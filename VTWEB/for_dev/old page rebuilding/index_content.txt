@@ -1,0 +1,184 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/
+Title:            VakilTech: Your Online Vakil | Expert Legal Advice & Lawyers
+Meta Description: Looking for a Vakil? VakilTech connects you with expert lawyers for legal notices, consultations & agreements. India's trusted online legal platform starting @ ₹299.
+Keywords:         vakil,vakiltech,online vakil,legal advice,talk to lawyer,lawyer contact number,send legal notice,online legal services india,advocate services
+
+── STATS / SOCIAL PROOF NUMBERS ─────────────────────────────────
+  • Got my ₹3.5 lakh back in 2 weeks! The legal notice was super professional and effective.Priya SharmaBusiness Owner, DelhiSaved me lakhs in potential losses. The advocate gave clear, direct advice in 15 minutes.Rajesh KumarSoftware Engineer, BangaloreMy tenant finally paid the pending rent. Fast service, no running around courts.Meera PatelProperty Owner, AhmedabadCheque bounce issue resolved. The draft was perfect and the delivery was tracked.Ananya VermaFreelancer, MumbaiBetter than my local lawyer and 10x cheaper. Highly recommended for contracts.Vikram SinghHR Manager, Hyderabad
+  • What is VakilTech?
+  • What services do you offer?
+  • Why choose VakilTech?
+  • Is this legitimate?
+  • Is my data safe?
+  • What if I'm not happy?
+  • 23 captures 22 Mar 2024 - 18 Feb 2026
+  • 22 Mar 2024 - 18 Feb 2026
+  • 15+ people booked consultation in last hour
+
+── PAGE SECTIONS ────────────────────────────────────────────────
+
+[Choose Your Legal Solution]
+    Professional legal services starting at just ₹299. No hidden fees, no complicated processes.
+    Custom Drafted
+  ▸ Legal Consultation
+    No Time Constraints
+    Detailed Consultation
+  ▸ FSSAI License
+    Get License
+  ▸ Trade License
+    Apply Now
+  ▸ ITR Filing
+  ▸ GST Registration
+    All services come with a 100% money-back guarantee
+
+[Popular Legal Services]
+    Looking for specific legal help? Explore our most-used services:
+  ▸ Money Recovery Legal Notice
+    Recover pending payments from individuals or businesses
+  ▸ Cheque Bounce Notice
+    File Section 138 NI Act notice for dishonoured cheques
+  ▸ Divorce Legal Notice
+    Initiate divorce proceedings under Hindu/Special Marriage Act
+  ▸ Tenant Eviction Notice
+    Evict non-paying or problematic tenants legally
+  ▸ Unpaid Salary Notice
+    Claim pending salary, PF, or gratuity from employer
+    Explore 20+ legal categories
+
+[Why Choose VakilTech ?]
+  ▸ Verified Experts
+    We only partner with experienced High Court practitioners. Quality you can trust.
+  ▸ Transparent Pricing
+    Premium legal services at fixed, affordable rates. No hidden costs.
+  ▸ Zero Court Visits
+    Minimal jhanjhat. Handle everything from your phone.
+  ▸ Track Every Step
+    Real-time updates via WhatsApp & Email. Sleep better.
+
+[How VakilTech Works]
+    THREE SIMPLE STEPS
+  ▸ Tell Us The Issue
+    Answer simple questions. No complicated legal jargon.
+  ▸ Expert Review
+    A Senior Advocate reviews your case drafted by our team.
+  ▸ You Get Results
+    Notice sent or advice delivered. Professional and precise.
+
+[Real People. Real Results.]
+    Got my ₹3.5 lakh back in 2 weeks! The legal notice was super professional and effective.Priya SharmaBusiness Owner, Delhi
+    Saved me lakhs in potential losses. The advocate gave clear, direct advice in 15 minutes.Rajesh KumarSoftware Engineer, Bangalore
+    My tenant finally paid the pending rent. Fast service, no running around courts.Meera PatelProperty Owner, Ahmedabad
+    Cheque bounce issue resolved. The draft was perfect and the delivery was tracked.Ananya VermaFreelancer, Mumbai
+    Better than my local lawyer and 10x cheaper. Highly recommended for contracts.Vikram SinghHR Manager, Hyderabad
+
+[Serving All Major Cities]
+    We serve in all major and tier 2 cities in India.
+    Maharashtra
+    Karnataka
+    Telangana
+  ▸ Chennai
+    Tamil Nadu
+  ▸ Kolkata
+    West Bengal
+  ▸ Pune
+  ▸ Ahmedabad
+  ▸ Jaipur
+    Rajasthan
+  ▸ Lucknow
+    Uttar Pradesh
+
+[Frequently Asked Questions]
+    Got questions? We've got answers. If you can't find what you're looking for, feel free to reach out to us.
+  ▸ What is VakilTech?
+  ▸ What services do you offer?
+  ▸ Why choose VakilTech?
+  ▸ Is this legitimate?
+  ▸ Is my data safe?
+  ▸ What if I'm not happy?
+
+[Quality Legal Support. Just a Click Away.]
+    Join 15,000+ satisfied clients who trust VakilTech for their legal needs.
+
+── TESTIMONIALS ─────────────────────────────────────────────────
+  [1] Got my ₹3.5 lakh back in 2 weeks! The legal notice was super professional and effective.
+     — Priya SharmaBusiness Owner, Delhi
+  [2] Better than my local lawyer and 10x cheaper. Highly recommended for contracts.Vikram SinghHR Manager, Hyderabad
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────
+  (Paste these <script> blocks into the page <head>)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "vakiltech",
+  "legalName": "vakiltech Legal Services",
+  "url": "https://vakiltech.in",
+  "logo": "https://vakiltech.in/logo.png",
+  "foundingDate": "2023",
+  "description": "India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-70476 83995",
+      "contactType": "Customer Service",
+      "availableLanguage": [
+        "English",
+        "Hindi"
+      ],
+      "areaServed": "IN"
+    }
+  ],
+  "sameAs": [],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Notice Services",
+        "description": "Professional legal notice drafting and sending"
+      },
+      "price": "1499",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Consultation",
+        "description": "Expert legal consultation from Licensed Advocates"
+      },
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Agreement Drafting",
+        "description": "Professional legal agreement drafting services"
+      },
+      "price": "999",
+      "priceCurrency": "INR"
+    }
+  ]
+}
+</script>
+
+======================================================================

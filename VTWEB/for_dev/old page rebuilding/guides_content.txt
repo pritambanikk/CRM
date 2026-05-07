@@ -1,0 +1,100 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/guides
+Title:            Comprehensive Legal Guides & Articles | VakilTech
+Meta Description: Explore our extensive library of legal guides and articles written by expert advocates. Learn about property, business, and family law in India.
+Keywords:         legal guides, law articles india, vakiltech guides, talk to lawyer, legal advice
+
+── STATS / SOCIAL PROOF NUMBERS ─────────────────────────────────
+  • 1 capture 23 Jan 2026
+  • 23 Jan 2026
+  • 15 min read
+  • 5 comprehensive guides
+  • 15 min
+  • 20 min
+  • 18 min
+  • 12 min
+  • 16 min
+  • 20 min read
+
+── PAGE SECTIONS ────────────────────────────────────────────────
+
+[Need Legal Help? Get Expert Consultation Today]
+    Connect with experienced advocates who can guide you through any legal matter.
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────
+  (Paste these <script> blocks into the page <head>)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "vakiltech",
+  "legalName": "vakiltech Legal Services",
+  "url": "https://vakiltech.in",
+  "logo": "https://vakiltech.in/logo.png",
+  "foundingDate": "2023",
+  "description": "India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-70476 83995",
+      "contactType": "Customer Service",
+      "availableLanguage": [
+        "English",
+        "Hindi"
+      ],
+      "areaServed": "IN"
+    }
+  ],
+  "sameAs": [],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Notice Services",
+        "description": "Professional legal notice drafting and sending"
+      },
+      "price": "1499",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Consultation",
+        "description": "Expert legal consultation from Licensed Advocates"
+      },
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Agreement Drafting",
+        "description": "Professional legal agreement drafting services"
+      },
+      "price": "999",
+      "priceCurrency": "INR"
+    }
+  ]
+}
+</script>
+
+======================================================================

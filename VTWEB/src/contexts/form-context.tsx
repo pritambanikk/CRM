@@ -1,0 +1,592 @@
+"use client";
+
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
+import { LeadFormData } from "@/types/lead-form";
+import { submitLead } from "@/services/lead-service";
+import { initializePayment } from "@/services/payment-service";
+import { createPaymentRequest } from "@/lib/payment-config";
+import { useAnalytics } from "@/hooks/use-analytics";
+
+interface FormContextType {
+  currentStep: number;
+  formData: Partial<LeadFormData>;
+  updateFormData: (data: Partial<LeadFormData>) => void;
+  nextStep: () => void;
+  prevStep: () => void;
+  goToStep: (step: number) => void;
+  resetForm: () => void;
+  openForm: (serviceType?: string) => void;
+  closeForm: () => void;
+  isFormOpen: boolean;
+  isSubmitting: boolean;
+  isProcessingPayment: boolean;
+  submitForm: (latestData?: Partial<LeadFormData>) => Promise<void>;
+  processPayment: () => Promise<void>;
+  submissionError: string | null;
+  paymentError: string | null;
+  paymentStatus: "pending" | "success" | "failed" | null;
+}
+
+interface FormProviderProps {
+  children: React.ReactNode;
+  initialService?: string;
+}
+
+const FormContext = createContext<FormContextType | undefined>(undefined);
+
+const PAYMENT_STORAGE_KEY = "vt-payment-pending";
+const PAYMENT_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
+
+export const FormProvider: React.FC<FormProviderProps> = ({
+  children,
+  initialService,
+}) => {
+
+  type StoredPayment = {
+    leadId: string;
+    service: LeadFormData["service"];
+    name: string;
+    whatsappNumber?: string;
+    status: "pending" | "failed";
+    createdAt: string;
+  };
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState<Partial<LeadFormData>>(
+    initialService ? { service: initialService as LeadFormData["service"] } : {}
+  );
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [paymentStatus, setPaymentStatus] = useState<
+    "pending" | "success" | "failed" | null
+  >(null);
+
+  // Analytics tracking
+  const {
+    logFormStart,
+    logFormStepViewed,
+    logFormStepCompleted,
+    logFormStepAbandoned,
+    logFormSubmitted,
+    logFormAbandoned,
+    logPaymentStarted,
+    logPaymentCompleted,
+    logPaymentFailed,
+    logPaymentAbandoned,
+    logEvent,
+
+    logLeadGenerated,
+    logConsultationBooked,
+    logLegalNoticeOrdered,
+    getUTMParams,
+    getPageType,
+  } = useAnalytics();
+
+  // Track step timing
+  const [stepStartTime, setStepStartTime] = useState<number>(Date.now());
+
+  const updateFormData = useCallback((data: Partial<LeadFormData>) => {
+    setFormData((prev) => ({ ...prev, ...data }));
+  }, []);
+
+  const nextStep = useCallback(() => {
+    const currentTime = Date.now();
+    const timeSpent = Math.round((currentTime - stepStartTime) / 1000);
+
+    // Track step completion
+    const stepNames = {
+      1: "Personal Details",
+      2: "Payment",
+      3: "What's Next",
+    };
+
+    logFormStepCompleted(
+      currentStep,
+      stepNames[currentStep as keyof typeof stepNames] || `Step ${currentStep}`,
+      formData.service,
+      timeSpent
+    );
+
+    setCurrentStep((prev) => Math.min(prev + 1, 3));
+    setStepStartTime(Date.now());
+  }, [currentStep, formData.service, stepStartTime, logFormStepCompleted]);
+
+  // Track step viewed on step change/open
+  useEffect(() => {
+    if (!isFormOpen) return;
+    const stepNames = {
+      1: "Personal Details",
+      2: "Payment",
+      3: "What's Next",
+    } as const;
+    logFormStepViewed(
+      currentStep,
+      stepNames[currentStep as keyof typeof stepNames] || `Step ${currentStep}`,
+      formData.service
+    );
+  }, [currentStep, isFormOpen, formData.service, logFormStepViewed]);
+
+  const prevStep = useCallback(() => {
+    // Track step abandonment (going back)
+    const stepNames = {
+      1: "Personal Details",
+      2: "Payment",
+      3: "What's Next",
+    };
+
+    logFormStepAbandoned(
+      currentStep,
+      stepNames[currentStep as keyof typeof stepNames] || `Step ${currentStep}`,
+      formData.service,
+      "user_navigated_back"
+    );
+
+    setCurrentStep((prev) => Math.max(prev - 1, 1));
+    setStepStartTime(Date.now());
+  }, [currentStep, formData.service, logFormStepAbandoned]);
+
+  const goToStep = useCallback(
+    (step: number) => {
+      // Track step abandonment if jumping to a different step
+      if (step !== currentStep) {
+        const stepNames = {
+          1: "Personal Details",
+          2: "Payment",
+          3: "What's Next",
+        };
+
+        logFormStepAbandoned(
+          currentStep,
+          stepNames[currentStep as keyof typeof stepNames] ||
+          `Step ${currentStep}`,
+          formData.service,
+          "user_jumped_to_step"
+        );
+      }
+
+      setCurrentStep(() => Math.max(1, Math.min(step, 3)));
+      setStepStartTime(Date.now());
+    },
+    [currentStep, formData.service, logFormStepAbandoned]
+  );
+
+  const resetForm = useCallback(() => {
+    // Track form abandonment
+    if (isFormOpen && currentStep > 0) {
+      logFormAbandoned(currentStep, formData.service, "form_reset");
+    }
+
+    setCurrentStep(1);
+    setFormData({});
+    setIsFormOpen(false);
+    setPaymentStatus(null);
+    setStepStartTime(Date.now());
+  }, [isFormOpen, currentStep, formData.service, logFormAbandoned]);
+
+  const openForm = useCallback(
+    (serviceType?: string, bundleType?: string) => {
+      // Always require a service - default to consultation if none provided
+      const selectedService = serviceType || "consultation";
+
+      setFormData((prev) => ({
+        ...prev,
+        service: selectedService as LeadFormData["service"],
+        bundleType: bundleType as LeadFormData["bundleType"],
+      }));
+      // Always go directly to step 1 (personal details) since we always have a service
+      setCurrentStep(1);
+
+      setIsFormOpen(true);
+      setPaymentStatus(null); // Reset payment status when opening form
+      setStepStartTime(Date.now());
+
+      // Track form start
+      const pageType = getPageType(
+        typeof window !== "undefined" ? window.location.pathname : ""
+      );
+      logFormStart(selectedService, pageType);
+    },
+    [logFormStart, getPageType]
+  );
+
+  const closeForm = useCallback(() => {
+    const formModal = document.querySelector('[role="dialog"]');
+    if (formModal) {
+      formModal.classList.remove(
+        "form-modal-during-payment",
+        "form-modal-after-payment"
+      );
+    }
+
+    // Track form abandonment if closing without completion
+    if (currentStep < 3 || (currentStep === 3 && paymentStatus !== "success")) {
+      logFormAbandoned(currentStep, formData.service, "user_closed_form");
+    }
+
+    // Only close the modal; do not reset form state so payment can proceed and we can reopen
+    setIsFormOpen(false);
+  }, [currentStep, paymentStatus, formData.service, logFormAbandoned]);
+
+  const updateUrlQueryParam = useCallback((key: string, value: string) => {
+    try {
+      if (typeof window === "undefined") return;
+      const url = new URL(window.location.href);
+      url.searchParams.set(key, value);
+      window.history.replaceState({}, "", url.toString());
+    } catch { }
+  }, []);
+
+  const submitForm = useCallback(async (latestData?: Partial<LeadFormData>) => {
+    // Merge any fresh data immediately to prevent React state batching race conditions
+    const currentData = { ...formData, ...latestData };
+
+    if (
+      !currentData.name ||
+      !currentData.location ||
+      !currentData.whatsappNumber ||
+      !currentData.service
+    ) {
+      setSubmissionError("Please complete all required fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmissionError(null);
+
+    try {
+      const completeFormData: LeadFormData = {
+        ...currentData,
+        name: currentData.name!,
+        location: currentData.location!,
+        whatsappNumber: currentData.whatsappNumber!,
+        service: currentData.service!,
+        serviceDetails: currentData.serviceDetails || undefined,
+        description: currentData.caseDescription || currentData.description || undefined,
+        paymentChoice: currentData.paymentChoice || "submit-only",
+        whatsappConsent: currentData.whatsappConsent ?? true,
+        step: currentStep,
+        submittedAt: new Date(),
+      };
+
+      console.log("🔥 SUBMIT FORM TRIGGERED. RAW FORMDATA:", currentData);
+      console.log("🔥 FINAL COMPILED FORMDATA:", completeFormData);
+
+      const result = await submitLead(completeFormData);
+
+      if (result.success) {
+        // Update form data with submission response
+        updateFormData({
+          leadId: result.leadId,
+          customId: result.customId,
+          submissionSuccess: true,
+          paymentChoice: completeFormData.paymentChoice,
+        });
+        // Update URL for ad conversion tracking
+        updateUrlQueryParam("type", "ticket-created");
+
+        // Analytics: Lead form submitted
+        logFormSubmitted(
+          completeFormData.service || "unknown",
+          completeFormData.paymentChoice || "unknown",
+          completeFormData.step || currentStep
+        );
+
+        // Track lead generation
+        const utmParams = getUTMParams();
+        const pageType = getPageType(
+          typeof window !== "undefined" ? window.location.pathname : ""
+        );
+        logLeadGenerated(
+          completeFormData.service || "unknown",
+          pageType,
+          utmParams
+        );
+
+        // Track specific service conversions
+        if (completeFormData.service === "consultation") {
+          logConsultationBooked(
+            completeFormData.service,
+            completeFormData.location || undefined,
+            pageType
+          );
+        } else if (completeFormData.service === "legal-notice") {
+          logLegalNoticeOrdered(
+            "legal-notice",
+            completeFormData.location || undefined,
+            pageType
+          );
+        }
+
+        // Move to next step
+        nextStep();
+      } else {
+        // Handle different types of errors
+        if (
+          result.error === "Duplicate lead" ||
+          result.error === "Duplicate unpaid lead"
+        ) {
+          setSubmissionError(
+            result.message || "A ticket already exists for this service."
+          );
+        } else {
+          setSubmissionError(
+            result.message || "Failed to submit lead. Please try again."
+          );
+        }
+      }
+    } catch (err) {
+      setSubmissionError("An unexpected error occurred. Please try again.");
+      console.error("Form submission error:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [
+    formData,
+    updateFormData,
+    nextStep,
+    currentStep,
+    logFormSubmitted,
+    logLeadGenerated,
+    logConsultationBooked,
+    logLegalNoticeOrdered,
+    getUTMParams,
+    getPageType,
+    updateUrlQueryParam,
+  ]);
+
+  const processPayment = useCallback(async () => {
+    if (!formData.leadId || !formData.service || !formData.name) {
+      setPaymentError("Missing required data for payment");
+      return;
+    }
+
+    setIsProcessingPayment(true);
+    setPaymentError(null);
+    setPaymentStatus("pending"); // Set payment status to pending
+
+    try {
+      // Create payment request
+      const paymentRequest = createPaymentRequest(
+        formData.service,
+        formData.leadId,
+        formData.name,
+        formData.bundleType
+      );
+
+      if (!paymentRequest) {
+        setPaymentError("Failed to create payment request");
+        setPaymentStatus("failed");
+        return;
+      }
+
+      // Track payment started
+      logPaymentStarted(formData.service!, paymentRequest.amount, "razorpay");
+
+      // Persist pending state before opening Razorpay so it survives refresh/navigation
+      try {
+        const toStore: StoredPayment = {
+          leadId: formData.leadId,
+          service: formData.service,
+          name: formData.name,
+          whatsappNumber: formData.whatsappNumber,
+          status: "pending",
+          createdAt: new Date().toISOString(),
+        };
+        localStorage.setItem(PAYMENT_STORAGE_KEY, JSON.stringify(toStore));
+      } catch { }
+
+      // Close modal before opening Razorpay to avoid z-index overlap
+      setIsFormOpen(false);
+
+      // Initialize payment
+      await initializePayment(
+        paymentRequest,
+        formData.name,
+        formData.whatsappNumber || "",
+        (response) => {
+          // Payment successful
+          updateFormData({
+            paymentSuccess: true,
+            paymentId: response.razorpay_payment_id,
+          });
+          setPaymentStatus("success");
+          // Update URL for ad conversion tracking
+          updateUrlQueryParam("type", "payment-success");
+          // Clear persisted pending state on success
+          try {
+            localStorage.removeItem(PAYMENT_STORAGE_KEY);
+          } catch { }
+
+          // Analytics: Payment completed - Enhanced tracking
+          logPaymentCompleted(
+            formData.service || "unknown",
+            paymentRequest.amount,
+            "razorpay",
+            response.razorpay_payment_id
+          );
+
+          // Also track as generic event for backup funnel tracking
+          const utmParams = getUTMParams();
+          logEvent("payment_completed", {
+            service_type: formData.service || "unknown",
+            payment_amount: paymentRequest.amount,
+            payment_method: "razorpay",
+            payment_id: response.razorpay_payment_id,
+            step: 2,
+            step_name: "Payment",
+            currency: "INR",
+            utm_source: utmParams.utm_source,
+            utm_medium: utmParams.utm_medium,
+            utm_campaign: utmParams.utm_campaign,
+            timestamp: Date.now(),
+          });
+
+          // Reopen modal on step 3 (success screen)
+          setIsFormOpen(true);
+          setCurrentStep(3);
+        },
+        (error) => {
+          setPaymentError(error);
+          setPaymentStatus("failed");
+
+          // Track payment failed
+          logPaymentFailed(
+            formData.service || "unknown",
+            paymentRequest.amount,
+            "razorpay",
+            error
+          );
+
+          // Mark persisted state as failed (still allows retry)
+          try {
+            const raw = localStorage.getItem(PAYMENT_STORAGE_KEY);
+            if (raw) {
+              const parsed: StoredPayment = JSON.parse(raw);
+              localStorage.setItem(
+                PAYMENT_STORAGE_KEY,
+                JSON.stringify({ ...parsed, status: "failed" })
+              );
+            }
+          } catch { }
+          // Show pending indicator with retry by keeping form closed; header will surface retry
+        },
+        () => {
+          // Razorpay modal dismissed by user
+          try {
+            logPaymentAbandoned(
+              formData.service || "unknown",
+              paymentRequest.amount,
+              "razorpay",
+              "razorpay_modal_dismissed"
+            );
+          } catch { }
+        }
+      );
+    } catch (err) {
+      setPaymentError("Payment initialization failed. Please try again.");
+      setPaymentStatus("failed");
+
+      // Track payment error
+      logPaymentFailed(
+        formData.service || "unknown",
+        0,
+        "razorpay",
+        "initialization_failed"
+      );
+
+      console.error("Payment error:", err);
+    } finally {
+      setIsProcessingPayment(false);
+    }
+  }, [
+    formData,
+    updateFormData,
+    logPaymentStarted,
+    logPaymentCompleted,
+    logPaymentFailed,
+    logPaymentAbandoned,
+    logEvent,
+    getUTMParams,
+    updateUrlQueryParam,
+  ]);
+
+  // Hydrate payment pending state from localStorage on mount
+  useEffect(() => {
+    try {
+      const raw =
+        typeof window !== "undefined"
+          ? localStorage.getItem(PAYMENT_STORAGE_KEY)
+          : null;
+      if (!raw) return;
+
+      const stored: StoredPayment | null = JSON.parse(raw);
+      if (!stored || !stored.leadId || !stored.service || !stored.name) return;
+
+      // Respect TTL for stored pending payment (12 hours)
+      if (stored.createdAt) {
+        const createdAtTime = new Date(stored.createdAt).getTime();
+        const nowTime = Date.now();
+        if (
+          Number.isFinite(createdAtTime) &&
+          nowTime - createdAtTime > PAYMENT_TTL_MS
+        ) {
+          try {
+            localStorage.removeItem(PAYMENT_STORAGE_KEY);
+          } catch { }
+          return;
+        }
+      }
+
+      // Restore minimal form data required to retry payment
+      setFormData((prev) => ({
+        ...prev,
+        leadId: stored.leadId,
+        service: stored.service,
+        name: stored.name,
+        whatsappNumber: stored.whatsappNumber,
+      }));
+      setPaymentStatus(stored.status || "pending");
+    } catch { }
+  }, []);
+
+  return (
+    <FormContext.Provider
+      value={{
+        currentStep,
+        formData,
+        updateFormData,
+        nextStep,
+        prevStep,
+        goToStep,
+        resetForm,
+        openForm,
+        closeForm,
+        isFormOpen,
+        isSubmitting,
+        isProcessingPayment,
+        submitForm,
+        processPayment,
+        submissionError,
+        paymentError,
+        paymentStatus,
+      }}
+    >
+      {children}
+    </FormContext.Provider>
+  );
+};
+
+export const useFormContext = () => {
+  const ctx = useContext(FormContext);
+  if (!ctx)
+    throw new Error("useFormContext must be used within a FormProvider");
+  return ctx;
+};

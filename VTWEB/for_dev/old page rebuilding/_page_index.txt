@@ -1,0 +1,257 @@
+VAKILTECH RECOVERED PAGES — MASTER INDEX
+======================================================================
+
+Total pages recovered: 63
+
+URL:   https://vakiltech.in/
+Title: About VakilTech | Affordable Legal Services for Every Indian
+File:  for_dev/about_content.txt
+
+URL:   https://vakiltech.in/agreement-drafting
+Title: Online Agreement Drafting Services | Rental, Employment, NDA | VakilTech
+File:  for_dev/agreement-drafting_content.txt
+
+URL:   https://vakiltech.in/agreement-drafting
+Title: Employment Agreement Drafting | Job Contract Format @ ₹499 | VakilTech
+File:  for_dev/agreement-drafting__employment-agreement_content.txt
+
+URL:   https://vakiltech.in/agreement-drafting
+Title: Rental Agreement Online | Draft Rent Agreement @ ₹299 | VakilTech
+File:  for_dev/agreement-drafting__rental-agreement_content.txt
+
+URL:   https://vakiltech.in/
+Title: Legal Blog & Insights | VakalatnaamaToday
+File:  for_dev/blogs_content.txt
+
+URL:   https://vakiltech.in/
+Title: Consumer Rights in India: How to File Complaints & Get Justice | VakalatnaamaToday Blog
+File:  for_dev/blogs__consumer-rights-protection-india_content.txt
+
+URL:   https://vakiltech.in/
+Title: How to Send a Legal Notice in India: A Complete Guide | VakalatnaamaToday Blog
+File:  for_dev/blogs__how-to-send-legal-notice-in-india_content.txt
+
+URL:   https://vakiltech.in/
+Title: Property Disputes in India: Types, Resolution & Legal Options | VakalatnaamaToday Blog
+File:  for_dev/blogs__property-disputes-india-complete-guide_content.txt
+
+URL:   https://vakiltech.in/
+Title: Contact Us | VakilTech
+File:  for_dev/contact-us_content.txt
+
+URL:   https://vakiltech.in/
+Title: FSSAI Registration Online | Food License Apply @ ₹429 | VakilTech
+File:  for_dev/fssai-registration_content.txt
+
+URL:   https://vakiltech.in/
+Title: GST Registration Online | New GSTIN Apply @ ₹698 | VakilTech
+File:  for_dev/gst-registration_content.txt
+
+URL:   https://vakiltech.in/
+Title: VakilTech: Your Online Vakil | Expert Legal Advice & Lawyers
+File:  for_dev/guides_content.txt
+
+URL:   https://vakiltech.in/
+Title: VakilTech: Your Online Vakil | Expert Legal Advice & Lawyers
+File:  for_dev/index_content.txt
+
+URL:   https://vakiltech.in/
+Title: ITR Filing Online CA Assisted | Income Tax Return @ ₹599 | VakilTech
+File:  for_dev/itr-filing_content.txt
+
+URL:   https://vakiltech.com/legal-consultation
+Title: Online Lawyer Consultation ₹299 | Talk to Expert Licensed Advocates | vakiltech
+File:  for_dev/legal-consultation_content.txt
+
+URL:   https://vakiltech.in/legal-drafts-bundle
+Title: 3500+ Legal Drafts Templates Bundle | Instant Download at ₹499 | Hindi, English & Marathi
+File:  for_dev/legal-drafts-bundle_content.txt
+
+URL:   https://vakiltech.in/
+Title: VakilTech: Your Online Vakil | Expert Legal Advice & Lawyers
+File:  for_dev/legal-notice-strength_content.txt
+
+URL:   https://vakiltech.in/
+Title: Privacy Policy | VakilTech
+File:  for_dev/privacy-policy_content.txt
+
+URL:   https://vakiltech.in/
+Title: Refund Policy | VakilTech
+File:  for_dev/refund-policy_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice
+Title: Send Legal Notice Online | Drafted by Expert Lawyers | Start ₹1,499
+File:  for_dev/send-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/amenities-society-builder/chennai
+Title: Legal Notice for Amenities to Society/Builder in Chennai – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__amenities-society-builder__chennai_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/amenities-society-builder/jaipur
+Title: Legal Notice for Amenities to Society/Builder in Jaipur – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__amenities-society-builder__jaipur_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/amenities-society-builder/kolkata
+Title: Legal Notice for Amenities to Society/Builder in Kolkata – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__amenities-society-builder__kolkata_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/bank-loan-settlement
+Title: Bank Loan Settlement Notice – Stop Harassment | OTS Help | ₹1,499
+File:  for_dev/send-legal-notice__bank-loan-settlement_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/breach-of-contract-legal-notice
+Title: Breach of Contract? | Enforce Agreement | Start at ₹499
+File:  for_dev/send-legal-notice__breach-of-contract-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/cheque-bounce-legal-notice
+Title: Cheque Bounce Notice – Section 138 NI Act | Get 2x Compensation | ₹1,499
+File:  for_dev/send-legal-notice__cheque-bounce-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/cheque-bounce-legal-notice/bangalore
+Title: Cheque Bounce Legal Notice in Bangalore – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__cheque-bounce-legal-notice__bangalore_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/cheque-bounce-legal-notice/chennai
+Title: Cheque Bounce Legal Notice in Chennai – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__cheque-bounce-legal-notice__chennai_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/cheque-bounce-legal-notice/delhi
+Title: Cheque Bounce Legal Notice in Delhi – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__cheque-bounce-legal-notice__delhi_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/cheque-bounce-legal-notice/hyderabad
+Title: Cheque Bounce Legal Notice in Hyderabad – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__cheque-bounce-legal-notice__hyderabad_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/cheque-bounce-legal-notice/mumbai
+Title: Cheque Bounce Legal Notice in Mumbai – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__cheque-bounce-legal-notice__mumbai_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/child-custody-legal-notice
+Title: Legal Notice for Child Custody | Visitation Rights | ₹499
+File:  for_dev/send-legal-notice__child-custody-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/consumer-complaint-legal-notice
+Title: Consumer Complaint Legal Notice – Defective Product/Service | ₹1499
+File:  for_dev/send-legal-notice__consumer-complaint-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/criminal-defamation-legal-notice
+Title: Criminal Defamation Notice – Section 356 BNS | ₹1,499 | 24hr Draft
+File:  for_dev/send-legal-notice__criminal-defamation-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/domestic-violence-legal-notice
+Title: Domestic Violence? | Send PWDVA Notice | Start at ₹499
+File:  for_dev/send-legal-notice__domestic-violence-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/employee-misconduct-legal-notice
+Title: Employee Misconduct? | Disciplinary Notice | Start ₹499
+File:  for_dev/send-legal-notice__employee-misconduct-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/eviction-legal-notice
+Title: Eviction Notice to Tenant India | Legal Process to Vacate
+File:  for_dev/send-legal-notice__eviction-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-cruelty-or-desertion
+Title: Legal Notice for Cruelty & Desertion | 498A & Divorce | ₹499
+File:  for_dev/send-legal-notice__legal-notice-for-cruelty-or-desertion_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-divorce
+Title: Affordable Divorce Legal Notice Online | VakilTech - Get Notice Drafted & Sent
+File:  for_dev/send-legal-notice__legal-notice-for-divorce_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-money-recovery
+Title: Money Recovery Legal Notice – Get Your ₹ Back | Lawyer Drafted ₹1499
+File:  for_dev/send-legal-notice__legal-notice-for-money-recovery_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-money-recovery/bangalore
+Title: Legal Notice for Money Recovery in Bangalore – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-for-money-recovery__bangalore_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-money-recovery/chennai
+Title: Legal Notice for Money Recovery in Chennai – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-for-money-recovery__chennai_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-money-recovery/delhi
+Title: Legal Notice for Money Recovery in Delhi – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-for-money-recovery__delhi_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-money-recovery/hyderabad
+Title: Legal Notice for Money Recovery in Hyderabad – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-for-money-recovery__hyderabad_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-money-recovery/mumbai
+Title: Legal Notice for Money Recovery in Mumbai – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-for-money-recovery__mumbai_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-outstanding-payment
+Title: Send Legal Notice for Outstanding Payment - Recover Dues Fast | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-for-outstanding-payment_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-property-possession
+Title: Demand Property Possession | Legal Notice | ₹499
+File:  for_dev/send-legal-notice__legal-notice-for-property-possession_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-rent-arrears
+Title: Legal Notice for Non-Payment of Rent | Recover Arrears & Evict
+File:  for_dev/send-legal-notice__legal-notice-for-rent-arrears_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-for-unpaid-salary
+Title: Unpaid Salary Legal Notice – Recover Employment Dues | 24hr Draft
+File:  for_dev/send-legal-notice__legal-notice-for-unpaid-salary_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-to-builder
+Title: Builder Delayed Possession? | Send RERA Notice | ₹499
+File:  for_dev/send-legal-notice__legal-notice-to-builder_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-to-tenant
+Title: Legal Notice to Tenant for Eviction | Draft & Send in 24 Hrs
+File:  for_dev/send-legal-notice__legal-notice-to-tenant_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-to-tenant/bangalore
+Title: Legal Notice to Tenant in Bangalore – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-to-tenant__bangalore_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-to-tenant/chennai
+Title: Legal Notice to Tenant in Chennai – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-to-tenant__chennai_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-to-tenant/delhi
+Title: Legal Notice to Tenant in Delhi – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-to-tenant__delhi_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-to-tenant/hyderabad
+Title: Legal Notice to Tenant in Hyderabad – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-to-tenant__hyderabad_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/legal-notice-to-tenant/mumbai
+Title: Legal Notice to Tenant in Mumbai – Expert Advocate Draft | VakilTech
+File:  for_dev/send-legal-notice__legal-notice-to-tenant__mumbai_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/maintenance-legal-notice
+Title: Maintenance/Alimony Legal Notice – Expert Drafting in 24 Hours
+File:  for_dev/send-legal-notice__maintenance-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/property-partition-legal-notice
+Title: Legal Notice for Partition of Property | Ancestral & Joint Family
+File:  for_dev/send-legal-notice__property-partition-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/workplace-harassment-legal-notice
+Title: Send Legal Notice for Workplace Harassment - Get Justice | VakilTech
+File:  for_dev/send-legal-notice__workplace-harassment-legal-notice_content.txt
+
+URL:   https://vakiltech.in/send-legal-notice/wrongful-termination-legal-notice
+Title: Wrongfully Terminated? | Challenge Dismissal | Start ₹499
+File:  for_dev/send-legal-notice__wrongful-termination-legal-notice_content.txt
+
+URL:   https://vakiltech.in/
+Title: Terms and Conditions | VakilTech
+File:  for_dev/terms-and-conditions_content.txt
+
+URL:   https://vakiltech.in/
+Title: Terms of Use | VakilTech
+File:  for_dev/terms-of-use_content.txt
+
+URL:   https://vakiltech.in/
+Title: Trade License Registration Online | Apply Municipal License @ ₹399
+File:  for_dev/trade-license_content.txt
+

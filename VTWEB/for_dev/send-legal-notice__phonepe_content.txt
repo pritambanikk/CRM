@@ -1,0 +1,176 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/send-legal-notice/phonepe
+Title:            Send Legal Notice to PhonePe | Registered Address + Complete Guide | VakilTech
+Meta Description: PhonePe not resolving your complaint? Send a lawyer-drafted legal notice to PhonePe Private Limited's registered address. Resolve consumer disputes legally. ₹1,499. Drafted in 24 hours.
+Keywords:         send legal notice to phonepe, phonepe registered address legal notice, phonepe grievance officer, PhonePe consumer complaint, PhonePe legal notice, how to file complaint against PhonePe
+
+── ARTICLE META ─────────────────────────────────────────────────────
+Author:           VakilTech Legal Team
+Last Updated:     April 2026
+Breadcrumb:       Home > Legal Notice > Send Legal Notice to PhonePe
+
+── PAGE SECTIONS ────────────────────────────────────────────────────
+
+[Send Legal Notice to PhonePe — Registered Address, Grievance Officer & Complete Guide]
+    If PhonePe has refused your refund, ignored your complaints, or failed
+    to resolve your dispute despite repeated attempts, a formal legal notice
+    is your most effective next step. This page gives you PhonePe's verified
+    registered address, grievance officer contact, and a complete guide to
+    resolving your dispute legally.
+
+[IMPORTANT — PhonePe's Correct Legal Entity for Consumer Notices]
+    The correct legal entity for consumer complaints is PhonePe Private Limited.
+    For UPI failures involving other banks, also approach your bank and RBI Ombudsman (14448). PhonePe's Principal Nodal Officer is Mr. Aniket Baheti.
+
+[PhonePe Private Limited — Registered Address for Legal Notice]
+    Send your legal notice via Speed Post with Acknowledgment Due to:
+
+  ▸ Legal Entity Name
+    PhonePe Private Limited
+
+  ▸ CIN (Corporate Identification Number)
+    U67190KA2012PTC176031
+
+  ▸ Registered Office Address
+    Office-2, Floor 4, 5, 6, 7, Wing A, Block A, Salarpuria Softzone, Service Road, Green Glen Layout, Bellandur, Bengaluru, Karnataka – 560103
+
+  ▸ Grievance Officer Email
+    grievance.phonepe.com (online portal)
+
+  ▸ Legal / Compliance Email
+    corp.sec@phonepe.com
+
+  ▸ Phone
+    080-68727374 / 022-68727374
+
+[When Can You Send a Legal Notice to PhonePe?]
+    You can send a legal notice to PhonePe when their support has failed.
+    Common situations include:
+    UPI payment failed but money debited and not refunded, fraudulent transaction disputed but claim rejected, KYC issues blocking account, wallet balance stuck or inaccessible, merchant payment dispute, account suspended without notice
+
+[Step-by-Step: How to Escalate Your PhonePe Complaint]
+    Step 1 — Contact PhonePe Customer Support
+    Use the official app or website. Note all ticket IDs and screenshot
+    all conversations.
+    Step 2 — Escalate to PhonePe Grievance Officer
+    Email the grievance officer with your complaint details and previous
+    reference numbers. They are legally required to respond within 15 days.
+    Step 3 — National Consumer Helpline
+    Call 1915 or file at consumerhelpline.gov.in if unresolved in 15 days.
+    Step 4 — Send a Legal Notice
+    Send a formal legal notice through a licensed advocate. This step
+    bypasses frontline support and prompts legal team review.
+    Step 5 — Consumer Court
+    File in the District Consumer Disputes Redressal Commission in your
+    city if the legal notice is ignored within 15–30 days.
+
+[Which Laws Protect You Against PhonePe?]
+    Consumer Protection Act 2019, Payment and Settlement Systems Act 2007, IT Act 2000, RBI Payment Guidelines
+    Consumer Protection Act, 2019 — your primary protection as a consumer.
+    IT Act, 2000 — requires a grievance officer who responds within 15 days.
+    Indian Contract Act, 1872 — failure to deliver agreed service is breach
+    of contract.
+
+[Real Success Story]
+    Suresh Gupta from Ahmedabad made a ₹15,000 UPI transfer that failed but was debited from his account. PhonePe's support said the money was transferred successfully. After 30 days of no refund and no resolution, a legal notice was sent. PhonePe reversed the transaction within 48 hours.
+    Note: This is a representative example. Individual outcomes vary.
+
+[Frequently Asked Questions]
+
+  ▸ What is PhonePe's registered address for a legal notice?
+    Send your notice to PhonePe Private Limited at: Office-2, Floor 4, 5, 6, 7, Wing A, Block A, Salarpuria Softzone, Service Road, Green Glen Layout, Bellandur, Bengaluru, Karnataka – 560103.
+    Grievance email: grievance.phonepe.com (online portal).
+
+  ▸ How long does PhonePe have to respond to a legal notice?
+    15 to 30 days as specified in the notice. After that you can file
+    a consumer complaint in the District Consumer Disputes Redressal
+    Commission in your city.
+
+  ▸ Can I file in my city even if PhonePe is registered elsewhere?
+    Yes. Under the Consumer Protection Act 2019, you can file where you
+    reside or where the transaction took place.
+
+  ▸ How much does it cost to send a legal notice to PhonePe?
+    VakilTech charges ₹1,499 all-inclusive — consultation with a licensed
+    advocate, custom drafting, unlimited revisions, and Speed Post dispatch
+    with Acknowledgment Due.
+
+── STATS / SOCIAL PROOF ─────────────────────────────────────────────
+  • 15,000+ legal notices sent across India
+  • 4.8/5 customer rating
+  • 65% of disputes settle after legal notice — without going to court
+  • Drafted by licensed advocates in 24 hours
+
+── RELATED SERVICES ─────────────────────────────────────────────────
+  • Send Legal Notice to Paytm
+    Link: /send-legal-notice/paytm
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+  • Consumer Complaint Legal Notice
+    Link: /send-legal-notice/consumer-complaint-legal-notice
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────────
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is PhonePe's registered address for a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send your notice to PhonePe Private Limited at Office-2, Floor 4, 5, 6, 7, Wing A, Block A, Salarpuria Softzone, Service Road, Green Glen Layout, Bellandur, Bengaluru, Karnataka – 560103. Grievance email: grievance.phonepe.com (online portal)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does PhonePe have to respond to a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "15 to 30 days as specified in the notice. After that you can file a consumer complaint in the District Consumer Disputes Redressal Commission in your city."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a legal notice to PhonePe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "VakilTech charges ₹1,499 all-inclusive — consultation, custom drafting, unlimited revisions, and Speed Post dispatch with Acknowledgment Due."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "VakilTech — Send Legal Notice to PhonePe",
+  "description": "Send a lawyer-drafted legal notice to PhonePe Private Limited for consumer disputes. ₹1,499.",
+  "url": "https://vakiltech.in/send-legal-notice/phonepe",
+  "priceRange": "₹1,499",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "provider": { "@type": "Organization", "name": "VakilTech", "url": "https://vakiltech.in" },
+  "offers": { "@type": "Offer", "price": "1499", "priceCurrency": "INR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vakiltech.in" },
+    { "@type": "ListItem", "position": 2, "name": "Send Legal Notice", "item": "https://vakiltech.in/send-legal-notice" },
+    { "@type": "ListItem", "position": 3, "name": "Send Legal Notice to PhonePe", "item": "https://vakiltech.in/send-legal-notice/phonepe" }
+  ]
+}
+</script>
+======================================================================

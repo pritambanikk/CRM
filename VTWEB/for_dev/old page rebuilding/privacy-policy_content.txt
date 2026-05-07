@@ -1,0 +1,96 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/
+Title:            Privacy Policy | VakilTech
+Meta Description: Learn about how VakilTech collects, uses, and protects your personal information.
+Keywords:         vakil,vakiltech,online vakil,legal advice,talk to lawyer,lawyer contact number,send legal notice,online legal services india,advocate services
+
+── STATS / SOCIAL PROOF NUMBERS ─────────────────────────────────
+  • Information We Collect
+  • How We Use Your Information
+  • Disclosure of Your Information
+  • Data Security
+  • Your Choices
+  • Children's Privacy
+  • Changes to this Policy
+  • 2 captures 23 Jan 2026 - 12 Feb 2026
+  • 23 Jan 2026 - 12 Feb 2026
+
+── PAGE SECTIONS ────────────────────────────────────────────────
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────
+  (Paste these <script> blocks into the page <head>)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "vakiltech",
+  "legalName": "vakiltech Legal Services",
+  "url": "https://vakiltech.in",
+  "logo": "https://vakiltech.in/logo.png",
+  "foundingDate": "2023",
+  "description": "India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-70476 83995",
+      "contactType": "Customer Service",
+      "availableLanguage": [
+        "English",
+        "Hindi"
+      ],
+      "areaServed": "IN"
+    }
+  ],
+  "sameAs": [],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Notice Services",
+        "description": "Professional legal notice drafting and sending"
+      },
+      "price": "1499",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Consultation",
+        "description": "Expert legal consultation from Licensed Advocates"
+      },
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Agreement Drafting",
+        "description": "Professional legal agreement drafting services"
+      },
+      "price": "999",
+      "priceCurrency": "INR"
+    }
+  ]
+}
+</script>
+
+======================================================================

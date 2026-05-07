@@ -1,0 +1,194 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/
+Title:            ITR Filing Online CA Assisted | Income Tax Return @ ₹599 | VakilTech
+Meta Description: File your ITR Online with Expert CA assistance starting @ ₹599. Get maximum refund. Secure & Confidential. Income Tax Return Filing Service India.
+Keywords:         itr filing online,income tax return filing,ca assisted itr filing,file itr online,income tax refund
+
+── STATS / SOCIAL PROOF NUMBERS ─────────────────────────────────
+  • Received a refund of ₹15,000 which I didn't even know I could claim. The CA was super helpful!Rohan DasSoftware Engineer, HyderabadVakilTech made ITR filing so simple. I just uploaded my Form 16 and they handled the rest.Meera IyerMarketing Manager, ChennaiBest service for freelancers. They understood my expenses and deductions perfectly.Vikram SinghGraphic Designer, Delhi
+  • Is it mandatory to file ITR?
+  • What documents are required for ITR filing?
+  • Can I file ITR myself?
+  • What is the penalty for late filing?
+  • How long does it take to get the refund?
+  • 1 capture 23 Jan 2026
+  • 23 Jan 2026
+
+── PAGE SECTIONS ────────────────────────────────────────────────
+
+[Why Choose Us for ITR Filing]
+  ▸ Tax Optimization
+    We don't just file; we plan to save every rupee possible legally.
+  ▸ Expert CAs
+    Filed by Chartered Accountants with years of experience.
+  ▸ Year-Round Support
+    Got a notice? We help you respond even after filing.
+  ▸ Documents Required
+    We'll review these to maximize your deductions.
+    Form 16 / 16A from Employer / Deductor
+    Form 26AS & AIS (Tax Credit Statements)
+    Bank Statements (Savings & Current)
+    Interest Certificates from Banks/Post Office
+    Proof of Investments (LIC, PPF, NSC, ELSS)
+    Home Loan Interest Certificate (if applicable)
+    Capital Gains Statement from Broker (for traders/investors)
+  ▸ Eligibility & Benefits
+    Filing ITR is crucial for financial health and compliance.
+  ▸ Income > ₹2.5 Lakhs
+    Mandatory for individuals with gross income above the exemption limit.
+  ▸ Claim Refunds
+    To claim back excess TDS deducted by your employer or bank.
+  ▸ Apply for Loans
+    ITR is the most important income proof for Housing or Personal Loans.
+  ▸ Visa Processing
+    Foreign consulates require ITRs of last 3 years for visa approval.
+
+[Filing Process]
+    File your ITR in 4 simple steps
+  ▸ Upload Documents
+    Submit Form 16, bank statements, and investment details secureley.
+  ▸ CA Review
+    Our CA analyzes your income to maximize deductions.
+  ▸ Draft Approval
+    We prepare the computation and get your approval.
+  ▸ File & E-Verify
+    We file the return and guide you to e-verify via OTP.
+
+[Real People. Real Results.]
+    Received a refund of ₹15,000 which I didn't even know I could claim. The CA was super helpful!Rohan DasSoftware Engineer, Hyderabad
+    VakilTech made ITR filing so simple. I just uploaded my Form 16 and they handled the rest.Meera IyerMarketing Manager, Chennai
+    Best service for freelancers. They understood my expenses and deductions perfectly.Vikram SinghGraphic Designer, Delhi
+
+[Frequently Asked Questions]
+    Everything you need to know about ITR Filing
+  ▸ Is it mandatory to file ITR?
+  ▸ What documents are required for ITR filing?
+  ▸ Can I file ITR myself?
+  ▸ What is the penalty for late filing?
+  ▸ How long does it take to get the refund?
+
+── TESTIMONIALS ─────────────────────────────────────────────────
+  [1] VakilTech made ITR filing so simple. I just uploaded my Form 16 and they handled the rest.
+     — Meera IyerMarketing Manager, Chennai
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────
+  (Paste these <script> blocks into the page <head>)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "vakiltech",
+  "legalName": "vakiltech Legal Services",
+  "url": "https://vakiltech.in",
+  "logo": "https://vakiltech.in/logo.png",
+  "foundingDate": "2023",
+  "description": "India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-70476 83995",
+      "contactType": "Customer Service",
+      "availableLanguage": [
+        "English",
+        "Hindi"
+      ],
+      "areaServed": "IN"
+    }
+  ],
+  "sameAs": [],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Notice Services",
+        "description": "Professional legal notice drafting and sending"
+      },
+      "price": "1499",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Consultation",
+        "description": "Expert legal consultation from Licensed Advocates"
+      },
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Agreement Drafting",
+        "description": "Professional legal agreement drafting services"
+      },
+      "price": "999",
+      "priceCurrency": "INR"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://vakiltech.in"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "ITR Filing",
+      "item": "https://vakiltech.in/itr-filing"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Online ITR Filing Service",
+  "description": "Expert CA assisted ITR filing service in India starting at ₹599.",
+  "provider": {
+    "@type": "Organization",
+    "name": "VakilTech",
+    "url": "https://vakiltech.in"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "599",
+    "priceCurrency": "INR"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  }
+}
+</script>
+
+======================================================================

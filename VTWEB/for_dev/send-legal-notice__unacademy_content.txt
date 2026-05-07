@@ -1,0 +1,189 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/send-legal-notice/unacademy
+Title:            Send Legal Notice to Unacademy | Registered Address + Complete Guide | VakilTech
+Meta Description: Unacademy not resolving your complaint? Send a lawyer-drafted legal notice to Sorting Hat Technologies Private Limited (Unacademy)'s registered address. Resolve consumer disputes legally. ₹1,499. Drafted in 24 hours.
+Keywords:         send legal notice to unacademy, unacademy registered address legal notice, unacademy grievance officer, Unacademy consumer complaint, Unacademy legal notice, how to file complaint against Unacademy
+
+── ARTICLE META ─────────────────────────────────────────────────────
+Author:           VakilTech Legal Team
+Last Updated:     April 2026
+Breadcrumb:       Home > Legal Notice > Send Legal Notice to Unacademy
+
+── PAGE SECTIONS ────────────────────────────────────────────────────
+
+[Send Legal Notice to Unacademy — Registered Address, Grievance Officer & Complete Guide]
+    If Unacademy has refused your refund, ignored your complaints, or failed
+    to resolve your dispute despite repeated attempts, a formal legal notice
+    is your most effective next step. This page gives you Unacademy's verified
+    registered address, grievance officer contact, and a complete guide to
+    resolving your dispute legally.
+
+[IMPORTANT — Unacademy's Correct Legal Entity for Consumer Notices]
+    The correct legal entity for consumer complaints is Sorting Hat Technologies Private Limited (Unacademy).
+    Unacademy's guarantee programs (like pass guarantees for competitive exams) have specific terms and conditions. Always document what was verbally or in writing promised at the time of enrollment.
+
+[Sorting Hat Technologies Private Limited (Unacademy) — Registered Address for Legal Notice]
+    Send your legal notice via Speed Post with Acknowledgment Due to:
+
+  ▸ Legal Entity Name
+    Sorting Hat Technologies Private Limited (Unacademy)
+
+  ▸ CIN (Corporate Identification Number)
+    U72200KA2015PTC080725
+
+  ▸ Registered Office Address
+    3rd Floor, UN House, #24, Bannerghatta Main Road, Bengaluru, Karnataka – 560029
+
+  ▸ Grievance Officer Email
+    support@unacademy.com
+
+  ▸ Legal / Compliance Email
+    grievance@unacademy.com
+
+  ▸ Phone
+    1800-102-0101
+
+[When Can You Send a Legal Notice to Unacademy?]
+    You can send a legal notice to Unacademy when their support has failed.
+    Common situations include:
+    Subscription refund refused after cancellation within policy period, educator left mid-course with no replacement or refund, course content misrepresented during sales, guaranteed placement or result not delivered, access revoked without reason
+
+[Step-by-Step: How to Escalate Your Unacademy Complaint]
+    Step 1 — Contact Unacademy Customer Support
+    Use the official app or website. Note all ticket IDs and screenshot
+    all conversations and chat responses.
+    Step 2 — Escalate to Unacademy Grievance Officer
+    Email the grievance officer with full complaint details and all previous
+    reference numbers. They must respond within 15 days under IT Act 2000.
+    Step 3 — National Consumer Helpline
+    Call 1915 or file at consumerhelpline.gov.in if unresolved in 15 days.
+    Step 4 — Send a Legal Notice
+    Send a formal legal notice through a licensed advocate. This escalates
+    the matter to Unacademy's legal team directly.
+    Step 5 — Consumer Court
+    File in the District Consumer Disputes Redressal Commission in your
+    city if the legal notice is ignored within 15–30 days.
+
+[Which Laws Protect You Against Unacademy?]
+    Consumer Protection Act 2019, Indian Contract Act 1872
+    Consumer Protection Act, 2019 — your primary protection as a consumer.
+    IT Act, 2000 — requires a grievance officer who must respond in 15 days.
+    Indian Contract Act, 1872 — failure to deliver agreed service is breach.
+
+[Real Success Story]
+    Sanjay Verma from Lucknow enrolled in an Unacademy UPSC course for ₹45,000 with a pass guarantee. The star educator whose course he enrolled for left the platform 2 months in. Unacademy refused a refund or replacement. A legal notice resulted in a 70% refund within 15 days.
+    Note: This is a representative example. Individual outcomes vary.
+
+[How Much Compensation Can You Claim?]
+    Beyond your refund, you can also claim advocate fees, compensation for
+    mental agony and inconvenience, and interest on the amount withheld.
+    Consumer courts regularly award ₹2,000 to ₹25,000 in compensation for
+    clear deficiency of service in addition to the principal refund.
+
+[Frequently Asked Questions]
+
+  ▸ What is Unacademy's registered address for a legal notice?
+    Send your notice to Sorting Hat Technologies Private Limited (Unacademy) at: 3rd Floor, UN House, #24, Bannerghatta Main Road, Bengaluru, Karnataka – 560029.
+    Grievance email: support@unacademy.com.
+
+  ▸ How long does Unacademy have to respond to a legal notice?
+    15 to 30 days as specified in the notice. After that you can file a
+    consumer complaint in the District Consumer Disputes Redressal Commission
+    in your city.
+
+  ▸ Can I file in my city even if Unacademy is registered elsewhere?
+    Yes. Under the Consumer Protection Act 2019, you can file where you
+    reside or where the transaction took place.
+
+  ▸ How much does it cost to send a legal notice to Unacademy?
+    VakilTech charges ₹1,499 all-inclusive — consultation with a licensed
+    advocate, custom drafting, unlimited revisions, and Speed Post dispatch
+    with Acknowledgment Due.
+
+── STATS / SOCIAL PROOF ─────────────────────────────────────────────
+  • 15,000+ legal notices sent across India
+  • 4.8/5 customer rating
+  • 65% of disputes settle after legal notice — without going to court
+  • Drafted by licensed advocates in 24 hours
+
+── RELATED SERVICES ─────────────────────────────────────────────────
+  • Send Legal Notice to Byju's
+    Link: /send-legal-notice/byjus
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+  • Consumer Complaint Legal Notice
+    Link: /send-legal-notice/consumer-complaint-legal-notice
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────────
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Unacademy's registered address for a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send your notice to Sorting Hat Technologies Private Limited (Unacademy) at 3rd Floor, UN House, #24, Bannerghatta Main Road, Bengaluru, Karnataka – 560029. Grievance email: support@unacademy.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does Unacademy have to respond to a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "15 to 30 days as specified in the notice. After that you can file in the District Consumer Disputes Redressal Commission in your city."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I file a consumer complaint in my city even if Unacademy is registered elsewhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Under the Consumer Protection Act 2019, you can file where you reside or where the transaction took place."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a legal notice to Unacademy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "VakilTech charges ₹1,499 all-inclusive — consultation, custom drafting, unlimited revisions, and Speed Post dispatch with Acknowledgment Due."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "VakilTech — Send Legal Notice to Unacademy",
+  "description": "Send a lawyer-drafted legal notice to Sorting Hat Technologies Private Limited (Unacademy) for consumer disputes. ₹1,499.",
+  "url": "https://vakiltech.in/send-legal-notice/unacademy",
+  "priceRange": "₹1,499",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "provider": { "@type": "Organization", "name": "VakilTech", "url": "https://vakiltech.in" },
+  "offers": { "@type": "Offer", "price": "1499", "priceCurrency": "INR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vakiltech.in" },
+    { "@type": "ListItem", "position": 2, "name": "Send Legal Notice", "item": "https://vakiltech.in/send-legal-notice" },
+    { "@type": "ListItem", "position": 3, "name": "Send Legal Notice to Unacademy", "item": "https://vakiltech.in/send-legal-notice/unacademy" }
+  ]
+}
+</script>
+======================================================================

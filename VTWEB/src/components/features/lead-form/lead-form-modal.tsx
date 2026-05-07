@@ -1,0 +1,430 @@
+"use client";
+
+
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { MultiStepForm } from "./multi-step-form";
+import { useFormContext } from "@/contexts/form-context";
+import { Loader2, CreditCard, AlertTriangle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { getPaymentConfig, formatAmount } from "@/lib/payment-config";
+import {
+  Dialog as ConfirmDialog,
+  DialogContent as ConfirmDialogContent,
+  DialogDescription as ConfirmDialogDescription,
+  DialogFooter as ConfirmDialogFooter,
+  DialogHeader as ConfirmDialogHeader,
+  DialogTitle as ConfirmDialogTitle,
+} from "@/components/ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import { useAnalytics } from "@/hooks/use-analytics";
+
+export const LeadFormModal = () => {
+  const {
+    currentStep,
+    prevStep,
+    isFormOpen,
+    closeForm,
+    isSubmitting,
+    submitForm,
+    submissionError,
+    formData,
+    processPayment,
+    isProcessingPayment,
+    paymentStatus,
+  } = useFormContext();
+
+  const { logCTAClick, logEvent } = useAnalytics();
+
+  const [isStepValid, setIsStepValid] = useState(false);
+  const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
+  const [modalZIndex, setModalZIndex] = useState(50);
+
+  // Manage z-index for payment modal compatibility
+  useEffect(() => {
+    if (isProcessingPayment) {
+      // Lower our modal's z-index to allow Razorpay modal to appear above
+      setModalZIndex(10);
+
+      // Add a small delay to ensure Razorpay modal loads
+      const timer = setTimeout(() => {
+        // Force focus to any Razorpay elements that might be present
+        const razorpayElements = document.querySelectorAll("[data-razorpay]");
+        if (razorpayElements.length > 0) {
+          // Ensure Razorpay modal is interactive
+          document.body.style.overflow = "hidden";
+        }
+      }, 100);
+
+      return () => {
+        clearTimeout(timer);
+        setModalZIndex(50);
+        document.body.style.overflow = "";
+      };
+    } else {
+      setModalZIndex(50);
+      document.body.style.overflow = "";
+    }
+  }, [isProcessingPayment]);
+
+  const getStepTitle = () => {
+    switch (currentStep) {
+      case 1:
+        return "Share Your Details";
+      case 2:
+        return "Get Your Legal Expert Today";
+      case 3:
+        if (paymentStatus === "success") {
+          return "Payment Successful!";
+        } else if (paymentStatus === "failed") {
+          return "Payment Failed";
+        } else {
+          return "What's Next";
+        }
+      default:
+        return "Get Legal Help";
+    }
+  };
+
+  const getStepDescription = () => {
+    switch (currentStep) {
+      case 1:
+        return "Provide contact information to connect to the lawyer";
+      case 2:
+        return "Personal lawyer assigned within 3 hours - guaranteed";
+      case 3:
+        if (paymentStatus === "success") {
+          return "Your payment has been processed successfully!";
+        } else if (paymentStatus === "failed") {
+          return "Payment was not completed. You can try again or contact support.";
+        } else {
+          return "Your ticket is submitted! Next steps below.";
+        }
+      default:
+        return "";
+    }
+  };
+
+  // Get payment amount for the service
+  const getPaymentAmount = () => {
+    const config = getPaymentConfig(formData.service || "consultation");
+    return config ? formatAmount(config.amount) : "₹499";
+  };
+
+  // Handle close attempt with confirmation for step 3
+  const handleCloseAttempt = () => {
+    // Don't allow closing if payment was successful
+    if (paymentStatus === "success") {
+      return;
+    }
+
+    if (currentStep === 3 && !formData.paymentSuccess) {
+      setShowCloseConfirmation(true);
+    } else {
+      closeForm();
+    }
+  };
+
+  const handleConfirmClose = () => {
+    closeForm();
+    setShowCloseConfirmation(false);
+  };
+
+  const handleCancelClose = () => {
+    setShowCloseConfirmation(false);
+  };
+
+  // Handle pay advance
+  const handlePayAdvance = () => {
+    try {
+      const config = getPaymentConfig(formData.service || "consultation");
+      // Track CTA click explicitly (separate from payment_started)
+      logCTAClick(
+        "pay",
+        `Pay ${config ? formatAmount(config.amount) : getPaymentAmount()}`,
+        typeof window !== "undefined" ? window.location.pathname : undefined,
+        formData.service || "consultation"
+      );
+      // Add step context for funneling in GA4
+      logEvent("cta_click", {
+        cta_type: "pay",
+        step_number: currentStep,
+        service_type: formData.service || "consultation",
+      });
+    } catch {}
+    processPayment();
+  };
+
+  // Handle retry payment
+  const handleRetryPayment = () => {
+    // Track retry CTA as well
+    try {
+      logEvent("cta_click", {
+        cta_type: "retry_payment",
+        step_number: currentStep,
+        service_type: formData.service || "consultation",
+      });
+    } catch {}
+    // Reset payment status and try again
+    processPayment();
+  };
+
+  const handleRaiseTicketAnalytics = () => {
+    try {
+      logCTAClick(
+        "raise_ticket",
+        "Raise Ticket",
+        typeof window !== "undefined" ? window.location.pathname : undefined,
+        formData.service || "consultation"
+      );
+      logEvent("cta_click", {
+        cta_type: "raise_ticket",
+        step_number: currentStep,
+        service_type: formData.service || "consultation",
+      });
+    } catch {}
+    // We no longer call submitForm() here! We let the native HTML form submission
+    // via id="lead-form-step-1" handle validation, which will then trigger
+    // handleStepComplete > submitForm automatically.
+  };
+
+  return (
+    <>
+        {isFormOpen && (
+          <Dialog open={isFormOpen} onOpenChange={handleCloseAttempt}>
+            <DialogContent
+              className="w-[calc(100%-2rem)] max-w-md max-h-[85dvh] rounded-2xl flex flex-col p-0 mx-auto overflow-hidden touch-manipulation form-scroll-container"
+              style={{ zIndex: modalZIndex }}
+            >
+              {/* Fixed Header */}
+              <DialogHeader className="px-4 sm:px-6 py-3 sm:py-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex-shrink-0">
+                <DialogTitle className="text-lg sm:text-xl font-semibold">
+                  {getStepTitle()}
+                </DialogTitle>
+                <DialogDescription className="text-xs sm:text-sm text-muted-foreground">
+                  {getStepDescription()}
+                </DialogDescription>
+              </DialogHeader>
+
+              {/* Scrollable Content */}
+              <div className="flex-1 min-h-0 overflow-hidden">
+                <MultiStepForm setIsStepValid={setIsStepValid} />
+
+                {/* Error Display */}
+                {submissionError && (
+                  <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
+                    <p className="text-sm text-red-600">{submissionError}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Fixed Footer */}
+              <div className="px-4 sm:px-6 py-3 sm:py-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex-shrink-0">
+                {/* Desktop Layout */}
+                <div className="hidden sm:flex justify-between items-center">
+                  <div className="text-xs sm:text-sm text-muted-foreground">
+                    {currentStep === 2
+                      ? "Almost Done (2 of 3)"
+                      : `Step ${currentStep} of 3`}
+                  </div>
+                  <div className="flex gap-2 sm:gap-3">
+                    {currentStep > 1 &&
+                      currentStep < 3 &&
+                      currentStep !== 2 && (
+                        <Button
+                          variant="outline"
+                          onClick={prevStep}
+                          size="sm"
+                          className="sm:text-base"
+                        >
+                          Back
+                        </Button>
+                      )}
+                    {currentStep === 1 ? (
+                      <Button
+                        type="submit"
+                        form="lead-form-step-1"
+                        onClick={handleRaiseTicketAnalytics}
+                        disabled={!isStepValid || isSubmitting}
+                        size="sm"
+                        className="min-w-[100px] sm:min-w-[120px] sm:text-base"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Raising Ticket...
+                          </>
+                        ) : (
+                          "Raise Ticket"
+                        )}
+                      </Button>
+                    ) : currentStep === 2 ? (
+                      <Button
+                        onClick={handlePayAdvance}
+                        disabled={isProcessingPayment}
+                        size="sm"
+                        className="min-w-[140px] sm:min-w-[180px] sm:text-base bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg"
+                      >
+                        <CreditCard className="w-4 h-4 mr-2" />
+                        {isProcessingPayment
+                          ? "Processing..."
+                          : `Secure Lawyer for ${getPaymentAmount()}`}
+                      </Button>
+                    ) : currentStep === 3 &&
+                      !formData.paymentSuccess &&
+                      paymentStatus !== "success" ? (
+                      <Button
+                        onClick={
+                          paymentStatus === "failed"
+                            ? handleRetryPayment
+                            : handlePayAdvance
+                        }
+                        disabled={isProcessingPayment}
+                        size="sm"
+                        className="min-w-[140px] sm:min-w-[160px] sm:text-base"
+                      >
+                        <CreditCard className="w-4 h-4 mr-2" />
+                        {isProcessingPayment
+                          ? "Processing..."
+                          : paymentStatus === "failed"
+                          ? "Retry Payment"
+                          : `Pay ${getPaymentAmount()}`}
+                      </Button>
+                    ) : currentStep === 3 && paymentStatus === "success" ? (
+                      <Button
+                        onClick={closeForm}
+                        size="sm"
+                        className="min-w-[100px] sm:min-w-[120px] sm:text-base bg-green-600 hover:bg-green-700"
+                      >
+                        Close
+                      </Button>
+                    ) : null}
+                  </div>
+                </div>
+
+                {/* Mobile Layout - Full Width CTA */}
+                <div className="sm:hidden space-y-2">
+                  <div className="text-center text-xs text-muted-foreground">
+                    {currentStep === 2
+                      ? "Almost Done (2 of 3)"
+                      : `Step ${currentStep} of 3`}
+                  </div>
+                  {currentStep === 1 ? (
+                    <Button
+                      type="submit"
+                      form="lead-form-step-1"
+                      onClick={handleRaiseTicketAnalytics}
+                      disabled={!isStepValid || isSubmitting}
+                      className="w-full h-12 text-base font-semibold"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Raising Ticket...
+                        </>
+                      ) : (
+                        "Raise Ticket"
+                      )}
+                    </Button>
+                  ) : currentStep === 2 ? (
+                    <Button
+                      onClick={handlePayAdvance}
+                      disabled={isProcessingPayment}
+                      className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90 text-white shadow-lg"
+                    >
+                      <CreditCard className="w-4 h-4 mr-2" />
+                      {isProcessingPayment
+                        ? "Processing..."
+                        : `Secure My Lawyer for ${getPaymentAmount()}`}
+                    </Button>
+                  ) : currentStep === 3 &&
+                    !formData.paymentSuccess &&
+                    paymentStatus !== "success" ? (
+                    <Button
+                      onClick={
+                        paymentStatus === "failed"
+                          ? handleRetryPayment
+                          : handlePayAdvance
+                      }
+                      disabled={isProcessingPayment}
+                      className="w-full h-12 text-base font-semibold"
+                    >
+                      <CreditCard className="w-4 h-4 mr-2" />
+                      {isProcessingPayment
+                        ? "Processing..."
+                        : paymentStatus === "failed"
+                        ? "Retry Payment"
+                        : `Pay ${getPaymentAmount()}`}
+                    </Button>
+                  ) : currentStep === 3 && paymentStatus === "success" ? (
+                    <Button
+                      onClick={closeForm}
+                      className="w-full h-12 text-base font-semibold bg-green-600 hover:bg-green-700"
+                    >
+                      Close
+                    </Button>
+                  ) : null}
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
+
+      {/* Close Confirmation Dialog */}
+      <ConfirmDialog
+        open={showCloseConfirmation}
+        onOpenChange={setShowCloseConfirmation}
+      >
+        <ConfirmDialogContent>
+          <ConfirmDialogHeader>
+            <ConfirmDialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5 text-orange-500" />
+              Wait! Don&apos;t miss out on priority support
+            </ConfirmDialogTitle>
+            <ConfirmDialogDescription className="text-left">
+              <p className="mb-3">By closing now, you&apos;ll miss out on:</p>
+              <ul className="list-disc list-inside space-y-1 text-sm mb-4">
+                <li>
+                  <strong>Priority support</strong> - Get faster response times
+                </li>
+                <li>
+                  <strong>Dedicated attention</strong> - Your case gets bumped
+                  to the top
+                </li>
+                <li>
+                  <strong>Peace of mind</strong> - Secure your spot in our queue
+                </li>
+                <li>
+                  <strong>Better outcomes</strong> - Early engagement leads to
+                  better results
+                </li>
+              </ul>
+              <p className="text-sm">
+                Just{" "}
+                <span className="font-semibold text-primary">
+                  {getPaymentAmount()}
+                </span>{" "}
+                secures your priority status. Your legal matter deserves the
+                best possible start!
+              </p>
+            </ConfirmDialogDescription>
+          </ConfirmDialogHeader>
+          <ConfirmDialogFooter>
+            <Button variant="outline" onClick={handleCancelClose}>
+              Stay & Pay Advance
+            </Button>
+            <br />
+            <Button onClick={handleConfirmClose} variant="secondary">
+              Close Anyway
+            </Button>
+          </ConfirmDialogFooter>
+        </ConfirmDialogContent>
+      </ConfirmDialog>
+    </>
+  );
+};

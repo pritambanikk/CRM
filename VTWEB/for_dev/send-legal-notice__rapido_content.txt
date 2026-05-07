@@ -1,0 +1,189 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/send-legal-notice/rapido
+Title:            Send Legal Notice to Rapido | Registered Address + Complete Guide | VakilTech
+Meta Description: Rapido not resolving your complaint? Send a lawyer-drafted legal notice to Roppen Transportation Services Private Limited (Rapido)'s registered address. Resolve consumer disputes legally. ₹1,499. Drafted in 24 hours.
+Keywords:         send legal notice to rapido, rapido registered address legal notice, rapido grievance officer, Rapido consumer complaint, Rapido legal notice, how to file complaint against Rapido
+
+── ARTICLE META ─────────────────────────────────────────────────────
+Author:           VakilTech Legal Team
+Last Updated:     April 2026
+Breadcrumb:       Home > Legal Notice > Send Legal Notice to Rapido
+
+── PAGE SECTIONS ────────────────────────────────────────────────────
+
+[Send Legal Notice to Rapido — Registered Address, Grievance Officer & Complete Guide]
+    If Rapido has refused your refund, ignored your complaints, or failed
+    to resolve your dispute despite repeated attempts, a formal legal notice
+    is your most effective next step. This page gives you Rapido's verified
+    registered address, grievance officer contact, and a complete guide to
+    resolving your dispute legally.
+
+[IMPORTANT — Rapido's Correct Legal Entity for Consumer Notices]
+    The correct legal entity for consumer complaints is Roppen Transportation Services Private Limited (Rapido).
+    Rapido connects users with bike taxi and auto services. It is regulated under Motor Vehicles Act in states where bike taxis are permitted. Note that bike taxis are not yet legal in all states — check local regulations.
+
+[Roppen Transportation Services Private Limited (Rapido) — Registered Address for Legal Notice]
+    Send your legal notice via Speed Post with Acknowledgment Due to:
+
+  ▸ Legal Entity Name
+    Roppen Transportation Services Private Limited (Rapido)
+
+  ▸ CIN (Corporate Identification Number)
+    U60221KA2015PTC081320
+
+  ▸ Registered Office Address
+    Koramangala, Bengaluru, Karnataka (verify latest address on MCA portal at mcaservices.gov.in)
+
+  ▸ Grievance Officer Email
+    support@rapido.bike
+
+  ▸ Legal / Compliance Email
+    support@rapido.bike
+
+  ▸ Phone
+    Contact via app
+
+[When Can You Send a Legal Notice to Rapido?]
+    You can send a legal notice to Rapido when their support has failed.
+    Common situations include:
+    Overcharging beyond meter or app estimate, driver cancelled mid-trip with charges applied, safety incident during ride, refund for cancelled or incomplete ride not received, account blocked without reason
+
+[Step-by-Step: How to Escalate Your Rapido Complaint]
+    Step 1 — Contact Rapido Customer Support
+    Use the official app or website. Note all ticket IDs and screenshot
+    all conversations and chat responses.
+    Step 2 — Escalate to Rapido Grievance Officer
+    Email the grievance officer with full complaint details and all previous
+    reference numbers. They must respond within 15 days under IT Act 2000.
+    Step 3 — National Consumer Helpline
+    Call 1915 or file at consumerhelpline.gov.in if unresolved in 15 days.
+    Step 4 — Send a Legal Notice
+    Send a formal legal notice through a licensed advocate. This escalates
+    the matter to Rapido's legal team directly.
+    Step 5 — Consumer Court
+    File in the District Consumer Disputes Redressal Commission in your
+    city if the legal notice is ignored within 15–30 days.
+
+[Which Laws Protect You Against Rapido?]
+    Consumer Protection Act 2019, Motor Vehicles Act 1988, IT Act 2000
+    Consumer Protection Act, 2019 — your primary protection as a consumer.
+    IT Act, 2000 — requires a grievance officer who must respond in 15 days.
+    Indian Contract Act, 1872 — failure to deliver agreed service is breach.
+
+[Real Success Story]
+    Aditi from Hyderabad was charged ₹450 for a Rapido auto ride that the app estimated at ₹120. The driver took a different route. Rapido support said fares can vary. A legal notice citing unfair trade practice resulted in Rapido refunding the overcharge within 5 days.
+    Note: This is a representative example. Individual outcomes vary.
+
+[How Much Compensation Can You Claim?]
+    Beyond your refund, you can also claim advocate fees, compensation for
+    mental agony and inconvenience, and interest on the amount withheld.
+    Consumer courts regularly award ₹2,000 to ₹25,000 in compensation for
+    clear deficiency of service in addition to the principal refund.
+
+[Frequently Asked Questions]
+
+  ▸ What is Rapido's registered address for a legal notice?
+    Send your notice to Roppen Transportation Services Private Limited (Rapido) at: Koramangala, Bengaluru, Karnataka (verify latest address on MCA portal at mcaservices.gov.in).
+    Grievance email: support@rapido.bike.
+
+  ▸ How long does Rapido have to respond to a legal notice?
+    15 to 30 days as specified in the notice. After that you can file a
+    consumer complaint in the District Consumer Disputes Redressal Commission
+    in your city.
+
+  ▸ Can I file in my city even if Rapido is registered elsewhere?
+    Yes. Under the Consumer Protection Act 2019, you can file where you
+    reside or where the transaction took place.
+
+  ▸ How much does it cost to send a legal notice to Rapido?
+    VakilTech charges ₹1,499 all-inclusive — consultation with a licensed
+    advocate, custom drafting, unlimited revisions, and Speed Post dispatch
+    with Acknowledgment Due.
+
+── STATS / SOCIAL PROOF ─────────────────────────────────────────────
+  • 15,000+ legal notices sent across India
+  • 4.8/5 customer rating
+  • 65% of disputes settle after legal notice — without going to court
+  • Drafted by licensed advocates in 24 hours
+
+── RELATED SERVICES ─────────────────────────────────────────────────
+  • Send Legal Notice to Ola Cabs
+    Link: /send-legal-notice/ola-cabs
+  • Send Legal Notice to Uber India
+    Link: /send-legal-notice/uber-india
+  • Consumer Complaint Legal Notice
+    Link: /send-legal-notice/consumer-complaint-legal-notice
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────────
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Rapido's registered address for a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send your notice to Roppen Transportation Services Private Limited (Rapido) at Koramangala, Bengaluru, Karnataka (verify latest address on MCA portal at mcaservices.gov.in). Grievance email: support@rapido.bike."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does Rapido have to respond to a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "15 to 30 days as specified in the notice. After that you can file in the District Consumer Disputes Redressal Commission in your city."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I file a consumer complaint in my city even if Rapido is registered elsewhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Under the Consumer Protection Act 2019, you can file where you reside or where the transaction took place."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a legal notice to Rapido?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "VakilTech charges ₹1,499 all-inclusive — consultation, custom drafting, unlimited revisions, and Speed Post dispatch with Acknowledgment Due."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "VakilTech — Send Legal Notice to Rapido",
+  "description": "Send a lawyer-drafted legal notice to Roppen Transportation Services Private Limited (Rapido) for consumer disputes. ₹1,499.",
+  "url": "https://vakiltech.in/send-legal-notice/rapido",
+  "priceRange": "₹1,499",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "provider": { "@type": "Organization", "name": "VakilTech", "url": "https://vakiltech.in" },
+  "offers": { "@type": "Offer", "price": "1499", "priceCurrency": "INR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vakiltech.in" },
+    { "@type": "ListItem", "position": 2, "name": "Send Legal Notice", "item": "https://vakiltech.in/send-legal-notice" },
+    { "@type": "ListItem", "position": 3, "name": "Send Legal Notice to Rapido", "item": "https://vakiltech.in/send-legal-notice/rapido" }
+  ]
+}
+</script>
+======================================================================

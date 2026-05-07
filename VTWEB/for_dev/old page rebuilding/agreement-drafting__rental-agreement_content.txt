@@ -1,0 +1,200 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/agreement-drafting
+Title:            Rental Agreement Online | Draft Rent Agreement @ ₹299 | VakilTech
+Meta Description: Draft your Rental Agreement Online starting @ ₹299. Legally valid, lawyer verified. Get it delivered to your email in 24 hours. Rental Agreement India.
+Keywords:         rental agreement online,rent agreement format,lease agreement india,house rent agreement,online rent agreement drafting
+
+── STATS / SOCIAL PROOF NUMBERS ─────────────────────────────────
+  • Received a very professional agreement. The clauses for maintenance and deposit were very clear.Vikram MalhotraLandlord, MumbaiNeeded an agreement quickly for my passport application. VakilTech delivered in 1 day!Priya DasTenant, PuneSaved me a trip to the lawyer. Everything was done online.Rahul VermaFlat Owner, Delhi
+  • Is a rental agreement mandatory in India?
+  • What is the difference between an 11-month agreement and a lease?
+  • Can I use this agreement as address proof?
+  • Does VakilTech handle stamp duty?
+  • How long does drafting take?
+  • 1 capture 23 Jan 2026
+  • 23 Jan 2026
+
+── PAGE SECTIONS ────────────────────────────────────────────────
+
+[Why Choose Us for Rental Agreements]
+  ▸ Customized
+    Tailored clauses for your specific property and needs.
+  ▸ Fast Delivery
+    Get your draft in 24-48 hours.
+  ▸ Legal Advice
+    Consultation on clauses and stamp duty requirements.
+  ▸ Details Required
+    We need these details to draft the agreement.
+    Details of Landlord (Name, Address)
+    Details of Tenant (Name, Permanent Address)
+    Property Address & Description
+    Rent Amount & Security Deposit Details
+    Lease Start Date & Duration
+    Notice Period & Lock-in Period (if any)
+    List of Fixtures & Fittings (optional)
+  ▸ Who Needs This?
+    Suitable for various rental scenarios.
+  ▸ Landlords
+    Protect your property and ensure timely rent payments.
+  ▸ Tenants
+    Secure your rights and get valid address proof.
+  ▸ Business Owners
+    For commercial property leasing and office spaces.
+  ▸ Shared Accommodation
+    Agreements for flatmates or paying guests (PG).
+
+[Drafting Process]
+    Get your agreement in 4 simple steps
+  ▸ Share Details
+    Fill out a simple form with Landlord, Tenant, and Property details.
+  ▸ Drafting
+    Our legal experts draft a customized agreement for you.
+  ▸ Review
+    You review the draft and request any changes.
+  ▸ Final Delivery
+    Receive the final ready-to-print agreement via email.
+
+[Real People. Real Results.]
+    Received a very professional agreement. The clauses for maintenance and deposit were very clear.Vikram MalhotraLandlord, Mumbai
+    Needed an agreement quickly for my passport application. VakilTech delivered in 1 day!Priya DasTenant, Pune
+    Saved me a trip to the lawyer. Everything was done online.Rahul VermaFlat Owner, Delhi
+
+[Frequently Asked Questions]
+    Everything about Rental Agreements
+  ▸ Is a rental agreement mandatory in India?
+  ▸ What is the difference between an 11-month agreement and a lease?
+  ▸ Can I use this agreement as address proof?
+  ▸ Does VakilTech handle stamp duty?
+  ▸ How long does drafting take?
+
+── TESTIMONIALS ─────────────────────────────────────────────────
+  [1] Needed an agreement quickly for my passport application. VakilTech delivered in 1 day!Priya DasTenant, Pune
+  [2] Saved me a trip to the lawyer. Everything was done online.Rahul VermaFlat Owner, Delhi
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────
+  (Paste these <script> blocks into the page <head>)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "vakiltech",
+  "legalName": "vakiltech Legal Services",
+  "url": "https://vakiltech.in",
+  "logo": "https://vakiltech.in/logo.png",
+  "foundingDate": "2023",
+  "description": "India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-70476 83995",
+      "contactType": "Customer Service",
+      "availableLanguage": [
+        "English",
+        "Hindi"
+      ],
+      "areaServed": "IN"
+    }
+  ],
+  "sameAs": [],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Notice Services",
+        "description": "Professional legal notice drafting and sending"
+      },
+      "price": "1499",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Consultation",
+        "description": "Expert legal consultation from Licensed Advocates"
+      },
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Agreement Drafting",
+        "description": "Professional legal agreement drafting services"
+      },
+      "price": "999",
+      "priceCurrency": "INR"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://vakiltech.in"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Agreement Drafting",
+      "item": "https://vakiltech.in/agreement-drafting"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Rental Agreement",
+      "item": "https://vakiltech.in/agreement-drafting/rental-agreement"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Rental Agreement Drafting Service",
+  "description": "Online Rental Agreement Drafting Service in India starting at ₹299. Lawyer verified drafts.",
+  "provider": {
+    "@type": "Organization",
+    "name": "VakilTech",
+    "url": "https://vakiltech.in"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "299",
+    "priceCurrency": "INR"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  }
+}
+</script>
+
+======================================================================

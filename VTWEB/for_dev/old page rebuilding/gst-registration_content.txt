@@ -1,0 +1,195 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/
+Title:            GST Registration Online | New GSTIN Apply @ ₹698 | VakilTech
+Meta Description: Apply for GST Registration Online in India starting @ ₹698. Get your 15-digit GSTIN number quickly. 100% Online process, Expert CA Assistance.
+Keywords:         gst registration,gst registration online,apply for gst,new gst registration,gstin registration
+
+── STATS / SOCIAL PROOF NUMBERS ─────────────────────────────────
+  • VakilTech helped me get my GST number in just 4 days. I could start selling on Amazon immediately.Rajesh KumarE-commerce Seller, BangaloreThe process was smooth. They handled all the document resizing and uploads perfectly.Sneha ReddyFreelance Consultant, HyderabadVery affordable service compared to local agents. Highly professional team.Amitabh SinghSmall Business Owner, Lucknow
+  • Who needs to register for GST in India?
+  • What documents are required for GST Registration?
+  • How long does it take to get the GST Certificate?
+  • Is physical verification of business premises mandatory?
+  • Can I file GST returns myself after registration?
+  • 1 capture 23 Jan 2026
+  • 23 Jan 2026
+  • 100% OnlineNo Visits Required
+
+── PAGE SECTIONS ────────────────────────────────────────────────
+
+[Why Choose Us for GST Registration]
+  ▸ Error-Free
+    We ensure precise HSN/SAC code selection to avoid future notices.
+  ▸ Fast Track
+    Priority processing with instant ARN generation.
+  ▸ Post-Reg Support
+    Guidance on first return filing and compliance.
+  ▸ Documents Required
+    Scan copies of these for quick approval.
+    PAN Card of Business / Proprietor
+    Aadhaar Card of Proprietor / Partners / Directors
+    Proof of Business Address (Electricity Bill / Rent Agreement)
+    Cancelled Cheque / Bank Statement
+    Passport Size Photos
+    Partnership Deed / Incorporation Certificate (if applicable)
+    Digital Signature Certificate (DSC) (for companies/LLPs)
+    NOC from Owner (if rented)
+  ▸ Eligibility Criteria
+    Mandatory under the GST Act for these businesses.
+  ▸ Turnover > ₹40 Lakhs
+    Businesses with annual turnover above ₹40L (₹20L for services) must register.
+  ▸ Inter-State Sales
+    Mandatory if you sell goods to customers in other states.
+  ▸ E-Commerce Sellers
+    Compulsory for selling on Amazon, Flipkart, Zomato, etc.
+  ▸ Voluntary Registration
+    To claim Input Tax Credit (ITC) on B2B purchases.
+
+[Registration Process]
+    Get your GSTIN in 4 simple steps
+  ▸ Application Filing
+    Submit business details and secure document upload.
+  ▸ ARN Generation
+    Receive Application Reference Number (ARN) instantly.
+  ▸ Department Approval
+    Officer reviews and approves the application.
+  ▸ Certificate Issued
+    Receive your 15-digit GSTIN and Registration Certificate.
+
+[Real People. Real Results.]
+    VakilTech helped me get my GST number in just 4 days. I could start selling on Amazon immediately.Rajesh KumarE-commerce Seller, Bangalore
+    The process was smooth. They handled all the document resizing and uploads perfectly.Sneha ReddyFreelance Consultant, Hyderabad
+    Very affordable service compared to local agents. Highly professional team.Amitabh SinghSmall Business Owner, Lucknow
+
+[Frequently Asked Questions]
+    Everything you need to know about GST
+  ▸ Who needs to register for GST in India?
+  ▸ What documents are required for GST Registration?
+  ▸ How long does it take to get the GST Certificate?
+  ▸ Is physical verification of business premises mandatory?
+  ▸ Can I file GST returns myself after registration?
+
+── TESTIMONIALS ─────────────────────────────────────────────────
+  [1] VakilTech helped me get my GST number in just 4 days. I could start selling on Amazon immediately.Rajesh KumarE-commerce Seller, Bangalore
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────
+  (Paste these <script> blocks into the page <head>)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "vakiltech",
+  "legalName": "vakiltech Legal Services",
+  "url": "https://vakiltech.in",
+  "logo": "https://vakiltech.in/logo.png",
+  "foundingDate": "2023",
+  "description": "India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-70476 83995",
+      "contactType": "Customer Service",
+      "availableLanguage": [
+        "English",
+        "Hindi"
+      ],
+      "areaServed": "IN"
+    }
+  ],
+  "sameAs": [],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Notice Services",
+        "description": "Professional legal notice drafting and sending"
+      },
+      "price": "1499",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Consultation",
+        "description": "Expert legal consultation from Licensed Advocates"
+      },
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Agreement Drafting",
+        "description": "Professional legal agreement drafting services"
+      },
+      "price": "999",
+      "priceCurrency": "INR"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://vakiltech.in"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "GST Registration",
+      "item": "https://vakiltech.in/gst-registration"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Online GST Registration Service",
+  "description": "Online GST Registration Service in India starting at ₹698. Get your 15-digit GSTIN easily.",
+  "provider": {
+    "@type": "Organization",
+    "name": "VakilTech",
+    "url": "https://vakiltech.in"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "698",
+    "priceCurrency": "INR"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  }
+}
+</script>
+
+======================================================================

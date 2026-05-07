@@ -1,0 +1,446 @@
+======================================================================
+VAKILTECH — COMPANY PAGES MASTER DATABASE
+Verified from MCA, official company websites, and BSE filings
+Last updated: April 2026
+======================================================================
+
+IMPORTANT NOTES FOR CONTENT TEAM:
+- Always verify addresses before publishing — companies do change registered offices
+- For legal notices, always address to the correct legal entity (see "CORRECT ENTITY FOR NOTICES" column)
+- Some companies have multiple entities — the correct one is specified
+- Grievance officer names change frequently — email is more reliable than names
+
+======================================================================
+TIER 1 — E-COMMERCE (BUILD FIRST)
+======================================================================
+
+1. FLIPKART
+----------------------------------------------------------------------
+Correct entity for notices: Flipkart Internet Private Limited
+(NOT Flipkart India Private Limited — that is B2B wholesale only)
+CIN: U51109KA2012PTC066107
+Registered Address: Buildings Alyssa, Begonia & Clover, Embassy Tech Village,
+  Outer Ring Road, Devarabeesanahalli Village, Bengaluru, Karnataka – 560103
+Corporate Office: Vaishnavi Summit, Ground Floor, 7th Main, 80 Feet Road,
+  3rd Block, Koramangala Industrial Layout, Bangalore – 560034
+Grievance Officer Email: grievance.officer@flipkart.com
+Grievance Officer Address: Flipkart Internet Private Limited, Block B (Begonia),
+  8th Floor, Embassy Tech Village, Outer Ring Road, Devarabeesanahalli Village,
+  Varthur Hobli, Bengaluru East Taluk, Bengaluru District, Karnataka – 560103
+Phone: +91 80 4908 3910
+Email for legal notices: legal@flipkart.com
+Common consumer complaints: Refund not processed, wrong product delivered,
+  item not delivered but marked delivered, seller fraud, fake products,
+  warranty issues, return rejected
+
+URL: vakiltech.in/send-legal-notice/flipkart
+
+----------------------------------------------------------------------
+2. AMAZON INDIA
+----------------------------------------------------------------------
+Correct entity for notices: Amazon Seller Services Private Limited
+CIN: U51900KA2010PTC053234
+Registered Address: 8th Floor, Brigade Gateway, 26/1 Dr. Rajkumar Road,
+  Bangalore, Karnataka – 560055
+(Current address per Tracxn 2025): Sattva Horizon, 2nd Floor, Survey No. 6/1
+  and 7/1, Vinayak Nagar, Kattigenahalli, Venkatala Village, Yelahanka Hobli,
+  Bengaluru, Karnataka – 560064
+Grievance Officer Email: grievance-officer@amazon.in
+Grievance Officer Address: Amazon Seller Services Private Limited (9O),
+  Nos. 1401 to 1421, 14th Floor, Block-E, International Trade Tower,
+  Nehru Place, New Delhi, Delhi – 110019
+Legal email: legal-support@amazon.com
+Common consumer complaints: Refund delays, fake sellers, item not delivered,
+  wrong product, A-to-Z guarantee claims denied, account suspension
+
+URL: vakiltech.in/send-legal-notice/amazon-india
+
+----------------------------------------------------------------------
+3. MEESHO
+----------------------------------------------------------------------
+Correct entity for notices: Meesho Limited
+(Formerly Fashnear Technologies Private Limited / Meesho Private Limited)
+CIN: L74900KA2015PLC082263
+Registered Address: 3rd Floor, Wing-E, Helios Business Park, Kadubeesanahalli
+  Village, Varthur Hobli, Outer Ring Road, Bengaluru, Karnataka – 560103
+Grievance Officer Email: grievances@meesho.com
+Alternate: legalsupport@meesho.com
+Phone: 08061799600
+Company Secretary: Rahul Bhardwaj (cs@meesho.com)
+Common consumer complaints: Fake/counterfeit products, refund not processed,
+  wrong size/product, supplier fraud, poor quality items, return issues
+
+URL: vakiltech.in/send-legal-notice/meesho
+
+----------------------------------------------------------------------
+4. MYNTRA
+----------------------------------------------------------------------
+Correct entity for notices: Myntra Jabong India Private Limited
+CIN: U74900KA2015FTC079383
+Registered Address: Buildings Alyssa, Begonia & Clover, Embassy Tech Village,
+  Outer Ring Road, Devarabeesanahalli Village, Bengaluru, Karnataka – 560103
+Email: grievances@myntra.com
+Common consumer complaints: Return rejected, refund delayed, wrong size delivered,
+  fake products, exchange issues, sale price disputes
+
+URL: vakiltech.in/send-legal-notice/myntra
+
+----------------------------------------------------------------------
+5. NYKAA
+----------------------------------------------------------------------
+Correct entity for notices: FSN E-Commerce Ventures Limited (Nykaa)
+CIN: L52600MH2012PLC230136
+Registered Address: 104, Vasan Udyog Bhavan, Sun Mill Compound,
+  Lower Parel, Mumbai, Maharashtra – 400013
+Grievance Officer Email: grievanceofficer@nykaa.com
+Common consumer complaints: Fake/expired products, wrong products, refund issues,
+  damaged goods delivered, misleading descriptions
+
+URL: vakiltech.in/send-legal-notice/nykaa
+
+----------------------------------------------------------------------
+6. SNAPDEAL
+----------------------------------------------------------------------
+Correct entity for notices: Jasper Infotech Private Limited (Snapdeal)
+CIN: U72900DL2010PTC199956
+Registered Address: 44, Sanjay Place, Agra, Uttar Pradesh – 282002
+Corporate Office: 246, Udyog Vihar Phase-IV, Gurugram, Haryana – 122015
+Grievance Officer Email: grievanceofficer@snapdeal.com
+Common consumer complaints: Refund not processed, fake sellers, item not received,
+  wrong product, poor after-sale service
+
+URL: vakiltech.in/send-legal-notice/snapdeal
+
+======================================================================
+TIER 2 — FOOD & DELIVERY
+======================================================================
+
+7. ZOMATO
+----------------------------------------------------------------------
+Correct entity for notices: Zomato Limited
+(Formerly Zomato Media Private Limited)
+CIN: L93030DL2010PLC198141
+Registered Address: Ground Floor 12A, 94 Meghdoot, Nehru Place,
+  New Delhi – 110019
+Phone: 011-40592373
+Grievance Officer Email: grievance.officer@zomato.com
+Alternate: legal@zomato.com
+Company Secretary: Sandhya Sethia (companysecretary@zomato.com)
+Common consumer complaints: Food not delivered, wrong order, delivery executive
+  rude/fraud, refund not given, restaurant quality issues, platform fee disputes
+
+URL: vakiltech.in/send-legal-notice/zomato
+
+----------------------------------------------------------------------
+8. SWIGGY
+----------------------------------------------------------------------
+Correct entity for notices: Swiggy Limited
+(Formerly Bundl Technologies Private Limited / Swiggy Private Limited)
+CIN: L74110KA2013PLC096530
+Registered Address: No.55, Sy No.8-14, Ground Floor, I&J Block,
+  Embassy Tech Village, Outer Ring Road, Devarbisanahalli,
+  Bengaluru – 560103, Karnataka
+Note: Address change approved Jan 2026 to Sumadhura Capitol Towers —
+  use the Embassy Tech Village address until official MCA update confirmed
+Phone: 080-68422422
+Email: support@swiggy.in
+Grievance Officer Email: grievances@swiggy.in
+Grievance Officer: Mr. Arun Cyril
+Common consumer complaints: Food not delivered, wrong order, delivery fraud,
+  refund not processed, Instamart issues, restaurant listed incorrectly
+
+URL: vakiltech.in/send-legal-notice/swiggy
+
+----------------------------------------------------------------------
+9. BLINKIT
+----------------------------------------------------------------------
+Correct entity for notices: Blink Commerce Private Limited (Blinkit)
+(Subsidiary of Zomato Limited)
+CIN: U52100HR2013PTC049843
+Registered Address: Gurugram, Haryana (verify on MCA portal for latest)
+Parent: Zomato Limited — send copy to Zomato's registered address as well
+Grievance Email: support@blinkit.com
+Common consumer complaints: Wrong product delivered, missing items,
+  expired products, refund issues, express delivery not honoured
+
+URL: vakiltech.in/send-legal-notice/blinkit
+
+----------------------------------------------------------------------
+10. ZEPTO
+----------------------------------------------------------------------
+Correct entity for notices: Kiranakart Technologies Private Limited (Zepto)
+CIN: U52100MH2021PTC367962
+Registered Address: 1st Floor, A Wing, Kanakia Zillion, LBS Marg,
+  BKC Annexe, Kurla West, Mumbai, Maharashtra – 400070
+Grievance Email: support@zepto.com
+Common consumer complaints: Missing items, wrong product, expired goods,
+  refund not received, poor product quality
+
+URL: vakiltech.in/send-legal-notice/zepto
+
+----------------------------------------------------------------------
+11. BIGBASKET
+----------------------------------------------------------------------
+Correct entity for notices: Supermarket Grocery Supplies Private Limited (BigBasket)
+CIN: U52100KA2011PTC057973
+Registered Address: Innovative Film City, Mysore Road, Bidadi,
+  Ramanagara District, Karnataka – 562109
+(Alternate: # 334/1, 4th Floor, SJR Pritech Park – SEZ, Outer Ring Road,
+  Bellandur, Bengaluru – 560103)
+Grievance Email: cs@bigbasket.com
+Common consumer complaints: Expired/near-expiry products, missing items,
+  wrong weight, quality issues, late delivery, substitution without consent
+
+URL: vakiltech.in/send-legal-notice/bigbasket
+
+----------------------------------------------------------------------
+12. DUNZO
+----------------------------------------------------------------------
+Correct entity for notices: Dunzo Digital Private Limited
+CIN: U63090KA2015PTC080729
+Registered Address: No.47/1, 3rd Floor, Tavarekere Main Road,
+  Mico Layout, BTM Layout 2nd Stage, Bengaluru – 560029, Karnataka
+Grievance Email: support@dunzo.in
+Note: Dunzo has been facing financial difficulties — verify active status before building page
+Common consumer complaints: Order not delivered, wrong item, refund issues,
+  app/wallet credit not honoured
+
+URL: vakiltech.in/send-legal-notice/dunzo
+
+======================================================================
+TIER 3 — TRAVEL & MOBILITY
+======================================================================
+
+13. OLA (CABS)
+----------------------------------------------------------------------
+Correct entity for notices: ANI Technologies Private Limited (Ola Cabs)
+CIN: (verify on MCA — ANI Technologies is unlisted)
+Registered Address: Regent Insignia, #414, 3rd Floor, 4th Block,
+  17th Main, 100 Feet Road, Koramangala, Bengaluru – 560034, Karnataka
+Phone: +91 80 6735 0900
+Email: support@olacabs.com
+Common consumer complaints: Overcharging, rude driver, cancellation charges,
+  safety issues, refund for cancelled ride, lost items in cab
+
+URL: vakiltech.in/send-legal-notice/ola-cabs
+
+----------------------------------------------------------------------
+14. OLA ELECTRIC
+----------------------------------------------------------------------
+Correct entity for notices: Ola Electric Mobility Limited
+CIN: L74999KA2017PLC099619
+Registered Address: Wing C, Prestige RMZ Startech, Hosur Road,
+  Municipal Ward No.67, Municipal No.140, Industrial Layout, Koramangala,
+  Bengaluru – 560095, Karnataka
+Phone: 080-35440050
+Email: support@olaelectric.com; companysecretary@olaelectric.com
+Common consumer complaints: Scooter defects, service centre issues,
+  software problems, range anxiety, warranty claims rejected,
+  service delays, overcharging for repairs
+
+URL: vakiltech.in/send-legal-notice/ola-electric
+
+----------------------------------------------------------------------
+15. UBER INDIA
+----------------------------------------------------------------------
+Correct entity for notices: Uber India Systems Private Limited
+CIN: U74120MH2013FTC247008
+Registered Address: Regus Business Platinum Centre Pvt. Ltd.,
+  Level 13, Platinum Techno Park, Plot No. 17/18, Sec-30A,
+  Vashi, Navi Mumbai, Thane, Maharashtra – 400705
+Grievance Officer: Mr. Pavan Nawander
+Grievance Email: grievanceredressaloffice@uber.com
+Phone: 080-46850055
+Common consumer complaints: Overcharging, unsafe driver behaviour,
+  cancellation charges, trip manipulation, refund for wrong charges,
+  account suspended, lost items
+
+URL: vakiltech.in/send-legal-notice/uber-india
+
+----------------------------------------------------------------------
+16. MAKEMYTRIP (includes Goibibo)
+----------------------------------------------------------------------
+Correct entity for notices: MakeMyTrip India Private Limited
+CIN: U63040HR2000PTC090846 (Haryana entity)
+Also: U63040DL2000PTC105210 (Delhi entity)
+Registered Address: 19th Floor, Tower A/B/C, Epitome Building No.5,
+  DLF Cyber City, DLF Phase III, Gurugram, Haryana – 122002
+Grievance Officer Email: grievanceofficer@makemytrip.com
+Nodal Officer Email: nodalofficer@makemytrip.com
+Common consumer complaints: Refund not processed for cancelled flights/hotels,
+  misleading pricing, hidden charges, booking errors, cancellation disputes
+
+URL: vakiltech.in/send-legal-notice/makemytrip
+
+----------------------------------------------------------------------
+17. IRCTC
+----------------------------------------------------------------------
+Correct entity for notices: Indian Railway Catering and Tourism Corporation Limited
+CIN: L74899DL1999GOI101707
+Registered Address: B-148, 11th Floor, Statesman House,
+  Barakhamba Road, New Delhi – 110001
+Phone: 0755-6610661, 1800-110-139 (toll-free)
+Email: care@irctc.co.in
+Grievance portal: https://www.pgportal.gov.in
+Note: IRCTC is a government company — consumer court is the best route;
+  also file on PG Portal (PM's grievance portal)
+Common consumer complaints: Ticket booked but PNR not generated, refund not
+  received for cancelled trains, food quality in trains, catering issues,
+  tatkal booking failures, e-catering issues
+
+URL: vakiltech.in/send-legal-notice/irctc
+
+======================================================================
+TIER 4 — FINTECH & EDTECH
+======================================================================
+
+18. PHONEPE
+----------------------------------------------------------------------
+Correct entity for notices: PhonePe Private Limited
+CIN: U67190KA2012PTC176031
+Registered Address: Office-2, Floor 4,5,6,7, Wing A, Block A,
+  Salarpuria Softzone, Service Road, Green Glen Layout, Bellandur,
+  Bengaluru, Karnataka – 560103
+Principal Nodal Officer: Mr. Aniket Baheti (also listed as Sinu Sudhakar)
+Phone: 080-68727374 / 022-68727374
+Grievance portal: grievance.phonepe.com
+Note: For payment disputes, also approach RBI Ombudsman: 14448
+Common consumer complaints: UPI transaction failure money debited but not credited,
+  wallet issues, KYC problems, account suspended, fraudulent transactions,
+  merchant payment disputes
+
+URL: vakiltech.in/send-legal-notice/phonepe
+
+----------------------------------------------------------------------
+19. PAYTM
+----------------------------------------------------------------------
+Correct entity for notices: One97 Communications Limited (Paytm)
+CIN: L72200DL2000PLC108985
+Registered Address: 136, First Floor, Devika Tower, Nehru Place, New Delhi – 110019
+Corporate Office: One Skymark, Tower-D, Plot No. H-10B, Sector-98, Noida – 201304
+Grievance Officer Address: B-121, Sector-5, Noida – 201301, Uttar Pradesh
+Email: care@paytm.com; compliance.officer@paytm.com
+Note: For Paytm Payments Bank issues, approach RBI Ombudsman separately
+Common consumer complaints: UPI failure, wallet money stuck, KYC not completed,
+  Paytm Payments Bank account frozen, loan disputes, merchant issues
+
+URL: vakiltech.in/send-legal-notice/paytm
+
+----------------------------------------------------------------------
+20. CRED
+----------------------------------------------------------------------
+Correct entity for notices: Dreamplug Technologies Private Limited (CRED)
+CIN: U67190KA2018PTC110038
+Registered Address: Salarpuria Softzone, Bellandur, Outer Ring Road,
+  Bengaluru, Karnataka – 560103
+Email: support@cred.club
+Common consumer complaints: Reward points not credited, credit card payment
+  issues, CRED coins expired, cashback not received, account blocked
+
+URL: vakiltech.in/send-legal-notice/cred
+
+----------------------------------------------------------------------
+21. BYJU'S
+----------------------------------------------------------------------
+Correct entity for notices: Think & Learn Private Limited (Byju's)
+CIN: U80903KA2011PTC061427
+Registered Address: IBC Knowledge Park, 4/1 Bannerghatta Road,
+  Bengaluru, Karnataka – 560029
+Email: legal@byjus.com
+Note: Byju's is currently under NCLT insolvency proceedings (2024-2026).
+  Mention this context on the page — consumer claims can still be filed
+  but recovery may be difficult. Recommend Consumer Court over legal notice.
+Common consumer complaints: Refund refused, aggressive sales tactics,
+  course content not as promised, coaching app issues, loan forced at signup
+
+URL: vakiltech.in/send-legal-notice/byjus
+
+----------------------------------------------------------------------
+22. UNACADEMY
+----------------------------------------------------------------------
+Correct entity for notices: Sorting Hat Technologies Private Limited (Unacademy)
+CIN: U72200KA2015PTC080725
+Registered Address: 3rd Floor, UN House, #24, Bannerghatta Main Road,
+  Bengaluru, Karnataka – 560029
+Email: support@unacademy.com; grievance@unacademy.com
+Common consumer complaints: Subscription refund refused, educators leaving mid-course,
+  course content not delivered, misleading guarantees, payment disputes
+
+URL: vakiltech.in/send-legal-notice/unacademy
+
+----------------------------------------------------------------------
+23. URBAN COMPANY
+----------------------------------------------------------------------
+Correct entity for notices: Urban Company (India) Private Limited
+CIN: U74900DL2014PTC272786
+Registered Address: Floor 7, Tower A, Spaze I-Tech Park, Sector-49,
+  Sohna Road, Gurugram, Haryana – 122018
+Email: support@urbancompany.com; legal@urbancompany.com
+Common consumer complaints: Service quality poor, professional rude/fraud,
+  damage to property during service, refund refused, misleading package prices
+
+URL: vakiltech.in/send-legal-notice/urban-company
+
+----------------------------------------------------------------------
+24. TATA CLIQ
+----------------------------------------------------------------------
+Correct entity for notices: Tata UniStore Limited (Tata CLiQ)
+CIN: U74999MH2015PLC265971
+Registered Address: 14th Floor, Lodha Supremus, Senapati Bapat Marg,
+  Lower Parel, Mumbai, Maharashtra – 400013
+Email: feedback@tatacliq.com; cs@tatacliq.com
+Common consumer complaints: Return rejected, refund delay, fake products from
+  marketplace sellers, EMI issues, warranty service disputes
+
+URL: vakiltech.in/send-legal-notice/tata-cliq
+
+----------------------------------------------------------------------
+25. RAPIDO
+----------------------------------------------------------------------
+Correct entity for notices: Roppen Transportation Services Private Limited (Rapido)
+CIN: U60221KA2015PTC081320
+Registered Address: Koramangala, Bengaluru, Karnataka (verify on MCA)
+Email: support@rapido.bike
+Common consumer complaints: Overcharging, driver fraud, cancellation charges,
+  safety issues with rides, refund not processed
+
+URL: vakiltech.in/send-legal-notice/rapido
+
+======================================================================
+PRIORITY BUILD ORDER
+======================================================================
+
+Week 1 (build these 5 first):
+1. Flipkart — highest search volume
+2. Amazon India — highest search volume
+3. Zomato — very high complaint volume
+4. Swiggy — very high complaint volume
+5. Meesho — fast growing complaint volume
+
+Week 2 (next 10):
+6. Ola Cabs
+7. Uber India
+8. MakeMyTrip
+9. PhonePe
+10. Paytm
+11. Myntra
+12. Blinkit
+13. Zepto
+14. BigBasket
+15. Ola Electric
+
+Week 3 (final 10):
+16. Nykaa
+17. Snapdeal
+18. Byju's
+19. Urban Company
+20. Unacademy
+21. CRED
+22. IRCTC
+23. Tata CLiQ
+24. Rapido
+25. Dunzo
+
+======================================================================
+END OF DATABASE
+======================================================================

@@ -1,0 +1,579 @@
+import type { Metadata } from "next";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { TrustSignalsSection } from "@/components/features/homepage/trust-signals";
+import { FAQSection } from "@/components/shared/faq-section";
+import Link from "next/link";
+import ClientFormTrigger from "@/app/send-legal-notice/legal-notice-for-money-recovery/client-form-trigger";
+
+export const metadata: Metadata = {
+  title: "Send Consumer Complaint Legal Notice Online | ₹1,499 – vakiltech",
+  description: "Draft and send a consumer complaint legal notice in minutes. Used by 1,000+ consumers. Defective product, service failure, e-commerce fraud. ₹1,499 flat. Speed Post + email delivery in 24 hrs.",
+  keywords: [
+    "consumer complaint legal notice",
+    "legal notice for consumer complaint",
+    "legal notice format for consumer complaint",
+    "consumer court legal notice",
+    "legal notice for defective goods",
+    "legal notice for deficiency in service",
+    "is legal notice mandatory in consumer cases",
+    "consumer legal notice format",
+    "how to send legal notice through consumer court",
+    "consumer protection act legal notice",
+  ],
+  alternates: {
+    canonical: "https://vakiltech.in/send-legal-notice/consumer-complaint-legal-notice",
+  },
+  openGraph: {
+    title: "Consumer Complaint Legal Notice – Send Online in 24 Hrs | ₹1,499 | vakiltech",
+    description: "Send a consumer complaint legal notice under Consumer Protection Act 2019. Defective product, deficiency in service, e-commerce fraud. Expert drafted, Speed Post delivery.",
+    url: "https://vakiltech.in/send-legal-notice/consumer-complaint-legal-notice",
+    siteName: "vakiltech",
+    images: [
+      {
+        url: "https://vakiltech.in/og/consumer-complaint-notice.png",
+        width: 1200,
+        height: 630,
+        alt: "Consumer complaint legal notice - professional drafting service by vakiltech advocates",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Consumer Complaint Legal Notice – Send Online in 24 Hrs | ₹1,499 | vakiltech",
+    description: "Send a consumer complaint legal notice under Consumer Protection Act 2019. Defective product, deficiency in service, e-commerce fraud.",
+    images: ["https://vakiltech.in/og/consumer-complaint-notice.png"],
+  },
+};
+
+export default function ConsumerComplaintLegalNoticePage() {
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Legal Notice", href: "/send-legal-notice" },
+    { label: "Consumer Complaint Legal Notice", current: true },
+  ];
+
+  const faqs = [
+    {
+      question: "Is sending a legal notice mandatory before filing a consumer complaint?",
+      answer:
+        "While the Consumer Protection Act 2019 does not make a legal notice strictly mandatory, most consumer forums expect you to have given the company a formal opportunity to resolve the issue before filing a case. Sending a notice creates critical documentary evidence of your complaint attempt, demonstrates good faith, and in the majority of cases results in settlement without needing to go to court. Skipping this step weakens your position before the forum.",
+    },
+    {
+      question: "What is a consumer complaint legal notice?",
+      answer:
+        "A consumer complaint legal notice is a formal written demand sent by a consumer's advocate to a company or seller, citing the Consumer Protection Act 2019, detailing the defect or deficiency, and demanding refund, replacement, or compensation within a specified period (usually 15–30 days). It is the strongest pre-litigation step available to a consumer in India.",
+    },
+    {
+      question: "How to send a legal notice through consumer court?",
+      answer:
+        "A legal notice is sent before approaching the consumer court — not through it. You (via your advocate) draft the notice, send it to the company via registered/speed post, and wait for their response. If they do not respond or refuse to settle within the notice period, you then file a complaint before the District Consumer Disputes Redressal Commission. vakiltech handles drafting and dispatch end-to-end.",
+    },
+    {
+      question: "What is the legal notice format for a consumer complaint?",
+      answer:
+        "A valid consumer complaint legal notice must include: (1) Full details of sender and recipient with addresses, (2) Description of goods or service availed with date and invoice, (3) Description of the defect or deficiency in clear factual terms, (4) Amount paid and compensation or refund claimed, (5) Reference to Consumer Protection Act 2019 sections, (6) Clear deadline for response (15–30 days), (7) Consequences of non-compliance, (8) Advocate's signature, Bar Council registration number and seal.",
+    },
+    {
+      question: "Who is considered a consumer under Consumer Protection Act 2019?",
+      answer:
+        "A consumer is any person who buys goods or hires services for personal use and not for resale or commercial purpose. This covers individual buyers, online shoppers, patients availing healthcare, bank customers, insurance holders, telecom subscribers, real estate buyers, and e-commerce customers. The 2019 Act expanded the definition to explicitly include online transactions.",
+    },
+    {
+      question: "What types of consumer complaints can I file a legal notice for?",
+      answer:
+        "You can send a consumer legal notice for: (1) Defective products, (2) Deficiency in service, (3) Unfair trade practices — false advertising or misleading descriptions, (4) Overcharging above MRP or agreed amount, (5) E-commerce fraud — product not delivered or counterfeit, (6) Non-delivery of goods or services paid for, (7) Breach of warranty or guarantee terms.",
+    },
+    {
+      question: "What is the time limit for filing a consumer complaint?",
+      answer:
+        "You must file a consumer complaint within 2 years from the date the cause of action arose — typically the date you discovered the defect or the date the service was supposed to be delivered. Consumer forums can condone delay if you show sufficient cause, but it is best to act promptly. Sending a legal notice does not suspend or extend this limitation period.",
+    },
+    {
+      question: "Which consumer forum should I approach?",
+      answer:
+        "The forum is determined by claim amount: District Consumer Disputes Redressal Commission for claims up to ₹1 crore; State Commission for ₹1 crore to ₹10 crore; National Commission for above ₹10 crore. You can file in the district where you reside, where the company is registered, or where the transaction took place. E-filing is available through the CONFONET portal.",
+    },
+    {
+      question: "What compensation can consumer forums award?",
+      answer:
+        "Consumer forums can order: full refund of amount paid, replacement of defective goods, repair at company's cost, compensation for financial loss, compensation for mental agony (typically ₹10,000–₹1,00,000), punitive damages for deliberate negligence, and reimbursement of litigation costs.",
+    },
+    {
+      question: "Can I file complaints against Amazon, Flipkart, Swiggy, or other e-commerce companies?",
+      answer:
+        "Yes. Consumer Protection Act 2019 and the Consumer Protection (E-Commerce) Rules 2020 explicitly cover e-commerce transactions. You can file complaints against both the platform and the seller for product not delivered, defective or fake product received, description mismatch, refund not processed, or any unfair trade practice.",
+    },
+    {
+      question: "How much does a consumer complaint legal notice cost with vakiltech?",
+      answer:
+        "vakiltech's consumer complaint legal notice service is priced at ₹1,499 all-inclusive. This covers a free consultation with our Licensed Advocate, professional drafting citing Consumer Protection Act 2019, unlimited revisions, dispatch via Speed Post with tracking, and post-notice guidance on next steps.",
+    },
+  ];
+
+  return (
+    <>
+    {/* schema-migrated */}
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"Organization","name":"vakiltech","legalName":"vakiltech Legal Services","url":"https://vakiltech.in","logo":"https://vakiltech.in/logo.png","foundingDate":"2023","description":"India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.","address":{"@type":"PostalAddress","addressCountry":"IN"},"contactPoint":[{"@type":"ContactPoint","telephone":"+91-70476 83995","contactType":"Customer Service","availableLanguage":["English","Hindi"],"areaServed":"IN"}],"sameAs":[],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"500","bestRating":"5","worstRating":"1"},"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Legal Notice Services","description":"Professional legal notice drafting and sending"},"price":"1499","priceCurrency":"INR"},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Legal Consultation","description":"Expert legal consultation from Licensed Advocates"},"price":"299","priceCurrency":"INR"},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Agreement Drafting","description":"Professional legal agreement drafting services"},"price":"999","priceCurrency":"INR"}]}` }}
+    />
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"LegalService","telephone":"+91-70476 83995","image":"https://vakiltech.in/vt-logo.png","address":{"@type":"PostalAddress","addressCountry":"IN"},"priceRange":"\u20b91,499+","name":"vakiltech - Consumer Complaint Legal Notice","description":"Got a defective product? Send consumer complaint notice under CPA 2019. Full refund + compensation. Expert drafted ₹1,499. 24hr delivery.","url":"https://vakiltech.in/send-legal-notice/consumer-complaint-legal-notice","areaServed":{"@type":"Country","name":"India"},"provider":{"@type":"Organization","name":"vakiltech","url":"https://vakiltech.in","logo":"https://vakiltech.in/logo.png","contactPoint":{"@type":"ContactPoint","telephone":"+91-70476 83995","contactType":"Customer Service","availableLanguage":["English","Hindi"]}},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"500"},"offers":{"@type":"Offer","price":"1499","priceCurrency":"INR","availability":"https://schema.org/InStock"}}` }}
+    />
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"WebPage","name":"Consumer Complaint Legal Notice – Defective Product/Service | ₹1499","description":"Got a defective product? Send consumer complaint notice under CPA 2019. Full refund + compensation. Expert drafted ₹1,499. 24hr delivery.","url":"https://vakiltech.in/send-legal-notice/consumer-complaint-legal-notice","speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2",".prose"]},"mainEntity":{"@type":"Service","name":"Consumer Complaint Legal Notice","description":"If you've received a defective product, faced deficiency in service, been charged unfairly, or encountered any unfair trade practice, you have strong rights under the Consumer Protection Act 2019. A consumer complaint legal notice is the mandatory first step before approaching a consumer forum. For a detailed understanding, read our [Consumer Protection Guide](/guide/consumer-protection).","provider":{"@type":"Organization","name":"vakiltech"}}}` }}
+    />
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is sending a legal notice mandatory before filing a consumer complaint?","acceptedAnswer":{"@type":"Answer","text":"While the Consumer Protection Act 2019 does not make a legal notice strictly mandatory, most consumer forums expect you to have given the company a formal opportunity to resolve the issue before filing a case. Sending a notice creates critical documentary evidence of your complaint attempt, demonstrates good faith, and in the majority of cases results in settlement without needing to go to court. Skipping this step weakens your position before the forum."}},{"@type":"Question","name":"What is a consumer complaint legal notice?","acceptedAnswer":{"@type":"Answer","text":"A consumer complaint legal notice is a formal written demand sent by a consumer's advocate to a company or seller, citing the Consumer Protection Act 2019, detailing the defect or deficiency, and demanding refund, replacement, or compensation within a specified period (usually 15–30 days). It is the strongest pre-litigation step available to a consumer in India."}},{"@type":"Question","name":"How to send a legal notice through consumer court?","acceptedAnswer":{"@type":"Answer","text":"A legal notice is sent before approaching the consumer court — not through it. You (via your advocate) draft the notice, send it to the company via registered/speed post, and wait for their response. If they do not respond or refuse to settle within the notice period, you then file a complaint before the District Consumer Disputes Redressal Commission. vakiltech handles drafting and dispatch end-to-end."}},{"@type":"Question","name":"What is the legal notice format for a consumer complaint?","acceptedAnswer":{"@type":"Answer","text":"A valid consumer complaint legal notice must include: (1) Full details of sender and recipient with addresses, (2) Description of goods or service availed with date and invoice, (3) Description of the defect or deficiency in clear factual terms, (4) Amount paid and compensation or refund claimed, (5) Reference to Consumer Protection Act 2019 sections, (6) Clear deadline for response (15–30 days), (7) Consequences of non-compliance, (8) Advocate's signature, Bar Council registration number and seal."}},{"@type":"Question","name":"Who is considered a consumer under Consumer Protection Act 2019?","acceptedAnswer":{"@type":"Answer","text":"A consumer is any person who buys goods or hires services for personal use and not for resale or commercial purpose. This covers individual buyers, online shoppers, patients availing healthcare, bank customers, insurance holders, telecom subscribers, real estate buyers, and e-commerce customers. The 2019 Act expanded the definition to explicitly include online transactions."}},{"@type":"Question","name":"What types of consumer complaints can I file a legal notice for?","acceptedAnswer":{"@type":"Answer","text":"You can send a consumer legal notice for: (1) Defective products, (2) Deficiency in service, (3) Unfair trade practices — false advertising or misleading descriptions, (4) Overcharging above MRP or agreed amount, (5) E-commerce fraud — product not delivered or counterfeit, (6) Non-delivery of goods or services paid for, (7) Breach of warranty or guarantee terms."}},{"@type":"Question","name":"What is the time limit for filing a consumer complaint?","acceptedAnswer":{"@type":"Answer","text":"You must file a consumer complaint within 2 years from the date the cause of action arose — typically the date you discovered the defect or the date the service was supposed to be delivered. Consumer forums can condone delay if you show sufficient cause, but it is best to act promptly. Sending a legal notice does not suspend or extend this limitation period."}},{"@type":"Question","name":"Which consumer forum should I approach?","acceptedAnswer":{"@type":"Answer","text":"The forum is determined by claim amount: District Consumer Disputes Redressal Commission for claims up to ₹1 crore; State Commission for ₹1 crore to ₹10 crore; National Commission for above ₹10 crore. You can file in the district where you reside, where the company is registered, or where the transaction took place. E-filing is available through the CONFONET portal."}},{"@type":"Question","name":"What compensation can consumer forums award?","acceptedAnswer":{"@type":"Answer","text":"Consumer forums can order: full refund of amount paid, replacement of defective goods, repair at company's cost, compensation for financial loss, compensation for mental agony (typically ₹10,000–₹1,00,000), punitive damages for deliberate negligence, and reimbursement of litigation costs."}},{"@type":"Question","name":"Can I file complaints against Amazon, Flipkart, Swiggy, or other e-commerce companies?","acceptedAnswer":{"@type":"Answer","text":"Yes. Consumer Protection Act 2019 and the Consumer Protection (E-Commerce) Rules 2020 explicitly cover e-commerce transactions. You can file complaints against both the platform and the seller for product not delivered, defective or fake product received, description mismatch, refund not processed, or any unfair trade practice."}},{"@type":"Question","name":"How much does a consumer complaint legal notice cost with vakiltech?","acceptedAnswer":{"@type":"Answer","text":"vakiltech's consumer complaint legal notice service is priced at ₹1,499 all-inclusive. This covers a free consultation with our Licensed Advocate, professional drafting citing Consumer Protection Act 2019, unlimited revisions, dispatch via Speed Post with tracking, and post-notice guidance on next steps."}}]}` }}
+    />
+
+    <main className="min-h-screen bg-gradient-to-b from-background to-background/55">
+      <div className="container mx-auto px-6 md:px-8 pb-8">
+
+        {/* ── HERO ── */}
+        <section className="relative pt-6 pb-16 md:pt-10 md:pb-24 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 overflow-hidden rounded-b-3xl md:rounded-b-[40px] -mx-6 md:-mx-8 px-6 md:px-8">
+          <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-[800px] h-[800px] bg-gradient-to-r from-primary/20 to-transparent rounded-full blur-3xl opacity-20" />
+          </div>
+          <div className="relative max-w-6xl mx-auto flex flex-col gap-8 md:gap-12">
+            <div className="z-10 mt-2 mb-2">
+              <Breadcrumb items={breadcrumbItems} />
+            </div>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <div className="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+                    Trusted by 18,000+ Indians
+                  </div>
+                  <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                    Consumer Complaint Legal Notice — Send Online in 24 Hours
+                  </h1>
+                  <p className="text-xl text-muted-foreground leading-relaxed">
+                    Defective product? Poor service? E-commerce fraud? A consumer complaint legal notice under Consumer Protection Act 2019 is your strongest first step. Drafted by Licensed Advocates. Sent via Speed Post. Starting at ₹1,499.
+                  </p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="text-sm text-foreground font-medium">✓ Licensed Advocate Drafted</div>
+                    <div className="text-sm text-foreground font-medium">✓ Valid in all Consumer Forums</div>
+                    <div className="text-sm text-foreground font-medium">✓ Speed Post with tracking ID</div>
+                    <div className="text-sm text-foreground font-medium">✓ Flat ₹1,499 — no hidden charges</div>
+                  </div>
+                </div>
+                <ClientFormTrigger />
+                <div className="flex items-center gap-6 text-sm text-muted-foreground flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full" />
+                    <span>Expert Lawyers</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full" />
+                    <span>24–48 Hour Delivery</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full" />
+                    <span>75% Settlement Rate</span>
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="relative w-full h-80 md:h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 p-8 flex items-center justify-center">
+                  <img
+                    src="/legal-notice/consumer-disputes.png"
+                    alt="Consumer complaint legal notice drafted by vakiltech advocates"
+                    className="w-full h-full object-contain drop-shadow-2xl"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── TABLE OF CONTENTS ── */}
+        <nav className="max-w-4xl mx-auto py-8" aria-label="Table of Contents">
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 className="text-lg font-bold text-foreground mb-4">📑 Table of Contents</h2>
+            <ol className="list-decimal pl-5 space-y-2 text-primary">
+              <li><a href="#what-is" className="hover:underline">What Is a Consumer Complaint Legal Notice?</a></li>
+              <li><a href="#when-to-send" className="hover:underline">When Should You Send a Consumer Legal Notice?</a></li>
+              <li><a href="#legal-basis" className="hover:underline">Legal Basis — Consumer Protection Act 2019</a></li>
+              <li><a href="#notice-format" className="hover:underline">Consumer Complaint Legal Notice Format (Sample)</a></li>
+              <li><a href="#is-mandatory" className="hover:underline">Is Legal Notice Mandatory in Consumer Cases?</a></li>
+              <li><a href="#how-to-send" className="hover:underline">How to Send a Consumer Legal Notice (Step-by-Step)</a></li>
+              <li><a href="#after-notice" className="hover:underline">What Happens After Sending the Notice?</a></li>
+              <li><a href="#forum-jurisdiction" className="hover:underline">Which Consumer Forum to Approach?</a></li>
+              <li><a href="#cost" className="hover:underline">Cost: vakiltech vs Traditional Lawyer</a></li>
+              <li><a href="#testimonials" className="hover:underline">Real Consumer Complaint Success Stories</a></li>
+            </ol>
+          </div>
+        </nav>
+
+        <div className="max-w-4xl mx-auto py-4 space-y-12">
+
+          {/* ── SECTION 1: What Is ── */}
+          <div id="what-is" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">What Is a Consumer Complaint Legal Notice?</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>A <strong>consumer complaint legal notice</strong> is a formal written demand sent by a consumer&apos;s advocate to a company, seller, or service provider under the Consumer Protection Act 2019. It details the specific defect or deficiency experienced, quantifies the loss or damage, and demands redressal — refund, replacement, or compensation — within a specified time period (usually 15–30 days).</p>
+              <p>This notice, drafted on an advocate&apos;s letterhead and dispatched via registered post, creates court-admissible evidence that you made a formal demand before approaching the consumer forum. Consumer forums across India consistently view a well-drafted pre-notice as a sign of good faith and seriousness on the consumer&apos;s part.</p>
+              <p>Unlike a general complaint email to a company&apos;s customer service, a consumer legal notice carries the weight of law. Companies treat it differently — it signals the consumer is prepared to escalate to the District Consumer Commission. This is why over <strong>75% of consumer disputes settle after receiving a formal legal notice</strong> — without the consumer ever needing to file a forum complaint.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Consumer Legal Notice vs Consumer Court Complaint</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse border border-border text-sm mt-2">
+                  <thead>
+                    <tr className="bg-muted/50">
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Aspect</th>
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Legal Notice</th>
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Consumer Forum Complaint</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td className="border border-border p-3">Stage</td><td className="border border-border p-3">Pre-litigation (first step)</td><td className="border border-border p-3">Formal legal proceeding</td></tr>
+                    <tr><td className="border border-border p-3">Cost</td><td className="border border-border p-3">₹1,499 with vakiltech</td><td className="border border-border p-3">₹200–₹5,000 fees + legal fees</td></tr>
+                    <tr><td className="border border-border p-3">Time to resolve</td><td className="border border-border p-3">15–30 days typically</td><td className="border border-border p-3">3–18 months</td></tr>
+                    <tr><td className="border border-border p-3">Success rate</td><td className="border border-border p-3">~75% settle at notice stage</td><td className="border border-border p-3">High, but time-intensive</td></tr>
+                    <tr><td className="border border-border p-3">Court visits</td><td className="border border-border p-3">None required</td><td className="border border-border p-3">Multiple hearings</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          {/* ── SECTION 2: When to Send ── */}
+          <div id="when-to-send" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">When Should You Send a Consumer Complaint Legal Notice?</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>Send a consumer legal notice as soon as the company has failed to resolve your complaint through normal customer service channels. Here are the most common situations:</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Defective Goods — Product Doesn&apos;t Work as Advertised</h3>
+              <p>You bought a product — appliance, phone, furniture, or vehicle — that turned out to be defective, didn&apos;t match the advertised specifications, or stopped working within the warranty period. The company is refusing to replace or repair it. A consumer legal notice for defective goods forces a formal response within 15–30 days.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Deficiency in Service — Service Not Delivered as Promised</h3>
+              <p>A service provider — builder, interior designer, coaching institute, hospital, travel agency, gym — failed to deliver the promised service or delivered it with serious deficiencies. Legal notice citing deficiency in service under CPA 2019 is the strongest pre-litigation step.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">E-Commerce Fraud — Product Not Delivered or Fake Product Received</h3>
+              <p>Amazon, Flipkart, Meesho, Nykaa, or any online seller sent you a fake product, wrong item, or simply failed to deliver — and the platform&apos;s customer service has not resolved the issue. Consumer Protection (E-Commerce) Rules 2020 specifically hold platforms accountable. vakiltech has specialised notices for{" "}
+                <Link href="/send-legal-notice/amazon-india" className="text-primary hover:underline">Amazon India</Link>,{" "}
+                <Link href="/send-legal-notice/flipkart" className="text-primary hover:underline">Flipkart</Link>,{" "}
+                <Link href="/send-legal-notice/meesho" className="text-primary hover:underline">Meesho</Link>, and more.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Overcharging or Unfair Trade Practices</h3>
+              <p>Charged above MRP? Hidden charges not disclosed at purchase? Misleading advertisements that influenced your buying decision? These constitute unfair trade practices under Section 2(47) of CPA 2019 and are grounds for a consumer legal notice.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Banking and Insurance Disputes</h3>
+              <p>Unauthorised bank debits, insurance claim wrongly rejected, mis-selling of financial products — banks and insurance companies are classified as service providers under CPA 2019. A consumer legal notice creates a formal paper trail and often accelerates resolution.</p>
+            </div>
+          </div>
+
+          {/* ── MID CTA 1 ── */}
+          <div className="bg-primary/5 border-2 border-primary/20 rounded-xl p-8 text-center">
+            <p className="text-xl font-bold text-foreground mb-2">Act before the 2-year limitation period expires.</p>
+            <p className="text-muted-foreground mb-6">You have 2 years from the date of the defect or service failure to file a consumer complaint. Send your notice now.</p>
+            <ClientFormTrigger />
+          </div>
+
+          {/* ── SECTION 3: Legal Basis ── */}
+          <div id="legal-basis" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Legal Basis — Consumer Protection Act 2019</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>Consumer rights in India are governed by the <strong>Consumer Protection Act 2019</strong> (CPA 2019), which replaced the older 1986 Act and significantly strengthened consumer protections — especially for online transactions.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Key Definitions Under CPA 2019</h3>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Consumer (Section 2(7)):</strong> Any person who buys goods or hires/avails services for personal use — not for resale or commercial purposes. Explicitly includes online buyers.</li>
+                <li><strong>Defect (Section 2(10)):</strong> Any fault, imperfection, shortcoming, or inadequacy in quality, quantity, potency, purity, or standard of a product as required by law or as claimed by the seller.</li>
+                <li><strong>Deficiency (Section 2(11)):</strong> Any fault, imperfection, shortcoming, or inadequacy in the quality, nature, and manner of performance of a service as required by law or as undertaken to be performed.</li>
+                <li><strong>Unfair Trade Practice (Section 2(47)):</strong> Any practice by a seller or service provider that adopts unfair methods or deceptive practices to promote the sale of goods or services.</li>
+              </ul>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Consumer Rights Under CPA 2019</h3>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Right to be protected against marketing of goods and services hazardous to life and property</li>
+                <li>Right to be informed about quality, quantity, potency, purity, standard, and price of goods/services</li>
+                <li>Right to be heard and to have consumer interests receive due consideration</li>
+                <li>Right to seek redressal against unfair trade practices or exploitation</li>
+                <li>Right to consumer education</li>
+              </ul>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">E-Commerce Rules 2020 — Additional Protection for Online Buyers</h3>
+              <p>The Consumer Protection (E-Commerce) Rules 2020 require all e-commerce platforms to display return, refund, exchange, and warranty policies clearly; not manipulate search results; not impose undisclosed cancellation charges; and appoint a Grievance Officer. Violation of these rules is grounds for a legal notice and consumer forum complaint.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Central Consumer Protection Authority (CCPA)</h3>
+              <p>The CPA 2019 established the CCPA — a regulatory body empowered to investigate unfair trade practices, issue safety notices against hazardous goods, and recall defective products. For systemic issues affecting many consumers, complaints can be directed to the CCPA in addition to a legal notice.</p>
+            </div>
+          </div>
+
+          {/* ── SECTION 4: Notice Format ── */}
+          <div id="notice-format" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Consumer Complaint Legal Notice Format — Sample</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>A valid consumer complaint legal notice must be precise, factual, and cite the relevant sections of the Consumer Protection Act 2019. Below is a simplified sample format for reference:</p>
+              <div className="bg-muted/30 border border-border rounded-lg p-6 font-mono text-sm leading-relaxed">
+                <p className="font-bold mb-4">[ON THE LETTERHEAD OF THE ADVOCATE]</p>
+                <p><strong>LEGAL NOTICE UNDER CONSUMER PROTECTION ACT, 2019</strong></p>
+                <p className="mt-2"><strong>Date:</strong> [DD/MM/YYYY] &nbsp;&nbsp; <strong>Ref. No.:</strong> [Reference Number]</p>
+                <p className="mt-4"><strong>To,</strong><br />[Name of Company / Seller / Service Provider]<br />[Registered Office Address]</p>
+                <p className="mt-4"><strong>Subject:</strong> Legal Notice — Demand for Refund/Replacement/Compensation under CPA 2019</p>
+                <p className="mt-4">Under instructions from my client <strong>[Consumer Name]</strong>, residing at <strong>[Address]</strong>, I serve this notice:</p>
+                <p className="mt-3">1. My client purchased <strong>[Product/Service]</strong> vide Invoice No. <strong>[XXXX]</strong> dated <strong>[Date]</strong> for ₹<strong>[Amount]</strong>.</p>
+                <p>2. The said product/service was found defective/deficient as follows: <strong>[specific description of defect]</strong>.</p>
+                <p>3. My client brought this to your notice on <strong>[Date]</strong> via <strong>[email/customer care]</strong>, but adequate remedy has not been provided.</p>
+                <p>4. The aforesaid acts constitute a <strong>defect / deficiency in service / unfair trade practice</strong> under Sections 2(10)/2(11)/2(47) of Consumer Protection Act, 2019.</p>
+                <p>5. You are called upon to pay/replace/rectify within <strong>15 days</strong> of receipt, failing which a complaint shall be filed before the competent Consumer Disputes Redressal Commission claiming full refund of ₹[Amount] + compensation for mental harassment + litigation costs.</p>
+                <p className="mt-4"><strong>[Advocate Name]</strong><br />Bar Council Enrolment No. [XXXX]<br />[Signature &amp; Seal]</p>
+              </div>
+              <p className="text-sm italic mt-2">Note: This is a simplified reference format. Your actual notice will be thoroughly customised to your specific facts by our Licensed Advocates.</p>
+            </div>
+          </div>
+
+          {/* ── SECTION 5: Is it Mandatory ── */}
+          <div id="is-mandatory" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Is Legal Notice Mandatory in Consumer Cases?</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>This is the most-searched question by Indian consumers. The short answer: <strong>not strictly mandatory under Consumer Protection Act 2019, but strongly advisable in practice.</strong></p>
+              <p>The CPA 2019 does not contain an explicit provision requiring a consumer to send a legal notice before filing a complaint before the consumer forum. Unlike Section 80 of the Code of Civil Procedure (which mandates notice before suing the government), no such blanket requirement exists for consumer complaints.</p>
+              <p>However, here is why sending a notice is considered best practice:</p>
+              <ul className="list-disc pl-5 space-y-3 mt-2">
+                <li><strong>Evidence of demand:</strong> The notice creates timestamped proof that you formally demanded resolution before filing. Consumer forums view this favourably.</li>
+                <li><strong>Settlement opportunity:</strong> A large percentage of companies settle after a legal notice to avoid litigation cost and reputational damage. You get your money faster.</li>
+                <li><strong>Stronger case:</strong> If the company ignores or inadequately responds to the notice, that becomes additional evidence of bad faith before the forum.</li>
+                <li><strong>Higher compensation:</strong> Forums are more likely to award compensation for mental harassment when the consumer can show they tried to resolve the matter and the company was unresponsive.</li>
+              </ul>
+              <p className="mt-2 font-medium text-foreground">Verdict: While you can technically file without a notice, doing so is strategically disadvantageous. Send the notice — it costs ₹1,499 and dramatically increases your chances of settlement before court.</p>
+            </div>
+          </div>
+
+          {/* ── SECTION 6: How to Send ── */}
+          <div id="how-to-send" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">How to Send a Consumer Complaint Legal Notice — Step-by-Step</h2>
+            <div className="space-y-6 text-muted-foreground">
+              <p>Here is the exact process vakiltech follows to draft and send your consumer complaint legal notice:</p>
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">1</div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-1">Gather Your Evidence</h3>
+                    <p>Collect all proof: invoice or order confirmation, photographs or videos of the defect, screenshots of product listing, customer service chat logs, emails you&apos;ve already sent, and the company&apos;s inadequate response. Even informal evidence like WhatsApp chats is useful.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">2</div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-1">Free Consultation with Our Advocate</h3>
+                    <p>Share your case details with our Licensed Advocates. They&apos;ll assess whether your case qualifies under CPA 2019, what remedies you can claim, and how strong your evidence is. This consultation is <strong>included free</strong> with your ₹1,499 notice.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">3</div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-1">Notice Drafted Within 24–48 Hours</h3>
+                    <p>Our advocate drafts your notice on official letterhead, citing the specific sections of Consumer Protection Act 2019 that apply, detailing your claim precisely, and setting a clear deadline. You review and approve — with unlimited free revisions.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">4</div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-1">Dispatched via Speed Post with Tracking</h3>
+                    <p>The signed notice is dispatched via India Post Speed Post to the company&apos;s registered office. You receive the tracking number and postal receipt — both serve as legal proof of delivery and delivery date, admissible in consumer forums.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">5</div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-1">Wait for Response (15–30 Days)</h3>
+                    <p>After the company receives the notice, they have 15–30 days to respond. In most cases, this results in the company reaching out with a settlement offer. If they do not respond or refuse to settle, our team guides you on filing before the appropriate consumer forum — with all documents already in order.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── SECTION 7: After Notice ── */}
+          <div id="after-notice" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">What Happens After Sending the Consumer Legal Notice?</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>After your notice is received by the company, there are three possible outcomes:</p>
+              <h3 className="text-xl font-semibold text-foreground mt-4 mb-2">Outcome 1: Company Settles (Most Common — ~75% of Cases)</h3>
+              <p>The company&apos;s legal team takes formal notices seriously. In many cases — particularly for large e-commerce platforms and branded companies — the threat of a consumer forum case prompts quick resolution. You receive a refund, replacement, or compensation offer. Review it carefully before accepting; our advocate can advise whether the offer is fair.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-4 mb-2">Outcome 2: Company Disputes or Responds Inadequately</h3>
+              <p>The company responds but denies liability or makes an unacceptable offer. This response itself becomes evidence. At this stage, you can either negotiate through your advocate or proceed to file a complaint before the consumer forum, now with a stronger case since you have the company&apos;s denial on record.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-4 mb-2">Outcome 3: Company Ignores the Notice</h3>
+              <p>Silence after a formal legal notice is treated as bad faith by consumer forums and can support a claim for higher compensation including mental harassment damages. File your consumer forum complaint immediately after the notice period expires. The unreplied notice, postal receipt, and tracking record all go into your complaint as evidence.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Using the National Consumer Helpline (NCH)</h3>
+              <p>Alongside the legal notice, register your complaint on the National Consumer Helpline at 1800-11-4000 or via consumerhelpline.gov.in. NCH contacts the company and many disputes resolve at this stage. The NCH registration also creates an official complaint trail that strengthens your position before the consumer forum.</p>
+            </div>
+          </div>
+
+          {/* ── SECTION 8: Forum Jurisdiction ── */}
+          <div id="forum-jurisdiction" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Which Consumer Forum Should You Approach?</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>If the company does not resolve the matter after the legal notice, you file a complaint before the appropriate Consumer Disputes Redressal Commission based on your claim amount:</p>
+              <div className="overflow-x-auto mt-4">
+                <table className="w-full border-collapse border border-border text-sm">
+                  <thead>
+                    <tr className="bg-muted/50">
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Forum</th>
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Claim Amount</th>
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Filing Fee</th>
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Typical Duration</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td className="border border-border p-3 font-medium">District Commission</td><td className="border border-border p-3">Up to ₹1 crore</td><td className="border border-border p-3">₹200–₹2,000</td><td className="border border-border p-3">3–12 months</td></tr>
+                    <tr><td className="border border-border p-3 font-medium">State Commission</td><td className="border border-border p-3">₹1 crore – ₹10 crore</td><td className="border border-border p-3">₹2,000–₹5,000</td><td className="border border-border p-3">6–18 months</td></tr>
+                    <tr><td className="border border-border p-3 font-medium">National Commission</td><td className="border border-border p-3">Above ₹10 crore</td><td className="border border-border p-3">₹5,000+</td><td className="border border-border p-3">1–3 years</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4"><strong>Where to file:</strong> You can file in the district where you reside, where the company has its registered office, or where the transaction took place. For online purchases, you can file at your district of residence. E-filing is available through the CONFONET portal (confonet.nic.in).</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">What Compensation Can Consumer Forums Award?</h3>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Full refund of the amount paid for the defective product or service</li>
+                <li>Replacement of defective goods with new, defect-free goods</li>
+                <li>Repair or rectification of the defect at the company&apos;s cost</li>
+                <li>Compensation for financial loss caused by the defect or deficiency</li>
+                <li>Compensation for mental agony and harassment (typically ₹10,000–₹1,00,000)</li>
+                <li>Punitive damages for grossly negligent or deliberate acts</li>
+                <li>Litigation costs covering your legal expenses</li>
+                <li>Interest on delayed refunds at court-determined rates</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* ── MID CTA 2 ── */}
+          <div className="bg-primary/5 border-2 border-primary/20 rounded-xl p-8 text-center">
+            <p className="text-xl font-bold text-foreground mb-2">Ready to assert your consumer rights?</p>
+            <p className="text-muted-foreground mb-6">Our Licensed Advocates draft and send your consumer complaint legal notice within 24 hours.</p>
+            <ClientFormTrigger />
+          </div>
+
+          {/* ── SECTION 9: Cost ── */}
+          <div id="cost" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Cost: vakiltech vs Traditional Lawyer</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse border border-border text-sm">
+                  <thead>
+                    <tr className="bg-muted/50">
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Feature</th>
+                      <th className="border border-border p-3 text-left font-semibold text-foreground">Traditional Lawyer</th>
+                      <th className="border border-border p-3 text-left font-semibold text-primary">vakiltech</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td className="border border-border p-3">Price</td><td className="border border-border p-3">₹5,000 – ₹15,000+</td><td className="border border-border p-3 font-semibold text-primary">₹1,499 (all-inclusive)</td></tr>
+                    <tr><td className="border border-border p-3">Initial consultation</td><td className="border border-border p-3">₹500 – ₹2,000 extra</td><td className="border border-border p-3 font-semibold text-primary">Free — included</td></tr>
+                    <tr><td className="border border-border p-3">Drafting time</td><td className="border border-border p-3">1–2 weeks</td><td className="border border-border p-3 font-semibold text-primary">24–48 hours</td></tr>
+                    <tr><td className="border border-border p-3">Revisions</td><td className="border border-border p-3">Additional charge</td><td className="border border-border p-3 font-semibold text-primary">Unlimited, free</td></tr>
+                    <tr><td className="border border-border p-3">Dispatch</td><td className="border border-border p-3">You handle it yourself</td><td className="border border-border p-3 font-semibold text-primary">Speed Post + tracking included</td></tr>
+                    <tr><td className="border border-border p-3">Hidden charges</td><td className="border border-border p-3">Common</td><td className="border border-border p-3 font-semibold text-primary">Zero</td></tr>
+                    <tr><td className="border border-border p-3">Post-notice guidance</td><td className="border border-border p-3">Separate fees</td><td className="border border-border p-3 font-semibold text-primary">Included</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4">vakiltech&apos;s ₹1,499 flat fee covers the entire end-to-end process — consultation, drafting, revisions, dispatch, and follow-up guidance. No hidden charges, no surprise bills.</p>
+            </div>
+          </div>
+
+          {/* ── Related Legal Notices ── */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Related Consumer Legal Notices</h2>
+            <p className="text-muted-foreground mb-6">Have a complaint against a specific company or platform? Check:</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+              {[
+                { label: "Amazon India", href: "/send-legal-notice/amazon-india" },
+                { label: "Flipkart", href: "/send-legal-notice/flipkart" },
+                { label: "Swiggy", href: "/send-legal-notice/swiggy" },
+                { label: "Zomato", href: "/send-legal-notice/zomato" },
+                { label: "Meesho", href: "/send-legal-notice/meesho" },
+                { label: "Myntra", href: "/send-legal-notice/myntra" },
+                { label: "Nykaa", href: "/send-legal-notice/nykaa" },
+                { label: "MakeMyTrip", href: "/send-legal-notice/makemytrip" },
+                { label: "IRCTC", href: "/send-legal-notice/irctc" },
+                { label: "Ola Cabs", href: "/send-legal-notice/ola-cabs" },
+                { label: "Urban Company", href: "/send-legal-notice/urban-company" },
+                { label: "BYJU'S", href: "/send-legal-notice/byjus" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="border border-border rounded-lg px-3 py-2 text-primary hover:bg-primary/5 transition-colors text-center"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Company Grid ── */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-foreground mb-2">Send Notice to a Specific Company</h2>
+            <p className="text-muted-foreground text-sm mb-4">Select the company that wronged you — each notice is tailored to their registered address and relevant consumer laws.</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+              {[
+                { name: "Amazon India", slug: "amazon-india" },
+                { name: "Flipkart", slug: "flipkart" },
+                { name: "Myntra", slug: "myntra" },
+                { name: "Meesho", slug: "meesho" },
+                { name: "Snapdeal", slug: "snapdeal" },
+                { name: "Nykaa", slug: "nykaa" },
+                { name: "Tata CLiQ", slug: "tata-cliq" },
+                { name: "Swiggy", slug: "swiggy" },
+                { name: "Zomato", slug: "zomato" },
+                { name: "Blinkit", slug: "blinkit" },
+                { name: "Zepto", slug: "zepto" },
+                { name: "BigBasket", slug: "bigbasket" },
+                { name: "Dunzo", slug: "dunzo" },
+                { name: "Rapido", slug: "rapido" },
+                { name: "Ola Cabs", slug: "ola-cabs" },
+                { name: "Ola Electric", slug: "ola-electric" },
+                { name: "Uber India", slug: "uber-india" },
+                { name: "MakeMyTrip", slug: "makemytrip" },
+                { name: "IRCTC", slug: "irctc" },
+                { name: "Paytm", slug: "paytm" },
+                { name: "PhonePe", slug: "phonepe" },
+                { name: "CRED", slug: "cred" },
+                { name: "Urban Company", slug: "urban-company" },
+                { name: "BYJU'S", slug: "byjus" },
+                { name: "Unacademy", slug: "unacademy" },
+              ].map((company) => (
+                <Link
+                  key={company.slug}
+                  href={`/send-legal-notice/${company.slug}`}
+                  className="bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground hover:border-primary hover:text-primary transition-colors text-center"
+                >
+                  {company.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* ── SECTION 10: Testimonials ── */}
+          <div id="testimonials" className="bg-card border border-border rounded-xl p-6 shadow-sm scroll-mt-20">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Real Consumer Complaint Success Stories</h2>
+            <div className="space-y-6 text-muted-foreground">
+              <div className="p-4 bg-muted/30 rounded-lg italic border-l-4 border-primary">
+                &ldquo;Bought a defective refrigerator and the company gave me the runaround for 3 months. Sent a consumer legal notice through vakiltech and the company called within a week with a full replacement offer. Fast and effective.&rdquo;
+                <div className="mt-2 font-semibold text-foreground not-italic">— Meera Nair, Homemaker, Kochi</div>
+              </div>
+              <div className="p-4 bg-muted/30 rounded-lg italic border-l-4 border-primary">
+                &ldquo;Ordered a phone online and received a brick in the box. Customer care was useless for weeks. After the legal notice citing Consumer Protection Act 2019, the platform processed my full refund within 10 days. The notice vakiltech drafted was extremely detailed and professional.&rdquo;
+                <div className="mt-2 font-semibold text-foreground not-italic">— Arjun Sharma, IT Professional, Hyderabad</div>
+              </div>
+              <div className="p-4 bg-muted/30 rounded-lg italic border-l-4 border-primary">
+                &ldquo;A coaching institute took ₹85,000 from me with promises of placement assistance that never materialised. vakiltech&apos;s notice cited deficiency in service and unfair trade practice. They refunded ₹60,000 to avoid a consumer forum case.&rdquo;
+                <div className="mt-2 font-semibold text-foreground not-italic">— Priya Menon, MBA Student, Chennai</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <TrustSignalsSection />
+
+      <FAQSection
+        faqs={faqs}
+        title="Frequently Asked Questions"
+        subtitle="Everything you need to know about consumer complaint legal notice"
+      />
+    </main>
+    </>
+  );
+}

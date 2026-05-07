@@ -1,0 +1,146 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/
+Title:            Consumer Rights in India: How to File Complaints & Get Justice | VakalatnaamaToday Blog
+Meta Description: Know your consumer rights under the Consumer Protection Act, 2019. Learn how to file complaints, seek redressal, and protect yourself from unfair trade practices.
+Keywords:         vakil,vakiltech,online vakil,legal advice,talk to lawyer,lawyer contact number,send legal notice,online legal services india,advocate services
+
+── STATS / SOCIAL PROOF NUMBERS ─────────────────────────────────
+  • 1 capture 23 Jan 2026
+  • 23 Jan 2026
+  • 5 December 2024
+  • 2 min read
+  • 100% SecureVerified ExpertsQuick Delivery
+  • 100% Secure
+
+── PAGE SECTIONS ────────────────────────────────────────────────
+
+[Your Rights as a Consumer]
+    Every consumer in India has the following fundamental rights:
+    Right to Safety: Protection against hazardous goods and services
+    Right to Information: Access to complete product information
+    Right to Choose: Access to a variety of products at competitive prices
+    Right to be Heard: Your grievances must be addressed
+    Right to Seek Redressal: Fair settlement of disputes
+    Right to Consumer Education: Awareness about rights and responsibilities
+
+[How to File a Consumer Complaint]
+    If you face issues with a product or service, follow these steps:
+  ▸ Step 1: Document Everything
+    Keep all receipts, bills, warranty cards, and communication with the seller. Take photos or videos if the product is defective.
+  ▸ Step 2: Contact the Seller/Service Provider
+    Before taking legal action, try to resolve the issue directly. Send a written complaint and keep a copy.
+  ▸ Step 3: Send a Legal Notice
+    If the issue remains unresolved, send a formal legal notice demanding resolution within 15 days.
+  ▸ Step 4: File a Complaint with Consumer Forum
+    Based on the value of goods/services, file your complaint with:
+    District Forum: Claims up to ₹1 crore
+    State Commission: Claims ₹1 crore to ₹10 crore
+    National Commission: Claims above ₹10 crore
+    "Consumer protection is not just about getting compensation—it's about creating accountability and improving business practices."
+
+[Time Limits for Filing Complaints]
+    Consumer complaints must be filed within 2 years from the date of cause of action. However, this period can be extended if there's sufficient cause for delay.
+
+[Online Consumer Complaint Portal]
+    The government has launched the e-Daakhil portal for filing consumer complaints online. This makes the process faster and more accessible.
+    Need help filing a consumer complaint? Our legal team can guide you through the entire process.
+  ▸ Legal Notice Service
+    Get your legal notice drafted by expert advocates. Professional, legally sound, and delivered via Speed Post.
+    “The first duty of society is justice. When justice is denied, peace is disrupted, and social harmony is threatened.”
+    Supreme Court of India
+  ▸ Legal Insight
+    Always keep copies of all legal documents and correspondence. They may be crucial evidence if the matter escalates to court proceedings.
+  ▸ Share this article
+    Written by
+  ▸ Adv. Meera Patel
+    Your Rights as a Consumer
+    How to File a Consumer Complaint
+    Time Limits for Filing Complaints
+    Online Consumer Complaint Portal
+  ▸ Share
+  ▸ Legal Consultation
+    Get expert advice from experienced advocates.
+    Expert drafted
+    Fast delivery
+    100% secure
+
+[Have a Legal Question? Get Expert Answers]
+    Our team of experienced advocates is ready to help you navigate any legal matter.
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────
+  (Paste these <script> blocks into the page <head>)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "vakiltech",
+  "legalName": "vakiltech Legal Services",
+  "url": "https://vakiltech.in",
+  "logo": "https://vakiltech.in/logo.png",
+  "foundingDate": "2023",
+  "description": "India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-70476 83995",
+      "contactType": "Customer Service",
+      "availableLanguage": [
+        "English",
+        "Hindi"
+      ],
+      "areaServed": "IN"
+    }
+  ],
+  "sameAs": [],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Notice Services",
+        "description": "Professional legal notice drafting and sending"
+      },
+      "price": "1499",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Consultation",
+        "description": "Expert legal consultation from Licensed Advocates"
+      },
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Agreement Drafting",
+        "description": "Professional legal agreement drafting services"
+      },
+      "price": "999",
+      "priceCurrency": "INR"
+    }
+  ]
+}
+</script>
+
+======================================================================

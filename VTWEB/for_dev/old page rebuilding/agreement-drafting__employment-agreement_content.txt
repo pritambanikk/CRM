@@ -1,0 +1,200 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/agreement-drafting
+Title:            Employment Agreement Drafting | Job Contract Format @ ₹499 | VakilTech
+Meta Description: Get professional Employment Agreements drafted online. Includes Non-compete, IP rights, and Probation clauses. Lawyer verified drafts for Startups & SMEs.
+Keywords:         employment agreement drafting,job contract format,employee bond agreement,appointment letter format,service agreement drafting
+
+── STATS / SOCIAL PROOF NUMBERS ─────────────────────────────────
+  • The agreement was very detailed and covered things I hadn't even thought of. Great for my startup.Arjun GuptaFounder, Tech Startup, BangaloreProfessional service. Helped us standardize our hiring process.Nisha PatelHR Manager, AhmedabadClear terms on IP ownership were crucial for us. VakilTech handled it perfectly.Sandeep RaoDirector, Design Agency, Hyderabad
+  • Why do I need a written employment agreement?
+  • Can I include a non-compete clause?
+  • Does it cover intellectual property rights?
+  • Is this suitable for freelancers?
+  • What about probation periods?
+  • 1 capture 23 Jan 2026
+  • 23 Jan 2026
+
+── PAGE SECTIONS ────────────────────────────────────────────────
+
+[Why Choose Us for Employment Contracts]
+  ▸ Business Protection
+    Strong IP, confidentiality, and non-compete clauses.
+  ▸ Compliant
+    Adheres to latest Indian labor laws and regulations.
+  ▸ Expert Support
+    Guidance on best practices for HR policies.
+  ▸ Information Needed
+    Key details to customize the contract.
+    Company Details (Name, Address)
+    Employee Details (Name, Role)
+    Salary Structure (CTC breakdown)
+    Probation Period Details
+    Notice Period Terms
+    Leave Policy Summary
+    Specific Confidentiality Needs
+  ▸ Who is this for?
+    Ideal for businesses of all sizes.
+  ▸ Startups
+    Essential for protecting early-stage IP and setting culture.
+  ▸ SMEs
+    Professionalize your hiring and reduce legal risks.
+  ▸ Corporates
+    Standardize contracts across departments and roles.
+  ▸ Consultants
+    Agreements for long-term contract staff.
+
+[Drafting Process]
+    Professional contracts in 3 steps
+  ▸ Requirement
+    Tell us about the role, salary, and specific company policies.
+  ▸ Drafting
+    We create a comprehensive agreement tailored to your needs.
+  ▸ Review
+    You review the terms and request adjustments.
+  ▸ Final Copy
+    Receive the clean, professional agreement ready for signing.
+
+[Real People. Real Results.]
+    The agreement was very detailed and covered things I hadn't even thought of. Great for my startup.Arjun GuptaFounder, Tech Startup, Bangalore
+    Professional service. Helped us standardize our hiring process.Nisha PatelHR Manager, Ahmedabad
+    Clear terms on IP ownership were crucial for us. VakilTech handled it perfectly.Sandeep RaoDirector, Design Agency, Hyderabad
+
+[Frequently Asked Questions]
+    Common questions about Hiring Contracts
+  ▸ Why do I need a written employment agreement?
+  ▸ Can I include a non-compete clause?
+  ▸ Does it cover intellectual property rights?
+  ▸ Is this suitable for freelancers?
+  ▸ What about probation periods?
+
+── TESTIMONIALS ─────────────────────────────────────────────────
+  [1] Clear terms on IP ownership were crucial for us. VakilTech handled it perfectly.
+     — Sandeep RaoDirector, Design Agency, Hyderabad
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────
+  (Paste these <script> blocks into the page <head>)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "vakiltech",
+  "legalName": "vakiltech Legal Services",
+  "url": "https://vakiltech.in",
+  "logo": "https://vakiltech.in/logo.png",
+  "foundingDate": "2023",
+  "description": "India's leading online legal services platform providing affordable legal notices, consultations, and agreement drafting services through experienced Licensed Advocates.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-70476 83995",
+      "contactType": "Customer Service",
+      "availableLanguage": [
+        "English",
+        "Hindi"
+      ],
+      "areaServed": "IN"
+    }
+  ],
+  "sameAs": [],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "500",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Notice Services",
+        "description": "Professional legal notice drafting and sending"
+      },
+      "price": "1499",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Legal Consultation",
+        "description": "Expert legal consultation from Licensed Advocates"
+      },
+      "price": "299",
+      "priceCurrency": "INR"
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Agreement Drafting",
+        "description": "Professional legal agreement drafting services"
+      },
+      "price": "999",
+      "priceCurrency": "INR"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://vakiltech.in"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Agreement Drafting",
+      "item": "https://vakiltech.in/agreement-drafting"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Employment Agreement",
+      "item": "https://vakiltech.in/agreement-drafting/employment-agreement"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Employment Agreement Drafting",
+  "description": "Online Employment Agreement Drafting for Startups & SMEs. Includes IP protection and non-compete clauses.",
+  "provider": {
+    "@type": "Organization",
+    "name": "VakilTech",
+    "url": "https://vakiltech.in"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "499",
+    "priceCurrency": "INR"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  }
+}
+</script>
+
+======================================================================

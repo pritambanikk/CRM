@@ -1,0 +1,176 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/send-legal-notice/makemytrip
+Title:            Send Legal Notice to MakeMyTrip | Registered Address + Complete Guide | VakilTech
+Meta Description: MakeMyTrip not resolving your complaint? Send a lawyer-drafted legal notice to MakeMyTrip India Private Limited's registered address. Resolve consumer disputes legally. ₹1,499. Drafted in 24 hours.
+Keywords:         send legal notice to makemytrip, makemytrip registered address legal notice, makemytrip grievance officer, MakeMyTrip consumer complaint, MakeMyTrip legal notice, how to file complaint against MakeMyTrip
+
+── ARTICLE META ─────────────────────────────────────────────────────
+Author:           VakilTech Legal Team
+Last Updated:     April 2026
+Breadcrumb:       Home > Legal Notice > Send Legal Notice to MakeMyTrip
+
+── PAGE SECTIONS ────────────────────────────────────────────────────
+
+[Send Legal Notice to MakeMyTrip — Registered Address, Grievance Officer & Complete Guide]
+    If MakeMyTrip has refused your refund, ignored your complaints, or failed
+    to resolve your dispute despite repeated attempts, a formal legal notice
+    is your most effective next step. This page gives you MakeMyTrip's verified
+    registered address, grievance officer contact, and a complete guide to
+    resolving your dispute legally.
+
+[IMPORTANT — MakeMyTrip's Correct Legal Entity for Consumer Notices]
+    The correct legal entity for consumer complaints is MakeMyTrip India Private Limited.
+    MakeMyTrip also owns Goibibo — complaints about Goibibo bookings should be sent to the same entity.
+
+[MakeMyTrip India Private Limited — Registered Address for Legal Notice]
+    Send your legal notice via Speed Post with Acknowledgment Due to:
+
+  ▸ Legal Entity Name
+    MakeMyTrip India Private Limited
+
+  ▸ CIN (Corporate Identification Number)
+    U63040HR2000PTC090846
+
+  ▸ Registered Office Address
+    19th Floor, Tower A/B/C, Epitome Building No. 5, DLF Cyber City, DLF Phase III, Gurugram, Haryana – 122002
+
+  ▸ Grievance Officer Email
+    grievanceofficer@makemytrip.com
+
+  ▸ Legal / Compliance Email
+    nodalofficer@makemytrip.com
+
+  ▸ Phone
+    0124-4628747
+
+[When Can You Send a Legal Notice to MakeMyTrip?]
+    You can send a legal notice to MakeMyTrip when their support has failed.
+    Common situations include:
+    Refund not processed for cancelled flight or hotel, hidden charges added at checkout, booking errors not rectified, cancellation charges applied despite policy exemption, travel insurance claim rejected, hotel not as described
+
+[Step-by-Step: How to Escalate Your MakeMyTrip Complaint]
+    Step 1 — Contact MakeMyTrip Customer Support
+    Use the official app or website. Note all ticket IDs and screenshot
+    all conversations.
+    Step 2 — Escalate to MakeMyTrip Grievance Officer
+    Email the grievance officer with your complaint details and previous
+    reference numbers. They are legally required to respond within 15 days.
+    Step 3 — National Consumer Helpline
+    Call 1915 or file at consumerhelpline.gov.in if unresolved in 15 days.
+    Step 4 — Send a Legal Notice
+    Send a formal legal notice through a licensed advocate. This step
+    bypasses frontline support and prompts legal team review.
+    Step 5 — Consumer Court
+    File in the District Consumer Disputes Redressal Commission in your
+    city if the legal notice is ignored within 15–30 days.
+
+[Which Laws Protect You Against MakeMyTrip?]
+    Consumer Protection Act 2019, Contract Act 1872, Consumer Protection (E-Commerce) Rules 2020
+    Consumer Protection Act, 2019 — your primary protection as a consumer.
+    IT Act, 2000 — requires a grievance officer who responds within 15 days.
+    Indian Contract Act, 1872 — failure to deliver agreed service is breach
+    of contract.
+
+[Real Success Story]
+    Vikram Singh from Pune booked a hotel for ₹18,000 through MakeMyTrip. The hotel was under renovation and uninhabitable. MakeMyTrip refused a refund citing hotel policy. After a legal notice citing deficiency in service and misrepresentation, MakeMyTrip settled with a full refund in 10 days.
+    Note: This is a representative example. Individual outcomes vary.
+
+[Frequently Asked Questions]
+
+  ▸ What is MakeMyTrip's registered address for a legal notice?
+    Send your notice to MakeMyTrip India Private Limited at: 19th Floor, Tower A/B/C, Epitome Building No. 5, DLF Cyber City, DLF Phase III, Gurugram, Haryana – 122002.
+    Grievance email: grievanceofficer@makemytrip.com.
+
+  ▸ How long does MakeMyTrip have to respond to a legal notice?
+    15 to 30 days as specified in the notice. After that you can file
+    a consumer complaint in the District Consumer Disputes Redressal
+    Commission in your city.
+
+  ▸ Can I file in my city even if MakeMyTrip is registered elsewhere?
+    Yes. Under the Consumer Protection Act 2019, you can file where you
+    reside or where the transaction took place.
+
+  ▸ How much does it cost to send a legal notice to MakeMyTrip?
+    VakilTech charges ₹1,499 all-inclusive — consultation with a licensed
+    advocate, custom drafting, unlimited revisions, and Speed Post dispatch
+    with Acknowledgment Due.
+
+── STATS / SOCIAL PROOF ─────────────────────────────────────────────
+  • 15,000+ legal notices sent across India
+  • 4.8/5 customer rating
+  • 65% of disputes settle after legal notice — without going to court
+  • Drafted by licensed advocates in 24 hours
+
+── RELATED SERVICES ─────────────────────────────────────────────────
+  • Send Legal Notice to Uber India
+    Link: /send-legal-notice/uber-india
+  • Send Legal Notice to IRCTC
+    Link: /send-legal-notice/irctc
+  • Consumer Complaint Legal Notice
+    Link: /send-legal-notice/consumer-complaint-legal-notice
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────────
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is MakeMyTrip's registered address for a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send your notice to MakeMyTrip India Private Limited at 19th Floor, Tower A/B/C, Epitome Building No. 5, DLF Cyber City, DLF Phase III, Gurugram, Haryana – 122002. Grievance email: grievanceofficer@makemytrip.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does MakeMyTrip have to respond to a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "15 to 30 days as specified in the notice. After that you can file a consumer complaint in the District Consumer Disputes Redressal Commission in your city."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a legal notice to MakeMyTrip?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "VakilTech charges ₹1,499 all-inclusive — consultation, custom drafting, unlimited revisions, and Speed Post dispatch with Acknowledgment Due."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "VakilTech — Send Legal Notice to MakeMyTrip",
+  "description": "Send a lawyer-drafted legal notice to MakeMyTrip India Private Limited for consumer disputes. ₹1,499.",
+  "url": "https://vakiltech.in/send-legal-notice/makemytrip",
+  "priceRange": "₹1,499",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "provider": { "@type": "Organization", "name": "VakilTech", "url": "https://vakiltech.in" },
+  "offers": { "@type": "Offer", "price": "1499", "priceCurrency": "INR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vakiltech.in" },
+    { "@type": "ListItem", "position": 2, "name": "Send Legal Notice", "item": "https://vakiltech.in/send-legal-notice" },
+    { "@type": "ListItem", "position": 3, "name": "Send Legal Notice to MakeMyTrip", "item": "https://vakiltech.in/send-legal-notice/makemytrip" }
+  ]
+}
+</script>
+======================================================================

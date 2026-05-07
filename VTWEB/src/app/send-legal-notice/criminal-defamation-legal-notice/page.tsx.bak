@@ -1,0 +1,405 @@
+import type { Metadata } from "next";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { TrustSignalsSection } from "@/components/features/homepage/trust-signals";
+import { FAQSection } from "@/components/shared/faq-section";
+import ClientFormTrigger from "../legal-notice-for-money-recovery/client-form-trigger";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+// Exact metadata from content file
+export const metadata: Metadata = {
+  title: "Legal Notice for Defamation India – Drafted in 24 Hrs | ₹1,499",
+  description: "Send a legal notice for defamation in India under Section 356 BNS. Expert-drafted by a Bar Council advocate in 24 hours. ₹1,499. Act today.",
+  keywords: ["legal notice for defamation", "defamation under bns", "defamation in bns", "section 356 bns defamation", "cyber defamation india", "defamation notice format", "criminal defamation india", "how to file defamation case in india", "defamation legal notice pdf", "libel and slander india", "legal notice for defamation india", "defamation notice format india"],
+  alternates: {
+    canonical: "https://vakiltech.in/send-legal-notice/criminal-defamation-legal-notice",
+  },
+};
+
+export default function LegalNoticeCriminalDefamationPage() {
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Legal Notice", href: "/send-legal-notice" },
+    { label: "Legal Notice for Defamation", current: true },
+  ];
+
+  const defamationFaqs = [
+    { question: "What evidence do I need to prove defamation?", answer: "To prove defamation, you need tangible evidence. For written defamation (libel), preserve original letters, emails, or publications. For online defamation, take clear screenshots showing the URL, date, and user identity immediately, as posts can be deleted. For spoken defamation (slander), you need witness statements or audio/video recordings. You must also demonstrate that the statement targets you specifically and has caused harm to your reputation." },
+    { question: "Has the law changed with BNS 2023?", answer: "Structurally, the offense remains similar. Section 499 of the Indian Penal Code (IPC) is now Section 356 of the Bharatiya Nyaya Sanhita (BNS). The definition of defamation and the exceptions (like truth, public conduct of public servants, etc.) are largely retained. The punishment also remains imprisonment of up to two years, significant fines, or both." },
+    { question: "Can I send a notice to a newspaper or TV channel?", answer: "Yes. Media houses do not have absolute immunity. While they have qualified privilege for 'fair reporting,' they cannot publish factually incorrect or malicious statements. If a media outlet has defamed you, you should first send a legal notice demanding a 'rejoinder' or 'clarification.'" },
+    { question: "Is truth a defense against defamation?", answer: "Yes, 'Truth' is an absolute defense in civil defamation. In criminal defamation, truth is a defense only if it is published for the 'public good.' Merely proving the statement is true might not be enough if the intent was solely to humiliate." },
+    { question: "Should I file a Cyber Crime complaint or send a Notice?", answer: "It is recommended to do both strategically. A Legal Notice is a civil/criminal warning that often yields faster results (takedown/apology). A Cyber Crime complaint (under IT Act) is a formal police report." },
+    { question: "Can I sue for defamation on a WhatsApp Group?", answer: "Absolutely. The administrator of a WhatsApp group and the person posting the message can be held liable. Indian courts have ruled that a WhatsApp group administrator is not liable for member content unless they approved/posted it." },
+    { question: "How much compensation can I ask for?", answer: "There is no upper limit. The amount depends on the extent of damage. A businessman losing a ₹1 Crore contract due to a false review can claim that amount plus damages for reputational loss." },
+    { question: "What is the time limit (Limitation Period) to file a case?", answer: "For Criminal Defamation (BNS 356), the complaint is generally expected to be filed within 3 years. For Civil Defamation (Damages), the limitation period is 1 year from the date the libel is published or the plaintiff comes to know of it." },
+    { question: "If they apologize, does the case end?", answer: "Legally, the offense is committed once the statement is made. However, defamation is a 'compoundable' offense, meaning the parties can compromise. If the offender offers a satisfactory apology and you accept it, you can withdraw the legal notice or the case." },
+    { question: "Why should I use vakiltech instead of a local lawyer?", answer: "vakiltech offers specialized digital-first legal services. Our experts specialize in defamation and cyber laws. We offer a transparent flat fee of ₹1,499 for the notice, whereas local lawyers may charge anywhere from ₹5,000 to ₹15,000 with varying quality." },
+    { question: "Where will the case be filed?", answer: "A criminal defamation complaint is typically filed in the Magistrate Court under whose jurisdiction the defamation occurred or where the victim resides and the defamation was 'published'." },
+    { question: "Can police register an FIR for defamation?", answer: "Generally, NO. Criminal Defamation is a non-cognizable offense, meaning police cannot register an FIR or arrest without a warrant. You must file a private complaint before a Judicial Magistrate." },
+    { question: "Is it mandatory to send a legal notice before filing a defamation case?", answer: "There is no strict legal requirement, but a legal notice for defamation is strongly recommended. It creates a formal record of your objection, often resolves the matter without court involvement, and an unresponded notice strengthens your position before the Magistrate as evidence of wilful non-compliance." },
+    { question: "What is the difference between libel and slander in India?", answer: "Libel is defamation in written or published form — social media posts, news articles, emails, online reviews. Slander is spoken defamation. Both are actionable under Indian law and covered by Section 356 BNS. Civil defamation law applies equally to both libel and slander." },
+  ];
+
+  // Exact JSON-LD schemas from content file
+return (
+    <>
+    <main className="min-h-screen bg-gradient-to-b from-background to-background/55">
+      {/* schema-migrated */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: defamationFaqs.map((f) => ({
+              "@type": "Question",
+              name: f.question,
+              acceptedAnswer: { "@type": "Answer", text: f.answer },
+            })),
+          })
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LegalService",
+            "name": "vakiltech — Legal Notice for Defamation",
+            "telephone": "+91-70476 83995",
+            "image": "https://vakiltech.in/vt-logo.png",
+            "address": { "@type": "PostalAddress", "addressCountry": "IN" },
+            "priceRange": "₹1,499+",
+            "url": "https://vakiltech.in/send-legal-notice/criminal-defamation-legal-notice",
+            "description": "Expert-drafted legal notice for defamation in India under Section 356 BNS. Bar Council advocate, 24-hour delivery, ₹1,499.",
+            "areaServed": { "@type": "Country", "name": "India" },
+            "provider": { "@type": "Organization", "name": "vakiltech", "url": "https://vakiltech.in" },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "18000",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "1499",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/InStock"
+            }
+          })
+        }}
+      />
+
+
+      <div className="container mx-auto px-6 md:px-8 pb-8">
+        {/* HERO SECTION */}
+        <section className="relative pt-6 pb-16 md:pt-10 md:pb-24 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 overflow-hidden rounded-b-3xl md:rounded-b-[40px] -mx-6 md:-mx-8 px-6 md:px-8">
+          <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-[800px] h-[800px] bg-gradient-to-r from-primary/20 to-transparent rounded-full blur-3xl opacity-20" />
+          </div>
+
+          <div className="relative max-w-6xl mx-auto flex flex-col gap-8 md:gap-12">
+            <div className="z-10 mt-2 mb-2">
+              <Breadcrumb items={breadcrumbItems} />
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <div className="inline-flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+                    Professional Legal Service
+                  </div>
+                  <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
+                    Send a Legal Notice for Defamation in India — Section 356 BNS, Bar Council Advocate, 24 Hours
+                  </h1>
+                  <p className="text-xl text-muted-foreground leading-relaxed">
+                    False accusations damaging your reputation? Send a Section 356 BNS notice. Expert-drafted. 2-year jail penalty for defamer. ₹1,499. Act now.
+                  </p>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="text-sm text-foreground font-medium">✓ Expert Drafted under BNS 2023</div>
+                    <div className="text-sm text-foreground font-medium">✓ Civil Liability & Damages included</div>
+                    <div className="text-sm text-foreground font-medium">✓ Sent via Speed Post with tracking ID</div>
+                    <div className="text-sm text-foreground font-medium">✓ Transparent ₹1,499 pricing</div>
+                  </div>
+                </div>
+
+                <ClientFormTrigger />
+
+                <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full" />
+                    <span>Expert Lawyers</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full" />
+                    <span>24-48 Hour Delivery</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full" />
+                    <span>Zero Court Visits</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="relative w-full h-80 md:h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 p-8 flex items-center justify-center">
+                  <img
+                    src="/legal-notice/lawyer-customer-desk.svg"
+                    alt="Advocate drafting a legal notice for defamation in India"
+                    className="w-full h-full object-contain drop-shadow-2xl"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CONTENT SECTIONS */}
+        <div className="max-w-4xl mx-auto py-12 space-y-12">
+
+          {/* Upstream link — want to understand BNS 356 first? */}
+          <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-xl p-5">
+            <p className="text-sm text-blue-800 dark:text-blue-200 font-medium mb-1">Want to understand Section 356 BNS first?</p>
+            <Link
+              href="/blogs/section-356-bns-defamation-law-india"
+              className="inline-flex items-center gap-2 text-sm text-blue-700 dark:text-blue-300 font-semibold hover:underline"
+            >
+              Read our complete guide to Section 356 BNS — Criminal Defamation Law in India
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+
+          {/* Brief framing — replaces long BNS 356 explainer (C-05) */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <p className="text-muted-foreground mb-4">
+              You can send a legal notice when someone defames you under Section 356 BNS — whether the
+              attack happened on social media, WhatsApp, a news article, or in person. The notice formally
+              demands a retraction, public apology, and compensation — and is the mandatory first step
+              before filing a criminal complaint before a Magistrate. Here is how vakiltech handles it.
+            </p>
+            <ul className="space-y-2 text-muted-foreground text-sm">
+              <li className="flex gap-2"><span className="text-primary font-bold">✓</span><span>Drafted by a Bar Council advocate on official letterhead</span></li>
+              <li className="flex gap-2"><span className="text-primary font-bold">✓</span><span>Demands retraction, public apology, and compensation</span></li>
+              <li className="flex gap-2"><span className="text-primary font-bold">✓</span><span>Sent via Speed Post with full tracking</span></li>
+              <li className="flex gap-2"><span className="text-primary font-bold">✓</span><span>Ready in 24 hours — ₹1,499 flat</span></li>
+            </ul>
+          </div>
+
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="criminal-vs-civil" className="text-2xl font-bold text-foreground mb-4">Criminal vs. Civil Defamation in India — Which Route Should You Take?</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>In India, defamation is a dual-wrong — you can pursue both criminal and civil action simultaneously. A well-drafted legal notice for defamation typically warns of both consequences to maximise pressure and settlement speed. Article 19(2) of the Constitution permits reasonable restrictions on free speech to protect another person&apos;s reputation — the legal foundation on which defamation law rests.</p>
+              <p><strong>Criminal Defamation (Section 356 BNS):</strong> Focuses on punishing the offender. A complaint is filed before a Judicial Magistrate First Class — not through police, as defamation is a non-cognizable offence. The Magistrate can impose imprisonment of up to 2 years, a fine, or both. Importantly, it is a <strong>compoundable offence</strong>, meaning the parties can reach a compromise and settle out of court under Section 359 BNS.</p>
+              <p><strong>Civil Defamation (Law of Torts):</strong> Focuses on compensating the victim. Defamation in civil law covers both <strong>libel</strong> (written or published false statements) and <strong>slander</strong> (spoken false statements). You file a civil suit for damages in the court of appropriate jurisdiction, claiming monetary compensation for loss of reputation, mental agony, and financial impact. There is no statutory cap on the amount.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-2">Can You Pursue Both Criminal and Civil Defamation Simultaneously?</h3>
+              <p>Yes. Indian law permits concurrent criminal and civil proceedings for the same defamatory act. Filing a criminal complaint before a Magistrate does not bar you from filing a civil suit for damages — and vice versa. In practice, sending a single well-drafted legal notice for defamation that invokes both tracks maximises settlement pressure and achieves faster results without going to court at all.</p>
+            </div>
+          </div>
+          
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="cyber" className="text-2xl font-bold text-foreground mb-4">Cyber Defamation in India — Legal Notice for Online Attacks (WhatsApp, LinkedIn, Reviews)</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>Cyber defamation in India is now one of the fastest-growing categories of legal complaints. A single post on LinkedIn, Google Reviews, or a WhatsApp group can reach thousands within hours. Courts in India recognise online defamation under the same legal framework as offline defamation — and digital footprints (screenshots, timestamps, URLs) often make cyber defamation <em>easier</em> to prove than spoken words.</p>
+              <p>Unlike offline defamation, digital content creates a permanent, searchable record that compounds reputational harm daily. A defamatory review or post can appear in Google search results for your name for years. Acting fast — with a legal notice for defamation that specifically demands content takedown under Section 79 of the IT Act — gives you the strongest chance of removing it before it calcifies in Google&apos;s index.</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>IT Act 2000 &amp; BNS 2023:</strong> Online defamation is prosecuted under Section 356 BNS read with applicable IT Act provisions. Platforms have safe harbour protection only if they act on takedown notices; ignoring them makes them liable.</li>
+                <li><strong>Bharatiya Sakshya Adhiniyam (BSA) 2023:</strong> Digital evidence — screenshots, metadata, server logs — is admissible under the BSA, which replaced the Indian Evidence Act. Preserve evidence before sending any notice.</li>
+                <li><strong>Intermediary Liability:</strong> You can legally demand that platforms — Google, Meta, Twitter/X — remove defamatory content under their grievance redressal mechanisms.</li>
+              </ul>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-2">Can I Send a Defamation Notice for a Fake Google Review?</h3>
+              <p>Yes. A false Google Review that misrepresents your services or character constitutes cyber defamation. Your legal notice for defamation must: (1) identify the exact review with its URL and date, (2) demonstrate falsity, (3) demand removal from the platform, and (4) claim compensation. Once Google receives a valid court order or notice establishing defamation, it is obligated to remove the review under its own policies and Section 79 of the IT Act.</p>
+            </div>
+          </div>
+
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="when-to-send" className="text-2xl font-bold text-foreground mb-4">When to Send a Legal Notice for Defamation — Situations That Qualify</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>A defamation notice is not limited to media cases or corporate disputes. Any person whose reputation has been damaged by a false statement — whether in a WhatsApp group of 5 people or a viral LinkedIn post seen by thousands — has a legal right to act. Send a notice immediately if any of these situations apply:</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>False accusations of fraud, crime, or immoral behavior</li>
+                <li>Malicious negative reviews by competitors or fake accounts</li>
+                <li>Defamatory emails sent to your employer, clients, or partners</li>
+                <li>Social media posts revealing private info or spreading lies</li>
+                <li>False allegations in matrimonial disputes intended to harass</li>
+                <li>Media reports that are factually incorrect and damaging</li>
+                <li>False statements made in a WhatsApp group, Telegram channel, or private message forwarded to others</li>
+                <li>Corporate defamation — false statements that damage a company&apos;s reputation or business relationships</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* MID-PAGE CTA */}
+          <div className="bg-primary/10 border border-primary/20 rounded-xl p-6 text-center space-y-4">
+            <p className="text-lg font-semibold text-foreground">Ready to protect your reputation?</p>
+            <p className="text-muted-foreground">Get your legal notice for defamation drafted by a Bar Council advocate — delivered in 24 hours for ₹1,499.</p>
+            <ClientFormTrigger />
+          </div>
+          
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="case-study" className="text-2xl font-bold text-foreground mb-4">Case Study: Review Removed & Apology Issued in 3 Days</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>Rohan (name changed), a freelance graphic designer, faced a career-ending crisis when a former client posted false 'scammer' alerts on LinkedIn and Twitter after Rohan refused unpaid scope creep. The posts were viral, costing him two major contracts.</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>The Strategy:</strong> We documented the evidence and sent a stern legal notice under Section 356 BNS, highlighting the financial loss and malicious intent.</li>
+                <li><strong>Immediate Impact:</strong> Fearing a criminal record and heavy damages, the client deleted all posts within 24 hours of receiving the notice.</li>
+                <li><strong>Final Settlement:</strong> To avoid litigation, the client issued a public clarification on the same platforms, restoring Rohan's professional standing.</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* POST-CASE-STUDY CTA */}
+          <div className="bg-primary/10 border border-primary/20 rounded-xl p-6 text-center space-y-4">
+            <p className="text-lg font-semibold text-foreground">Your situation could be next. Act before the defamer deletes evidence.</p>
+            <p className="text-muted-foreground">Bar Council advocate drafts and dispatches your notice within 24 hours for ₹1,499.</p>
+            <ClientFormTrigger />
+          </div>
+
+          {/* HOW TO DRAFT */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="how-to-draft" className="text-2xl font-bold text-foreground mb-4">How to Draft a Legal Notice for Defamation — Mandatory Contents</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>A defamation notice that is vague, unsigned, or poorly structured will be ignored — or worse, used against you to claim harassment. Indian courts and opposing lawyers look for specific elements before taking a notice seriously. Every legal notice for defamation must include the following:</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Advocate Letterhead:</strong> The notice must be drafted on the official letterhead of a registered advocate, with their Bar Council enrollment number, name, and contact details. A notice sent directly by the aggrieved party — without an advocate — carries far less legal weight and is easily dismissed.</li>
+                <li><strong>Identity of the Sender:</strong> Full name, address, and relationship to the defamatory statement (i.e., you are the person defamed).</li>
+                <li><strong>Particulars of the Defamatory Statement:</strong> The exact words, post, or publication — with date, platform, and URL or physical location where it appeared. Vague descriptions fail. Precision matters.</li>
+                <li><strong>How It Constitutes Defamation:</strong> A brief legal explanation establishing falsity, publication to a third party, and the harm caused to your reputation, business, or personal life.</li>
+                <li><strong>Specific Demands:</strong> Typically — immediate removal of the content, an unconditional public apology, and monetary compensation (state the exact amount claimed).</li>
+                <li><strong>Response Deadline:</strong> Usually 15 to 30 days. Stating a deadline triggers the clock — if ignored, it becomes evidence of wilful non-compliance in court.</li>
+                <li><strong>Mode of Delivery:</strong> Send via registered post or speed post with acknowledgement due (AD). Keep the postal receipt and the returned AD card — these are your proof of service.</li>
+              </ul>
+              <p>At vakiltech, our advocates handle every one of these elements. You provide the facts; we structure the notice to maximise legal impact and minimise the defamer's ability to dismiss it on technical grounds.</p>
+            </div>
+          </div>
+
+          {/* NEW SECTION: Step-by-Step Process */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="process" className="text-2xl font-bold text-foreground mb-4">Step-by-Step Process to Send a Defamation Notice in India</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>Sending a legal notice for defamation is not just about writing a letter. Each step in the process serves a legal purpose — skipping any one of them weakens your position. Here is the complete procedure:</p>
+              <ol className="list-decimal pl-5 space-y-3">
+                <li><strong>Preserve all evidence immediately.</strong> Screenshot the defamatory post, email, or message with the URL and timestamp visible. If it is on a website, use a web archival tool to create a permanent record. Do not contact the defamer directly at this stage — it can complicate matters.</li>
+                <li><strong>Consult a defamation advocate.</strong> Share the evidence and the facts. The advocate will assess whether the statement meets the legal threshold for defamation — falsity, publication, identification, and harm — and advise on whether to pursue criminal action, civil damages, or both.</li>
+                <li><strong>Draft and review the notice.</strong> The advocate drafts the notice on their letterhead, incorporating the specific legal demands. Review it for factual accuracy before it is dispatched — errors in names, dates, or the description of the defamatory content can give the other side grounds to challenge it.</li>
+                <li><strong>Dispatch via speed post with AD.</strong> The notice is sent to the defamer's last known address via registered or speed post with acknowledgement due. If the defamer is a company, it is addressed to the registered office and the responsible individual (editor, CEO, or content author).</li>
+                <li><strong>Wait for the response window.</strong> The standard response period is 15 to 30 days. During this time, the defamer may comply (remove content, apologise, offer compensation) or ignore the notice. Both responses have legal implications.</li>
+                <li><strong>Decide on next action.</strong> If the defamer complies — negotiate a settlement and obtain a written undertaking. If they ignore or deny — proceed to file a criminal complaint before the Judicial Magistrate First Class or initiate a civil suit for damages, using the unresponded notice as evidence of prior notice and wilful refusal.</li>
+              </ol>
+              <p>With vakiltech, steps 1 through 4 are completed within 24 hours of you sharing the evidence. You do not need to visit a lawyer's office or a court. vakiltech also handles other legal notice types — including a <a href="/send-legal-notice/cheque-bounce-legal-notice" className="text-primary underline hover:no-underline">cheque bounce legal notice</a> and a <a href="/send-legal-notice/legal-notice-for-money-recovery" className="text-primary underline hover:no-underline">money recovery legal notice</a> — all with the same 24-hour turnaround.</p>
+              <h3 className="text-xl font-semibold text-foreground mt-6 mb-2">How to File a Defamation Case in India After the Notice Is Ignored</h3>
+              <p>If the defamer does not respond within the notice period, you file a private complaint before the Judicial Magistrate First Class (JMFC) in the jurisdiction where the defamatory statement was published or where you reside. Attach the original notice, postal acknowledgement, and all evidence. The Magistrate will examine you, and if satisfied, issue summons to the accused. Simultaneously, you can file a civil suit for damages in the appropriate civil court.</p>
+            </div>
+          </div>
+
+          {/* POST-PROCESS CTA */}
+          <div className="bg-primary/10 border border-primary/20 rounded-xl p-6 text-center space-y-4">
+            <p className="text-lg font-semibold text-foreground">Don&apos;t navigate this alone. vakiltech handles steps 1–4 in 24 hours.</p>
+            <ClientFormTrigger />
+          </div>
+
+          {/* NEW SECTION: What Happens After */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="after-notice" className="text-2xl font-bold text-foreground mb-4">What Happens After the Defamation Notice Is Served?</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>Once the defamer receives your legal notice for defamation, one of four things will happen — and you need to be prepared for each outcome.</p>
+              <p><strong>1. They comply fully.</strong> This is the most common outcome when the notice is strongly worded and the evidence is solid. The defamer removes the content, issues a public apology, and may offer to pay compensation. Obtain a written settlement agreement before closing the matter. Since defamation is a compoundable offence, a mutual compromise is legally recognised and enforceable.</p>
+              <p><strong>2. They partially comply.</strong> They may remove the content but refuse to apologise or pay compensation. Negotiate — your advocate can push for full compliance. If they refuse, you proceed to court with partial compliance already on record, which demonstrates their acknowledgement of wrongdoing.</p>
+              <p><strong>3. They ignore the notice.</strong> Non-response within the stipulated period is not silence — it is evidence. File the criminal complaint before the Judicial Magistrate First Class, attaching the unresponded notice and the postal acknowledgement as proof of service. The Magistrate will then summon the accused.</p>
+              <p><strong>4. They dispute and deny.</strong> If the defamer sends a reply denying the allegations or claiming truth as a defence, your advocate will assess the strength of their position and advise on whether to proceed to court. A denial that cannot be substantiated in court strengthens your case further.</p>
+            </div>
+          </div>
+
+          {/* NEW SECTION: Limitation Period */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="format" className="text-2xl font-bold text-foreground mb-4">Defamation Legal Notice Format — What a Valid Notice Must Contain</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>A defamation legal notice format in India follows a specific structure. While the exact wording varies by case, every valid defamation notice must contain the following sections in this order:</p>
+              <ol className="list-decimal pl-5 space-y-3">
+                <li><strong>Advocate&apos;s Letterhead &amp; Bar Council Details</strong> — Name, enrollment number, address, and contact of the drafting advocate.</li>
+                <li><strong>Notice Date &amp; Reference Number</strong> — For tracking and future court reference.</li>
+                <li><strong>Addressee Details</strong> — Full name, address, and designation (if applicable) of the defamer.</li>
+                <li><strong>Statement of Facts</strong> — Exact reproduction of the defamatory statement with date, platform, URL, and context. Precision is mandatory — vague descriptions are challenged in court.</li>
+                <li><strong>Legal Basis</strong> — Citation of Section 356 BNS, Article 21 of the Constitution (right to reputation), and relevant case law establishing defamation.</li>
+                <li><strong>Specific Demands</strong> — (a) Immediate removal of the defamatory content; (b) unconditional public apology; (c) monetary compensation for stated amount; (d) written undertaking not to repeat.</li>
+                <li><strong>Response Deadline</strong> — 15 to 30 days from receipt of notice.</li>
+                <li><strong>Consequences of Non-Compliance</strong> — Criminal complaint before JMFC + civil suit for damages.</li>
+                <li><strong>Advocate&apos;s Signature &amp; Stamp</strong> — Mandatory for legal validity.</li>
+              </ol>
+              <p>At vakiltech, the entire defamation notice format is prepared by a Bar Council advocate who tailors each section to your specific facts — not a generic template. A bespoke notice carries significantly more weight than an auto-generated format.</p>
+            </div>
+          </div>
+
+          {/* NEW SECTION: Compensation */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="compensation" className="text-2xl font-bold text-foreground mb-4">How Much Compensation Can You Claim for Defamation?</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>There is no statutory cap on compensation for civil defamation in India. Indian courts have awarded amounts ranging from ₹1 lakh to several crores, depending on the following factors:</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Severity of harm:</strong> Did the defamatory statement cost you a job, contract, or business relationship?</li>
+                <li><strong>Reach of the statement:</strong> A viral LinkedIn post reaching 50,000 people causes greater damage than a remark in a private email.</li>
+                <li><strong>Professional standing:</strong> A doctor or lawyer defamed on a public platform suffers greater quantifiable harm than a private individual.</li>
+                <li><strong>Duration of exposure:</strong> How long did the defamatory content remain accessible before removal?</li>
+                <li><strong>Defendant&apos;s conduct:</strong> Malicious intent, refusal to retract, and repeat offences all increase damages awarded.</li>
+              </ul>
+              <p>In your legal notice for defamation, state a specific compensation amount. Courts treat the amount claimed in the notice as a baseline when determining the suit value. Consult your advocate to arrive at a figure that is both defensible and commensurate with your loss.</p>
+            </div>
+          </div>
+
+          {/* LIMITATION PERIOD */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="limitation" className="text-2xl font-bold text-foreground mb-4">Time Limit to Act — Limitation Period for Defamation in India</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>One of the most commonly overlooked aspects of defamation law in India is the limitation period — the legal deadline by which you must act. Waiting too long can extinguish your right to sue, regardless of how clear-cut your case is.</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Civil Defamation Suit:</strong> Under the Limitation Act, 1963, the limitation period for filing a civil suit for defamation is <strong>1 year</strong> from the date the defamatory statement was published or the date you became aware of it. This is a short window — act before it closes.</li>
+                <li><strong>Criminal Defamation Complaint:</strong> For filing a criminal complaint under Section 356 BNS before a Magistrate, the general limitation period is <strong>3 years</strong> from the date of the offence. However, courts have discretion to condone delay in compelling circumstances.</li>
+                <li><strong>Online Defamation:</strong> For digital content that continues to circulate — a Google Review that remains live, a social media post that is still up — courts have in some cases held that the limitation period runs fresh each day the content remains accessible. However, do not rely on this interpretation — act immediately.</li>
+              </ul>
+              <p>The single most important reason to send your legal notice for defamation without delay is this: the longer defamatory content remains online, the deeper the reputational damage — and the harder it becomes to prove that the harm was contained and correctable. Early action protects both your legal rights and your reputation.</p>
+            </div>
+          </div>
+
+          {/* NEW SECTION: How to Respond to a Defamation Notice */}
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 id="respond" className="text-2xl font-bold text-foreground mb-4">Received a Defamation Notice? Here Is How to Respond</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>If you have received a legal notice for defamation, do not panic — and do not ignore it. Ignoring a defamation notice is the single worst response, as it will be used as evidence of wilful non-compliance when the matter reaches a Magistrate.</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Do not respond directly to the sender.</strong> Any communication you send without legal advice can be used against you. Engage a lawyer immediately.</li>
+                <li><strong>Assess whether the statement is true.</strong> Truth is an absolute defence in civil defamation, and a defence in criminal defamation if made for public good. If what you said is demonstrably true and in the public interest, your advocate can build a strong reply on that basis.</li>
+                <li><strong>Check whether any legal exceptions apply.</strong> Section 356 BNS lists specific exceptions — fair comment on public figures, reports of judicial proceedings, publications by or under the authority of the government, and others. If your statement falls within an exception, say so in your reply.</li>
+                <li><strong>Send a formal legal reply within the deadline.</strong> Your advocate will draft a reply notice addressing each allegation, asserting your defences, and — if you are willing — proposing terms of settlement. A timely, legally sound reply often resolves matters without litigation.</li>
+                <li><strong>Do not delete the content as a panic response.</strong> Deleting content after receiving a notice can be interpreted as an admission of wrongdoing. Take legal advice first.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <TrustSignalsSection />
+
+      <div id="faq">
+        <FAQSection
+          faqs={defamationFaqs}
+          title="Frequently Asked Questions About Defamation Legal Notices in India"
+          subtitle="Everything you need to know before sending a legal notice for defamation"
+        />
+      </div>
+
+      {/* BOTTOM CTA */}
+      <div className="container mx-auto px-6 md:px-8 py-12">
+        <div className="max-w-2xl mx-auto bg-primary/10 border border-primary/20 rounded-xl p-8 text-center space-y-4">
+          <p className="text-xl font-semibold text-foreground">Still have questions?</p>
+          <p className="text-muted-foreground">Talk to a defamation lawyer for free — no obligation, no jargon.</p>
+          <ClientFormTrigger />
+        </div>
+      </div>
+    </main>
+    </>
+  );
+}

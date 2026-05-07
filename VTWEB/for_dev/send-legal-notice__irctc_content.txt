@@ -1,0 +1,189 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/send-legal-notice/irctc
+Title:            Send Legal Notice to IRCTC | Registered Address + Complete Guide | VakilTech
+Meta Description: IRCTC not resolving your complaint? Send a lawyer-drafted legal notice to Indian Railway Catering and Tourism Corporation Limited (IRCTC)'s registered address. Resolve consumer disputes legally. ₹1,499. Drafted in 24 hours.
+Keywords:         send legal notice to irctc, irctc registered address legal notice, irctc grievance officer, IRCTC consumer complaint, IRCTC legal notice, how to file complaint against IRCTC
+
+── ARTICLE META ─────────────────────────────────────────────────────
+Author:           VakilTech Legal Team
+Last Updated:     April 2026
+Breadcrumb:       Home > Legal Notice > Send Legal Notice to IRCTC
+
+── PAGE SECTIONS ────────────────────────────────────────────────────
+
+[Send Legal Notice to IRCTC — Registered Address, Grievance Officer & Complete Guide]
+    If IRCTC has refused your refund, ignored your complaints, or failed
+    to resolve your dispute despite repeated attempts, a formal legal notice
+    is your most effective next step. This page gives you IRCTC's verified
+    registered address, grievance officer contact, and a complete guide to
+    resolving your dispute legally.
+
+[IMPORTANT — IRCTC's Correct Legal Entity for Consumer Notices]
+    The correct legal entity for consumer complaints is Indian Railway Catering and Tourism Corporation Limited (IRCTC).
+    IRCTC is a government company — in addition to a legal notice, file on the PM Grievance Portal (pgportal.gov.in) and Railway Complaint Portal (railmadad.indianrailways.gov.in). For refund issues, also file RTI if needed.
+
+[Indian Railway Catering and Tourism Corporation Limited (IRCTC) — Registered Address for Legal Notice]
+    Send your legal notice via Speed Post with Acknowledgment Due to:
+
+  ▸ Legal Entity Name
+    Indian Railway Catering and Tourism Corporation Limited (IRCTC)
+
+  ▸ CIN (Corporate Identification Number)
+    L74899DL1999GOI101707
+
+  ▸ Registered Office Address
+    B-148, 11th Floor, Statesman House, Barakhamba Road, New Delhi – 110001
+
+  ▸ Grievance Officer Email
+    care@irctc.co.in
+
+  ▸ Legal / Compliance Email
+    care@irctc.co.in
+
+  ▸ Phone
+    1800-110-139 (toll-free) / 0755-6610661
+
+[When Can You Send a Legal Notice to IRCTC?]
+    You can send a legal notice to IRCTC when their support has failed.
+    Common situations include:
+    Ticket booked successfully but PNR not generated and money deducted, refund not received for train cancelled by Railways, TDR (Ticket Deposit Receipt) filed but refund pending for months, e-catering food quality poor or not delivered, tatkal booking failed but amount deducted
+
+[Step-by-Step: How to Escalate Your IRCTC Complaint]
+    Step 1 — Contact IRCTC Customer Support
+    Use the official app or website. Note all ticket IDs and screenshot
+    all conversations and chat responses.
+    Step 2 — Escalate to IRCTC Grievance Officer
+    Email the grievance officer with full complaint details and all previous
+    reference numbers. They must respond within 15 days under IT Act 2000.
+    Step 3 — National Consumer Helpline
+    Call 1915 or file at consumerhelpline.gov.in if unresolved in 15 days.
+    Step 4 — Send a Legal Notice
+    Send a formal legal notice through a licensed advocate. This escalates
+    the matter to IRCTC's legal team directly.
+    Step 5 — Consumer Court
+    File in the District Consumer Disputes Redressal Commission in your
+    city if the legal notice is ignored within 15–30 days.
+
+[Which Laws Protect You Against IRCTC?]
+    Consumer Protection Act 2019, Railways Act 1989, Right to Information Act 2005
+    Consumer Protection Act, 2019 — your primary protection as a consumer.
+    IT Act, 2000 — requires a grievance officer who must respond in 15 days.
+    Indian Contract Act, 1872 — failure to deliver agreed service is breach.
+
+[Real Success Story]
+    Suresh from Chennai booked 4 tatkal tickets worth ₹8,400 on IRCTC. The transaction showed success but no PNR was generated. The amount was debited. IRCTC support said to wait 7 days. After 45 days and no refund, a legal notice was sent. IRCTC processed the refund within 10 days.
+    Note: This is a representative example. Individual outcomes vary.
+
+[How Much Compensation Can You Claim?]
+    Beyond your refund, you can also claim advocate fees, compensation for
+    mental agony and inconvenience, and interest on the amount withheld.
+    Consumer courts regularly award ₹2,000 to ₹25,000 in compensation for
+    clear deficiency of service in addition to the principal refund.
+
+[Frequently Asked Questions]
+
+  ▸ What is IRCTC's registered address for a legal notice?
+    Send your notice to Indian Railway Catering and Tourism Corporation Limited (IRCTC) at: B-148, 11th Floor, Statesman House, Barakhamba Road, New Delhi – 110001.
+    Grievance email: care@irctc.co.in.
+
+  ▸ How long does IRCTC have to respond to a legal notice?
+    15 to 30 days as specified in the notice. After that you can file a
+    consumer complaint in the District Consumer Disputes Redressal Commission
+    in your city.
+
+  ▸ Can I file in my city even if IRCTC is registered elsewhere?
+    Yes. Under the Consumer Protection Act 2019, you can file where you
+    reside or where the transaction took place.
+
+  ▸ How much does it cost to send a legal notice to IRCTC?
+    VakilTech charges ₹1,499 all-inclusive — consultation with a licensed
+    advocate, custom drafting, unlimited revisions, and Speed Post dispatch
+    with Acknowledgment Due.
+
+── STATS / SOCIAL PROOF ─────────────────────────────────────────────
+  • 15,000+ legal notices sent across India
+  • 4.8/5 customer rating
+  • 65% of disputes settle after legal notice — without going to court
+  • Drafted by licensed advocates in 24 hours
+
+── RELATED SERVICES ─────────────────────────────────────────────────
+  • Send Legal Notice to MakeMyTrip
+    Link: /send-legal-notice/makemytrip
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+  • Consumer Complaint Legal Notice
+    Link: /send-legal-notice/consumer-complaint-legal-notice
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────────
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is IRCTC's registered address for a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send your notice to Indian Railway Catering and Tourism Corporation Limited (IRCTC) at B-148, 11th Floor, Statesman House, Barakhamba Road, New Delhi – 110001. Grievance email: care@irctc.co.in."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does IRCTC have to respond to a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "15 to 30 days as specified in the notice. After that you can file in the District Consumer Disputes Redressal Commission in your city."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I file a consumer complaint in my city even if IRCTC is registered elsewhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Under the Consumer Protection Act 2019, you can file where you reside or where the transaction took place."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a legal notice to IRCTC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "VakilTech charges ₹1,499 all-inclusive — consultation, custom drafting, unlimited revisions, and Speed Post dispatch with Acknowledgment Due."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "VakilTech — Send Legal Notice to IRCTC",
+  "description": "Send a lawyer-drafted legal notice to Indian Railway Catering and Tourism Corporation Limited (IRCTC) for consumer disputes. ₹1,499.",
+  "url": "https://vakiltech.in/send-legal-notice/irctc",
+  "priceRange": "₹1,499",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "provider": { "@type": "Organization", "name": "VakilTech", "url": "https://vakiltech.in" },
+  "offers": { "@type": "Offer", "price": "1499", "priceCurrency": "INR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vakiltech.in" },
+    { "@type": "ListItem", "position": 2, "name": "Send Legal Notice", "item": "https://vakiltech.in/send-legal-notice" },
+    { "@type": "ListItem", "position": 3, "name": "Send Legal Notice to IRCTC", "item": "https://vakiltech.in/send-legal-notice/irctc" }
+  ]
+}
+</script>
+======================================================================

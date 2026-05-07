@@ -1,0 +1,189 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/send-legal-notice/byjus
+Title:            Send Legal Notice to Byju's | Registered Address + Complete Guide | VakilTech
+Meta Description: Byju's not resolving your complaint? Send a lawyer-drafted legal notice to Think and Learn Private Limited (Byju's)'s registered address. Resolve consumer disputes legally. ₹1,499. Drafted in 24 hours.
+Keywords:         send legal notice to byjus, byjus registered address legal notice, byjus grievance officer, Byju's consumer complaint, Byju's legal notice, how to file complaint against Byju's
+
+── ARTICLE META ─────────────────────────────────────────────────────
+Author:           VakilTech Legal Team
+Last Updated:     April 2026
+Breadcrumb:       Home > Legal Notice > Send Legal Notice to Byju's
+
+── PAGE SECTIONS ────────────────────────────────────────────────────
+
+[Send Legal Notice to Byju's — Registered Address, Grievance Officer & Complete Guide]
+    If Byju's has refused your refund, ignored your complaints, or failed
+    to resolve your dispute despite repeated attempts, a formal legal notice
+    is your most effective next step. This page gives you Byju's's verified
+    registered address, grievance officer contact, and a complete guide to
+    resolving your dispute legally.
+
+[IMPORTANT — Byju's's Correct Legal Entity for Consumer Notices]
+    The correct legal entity for consumer complaints is Think and Learn Private Limited (Byju's).
+    IMPORTANT: Byju's parent company Think and Learn Private Limited is currently undergoing insolvency proceedings before the National Company Law Tribunal (NCLT) as of 2024-2026. While consumer complaints can still be filed, recovery through a legal notice may be slower than usual. Filing directly with the consumer court or NCLT as a creditor may be more effective for larger amounts. Always consult a lawyer before proceeding.
+
+[Think and Learn Private Limited (Byju's) — Registered Address for Legal Notice]
+    Send your legal notice via Speed Post with Acknowledgment Due to:
+
+  ▸ Legal Entity Name
+    Think and Learn Private Limited (Byju's)
+
+  ▸ CIN (Corporate Identification Number)
+    U80903KA2011PTC061427
+
+  ▸ Registered Office Address
+    IBC Knowledge Park, 4/1, Bannerghatta Road, Bengaluru, Karnataka – 560029
+
+  ▸ Grievance Officer Email
+    legal@byjus.com
+
+  ▸ Legal / Compliance Email
+    legal@byjus.com
+
+  ▸ Phone
+    1800-102-9595
+
+[When Can You Send a Legal Notice to Byju's?]
+    You can send a legal notice to Byju's when their support has failed.
+    Common situations include:
+    Refund refused after cancellation within cooling-off period, aggressive sales tactics and misrepresentation of course content, EMI or loan for course taken without clear consent, tablet or hardware not delivered after payment, course access revoked without reason
+
+[Step-by-Step: How to Escalate Your Byju's Complaint]
+    Step 1 — Contact Byju's Customer Support
+    Use the official app or website. Note all ticket IDs and screenshot
+    all conversations and chat responses.
+    Step 2 — Escalate to Byju's Grievance Officer
+    Email the grievance officer with full complaint details and all previous
+    reference numbers. They must respond within 15 days under IT Act 2000.
+    Step 3 — National Consumer Helpline
+    Call 1915 or file at consumerhelpline.gov.in if unresolved in 15 days.
+    Step 4 — Send a Legal Notice
+    Send a formal legal notice through a licensed advocate. This escalates
+    the matter to Byju's's legal team directly.
+    Step 5 — Consumer Court
+    File in the District Consumer Disputes Redressal Commission in your
+    city if the legal notice is ignored within 15–30 days.
+
+[Which Laws Protect You Against Byju's?]
+    Consumer Protection Act 2019, Indian Contract Act 1872, RBI Guidelines on unsolicited loans
+    Consumer Protection Act, 2019 — your primary protection as a consumer.
+    IT Act, 2000 — requires a grievance officer who must respond in 15 days.
+    Indian Contract Act, 1872 — failure to deliver agreed service is breach.
+
+[Real Success Story]
+    Neha Singh from Delhi signed up for a Byju's course for ₹80,000. The sales representative verbally promised features that were not in the written agreement. When she tried to cancel within 7 days, Byju's refused. A legal notice citing misrepresentation and Consumer Protection Act led to a partial settlement of ₹60,000.
+    Note: This is a representative example. Individual outcomes vary.
+
+[How Much Compensation Can You Claim?]
+    Beyond your refund, you can also claim advocate fees, compensation for
+    mental agony and inconvenience, and interest on the amount withheld.
+    Consumer courts regularly award ₹2,000 to ₹25,000 in compensation for
+    clear deficiency of service in addition to the principal refund.
+
+[Frequently Asked Questions]
+
+  ▸ What is Byju's's registered address for a legal notice?
+    Send your notice to Think and Learn Private Limited (Byju's) at: IBC Knowledge Park, 4/1, Bannerghatta Road, Bengaluru, Karnataka – 560029.
+    Grievance email: legal@byjus.com.
+
+  ▸ How long does Byju's have to respond to a legal notice?
+    15 to 30 days as specified in the notice. After that you can file a
+    consumer complaint in the District Consumer Disputes Redressal Commission
+    in your city.
+
+  ▸ Can I file in my city even if Byju's is registered elsewhere?
+    Yes. Under the Consumer Protection Act 2019, you can file where you
+    reside or where the transaction took place.
+
+  ▸ How much does it cost to send a legal notice to Byju's?
+    VakilTech charges ₹1,499 all-inclusive — consultation with a licensed
+    advocate, custom drafting, unlimited revisions, and Speed Post dispatch
+    with Acknowledgment Due.
+
+── STATS / SOCIAL PROOF ─────────────────────────────────────────────
+  • 15,000+ legal notices sent across India
+  • 4.8/5 customer rating
+  • 65% of disputes settle after legal notice — without going to court
+  • Drafted by licensed advocates in 24 hours
+
+── RELATED SERVICES ─────────────────────────────────────────────────
+  • Send Legal Notice to Unacademy
+    Link: /send-legal-notice/unacademy
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+  • Consumer Complaint Legal Notice
+    Link: /send-legal-notice/consumer-complaint-legal-notice
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────────
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Byju's's registered address for a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send your notice to Think and Learn Private Limited (Byju's) at IBC Knowledge Park, 4/1, Bannerghatta Road, Bengaluru, Karnataka – 560029. Grievance email: legal@byjus.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does Byju's have to respond to a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "15 to 30 days as specified in the notice. After that you can file in the District Consumer Disputes Redressal Commission in your city."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I file a consumer complaint in my city even if Byju's is registered elsewhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Under the Consumer Protection Act 2019, you can file where you reside or where the transaction took place."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a legal notice to Byju's?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "VakilTech charges ₹1,499 all-inclusive — consultation, custom drafting, unlimited revisions, and Speed Post dispatch with Acknowledgment Due."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "VakilTech — Send Legal Notice to Byju's",
+  "description": "Send a lawyer-drafted legal notice to Think and Learn Private Limited (Byju's) for consumer disputes. ₹1,499.",
+  "url": "https://vakiltech.in/send-legal-notice/byjus",
+  "priceRange": "₹1,499",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "provider": { "@type": "Organization", "name": "VakilTech", "url": "https://vakiltech.in" },
+  "offers": { "@type": "Offer", "price": "1499", "priceCurrency": "INR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vakiltech.in" },
+    { "@type": "ListItem", "position": 2, "name": "Send Legal Notice", "item": "https://vakiltech.in/send-legal-notice" },
+    { "@type": "ListItem", "position": 3, "name": "Send Legal Notice to Byju's", "item": "https://vakiltech.in/send-legal-notice/byjus" }
+  ]
+}
+</script>
+======================================================================

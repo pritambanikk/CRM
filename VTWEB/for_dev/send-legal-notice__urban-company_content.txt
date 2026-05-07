@@ -1,0 +1,189 @@
+======================================================================
+PAGE CONTENT — FOR DEVELOPER REBUILD
+======================================================================
+
+── SEO ──────────────────────────────────────────────────────────────
+URL:              https://vakiltech.in/send-legal-notice/urban-company
+Title:            Send Legal Notice to Urban Company | Registered Address + Complete Guide | VakilTech
+Meta Description: Urban Company not resolving your complaint? Send a lawyer-drafted legal notice to Urban Company (India) Private Limited's registered address. Resolve consumer disputes legally. ₹1,499. Drafted in 24 hours.
+Keywords:         send legal notice to urban-company, urban-company registered address legal notice, urban-company grievance officer, Urban Company consumer complaint, Urban Company legal notice, how to file complaint against Urban Company
+
+── ARTICLE META ─────────────────────────────────────────────────────
+Author:           VakilTech Legal Team
+Last Updated:     April 2026
+Breadcrumb:       Home > Legal Notice > Send Legal Notice to Urban Company
+
+── PAGE SECTIONS ────────────────────────────────────────────────────
+
+[Send Legal Notice to Urban Company — Registered Address, Grievance Officer & Complete Guide]
+    If Urban Company has refused your refund, ignored your complaints, or failed
+    to resolve your dispute despite repeated attempts, a formal legal notice
+    is your most effective next step. This page gives you Urban Company's verified
+    registered address, grievance officer contact, and a complete guide to
+    resolving your dispute legally.
+
+[IMPORTANT — Urban Company's Correct Legal Entity for Consumer Notices]
+    The correct legal entity for consumer complaints is Urban Company (India) Private Limited.
+    Urban Company is liable for the actions of its professionals — they are not independent contractors under consumer law when booked through the platform.
+
+[Urban Company (India) Private Limited — Registered Address for Legal Notice]
+    Send your legal notice via Speed Post with Acknowledgment Due to:
+
+  ▸ Legal Entity Name
+    Urban Company (India) Private Limited
+
+  ▸ CIN (Corporate Identification Number)
+    U74900DL2014PTC272786
+
+  ▸ Registered Office Address
+    Floor 7, Tower A, Spaze I-Tech Park, Sector-49, Sohna Road, Gurugram, Haryana – 122018
+
+  ▸ Grievance Officer Email
+    support@urbancompany.com
+
+  ▸ Legal / Compliance Email
+    legal@urbancompany.com
+
+  ▸ Phone
+    1800-208-1000
+
+[When Can You Send a Legal Notice to Urban Company?]
+    You can send a legal notice to Urban Company when their support has failed.
+    Common situations include:
+    Property damage caused by Urban Company professional during service, poor quality work not remediated, professional did not arrive but payment deducted, misleading service package pricing, safety incident during home visit
+
+[Step-by-Step: How to Escalate Your Urban Company Complaint]
+    Step 1 — Contact Urban Company Customer Support
+    Use the official app or website. Note all ticket IDs and screenshot
+    all conversations and chat responses.
+    Step 2 — Escalate to Urban Company Grievance Officer
+    Email the grievance officer with full complaint details and all previous
+    reference numbers. They must respond within 15 days under IT Act 2000.
+    Step 3 — National Consumer Helpline
+    Call 1915 or file at consumerhelpline.gov.in if unresolved in 15 days.
+    Step 4 — Send a Legal Notice
+    Send a formal legal notice through a licensed advocate. This escalates
+    the matter to Urban Company's legal team directly.
+    Step 5 — Consumer Court
+    File in the District Consumer Disputes Redressal Commission in your
+    city if the legal notice is ignored within 15–30 days.
+
+[Which Laws Protect You Against Urban Company?]
+    Consumer Protection Act 2019, Indian Contract Act 1872, Specific Relief Act 1963 (for property damage)
+    Consumer Protection Act, 2019 — your primary protection as a consumer.
+    IT Act, 2000 — requires a grievance officer who must respond in 15 days.
+    Indian Contract Act, 1872 — failure to deliver agreed service is breach.
+
+[Real Success Story]
+    Anand Kumar from Noida had his bathroom tiles cracked by an Urban Company plumber during a repair visit. Urban Company offered only a ₹500 goodwill gesture for ₹18,000 worth of damage. A legal notice citing property damage and deficiency in service resulted in Urban Company paying ₹15,000 in compensation.
+    Note: This is a representative example. Individual outcomes vary.
+
+[How Much Compensation Can You Claim?]
+    Beyond your refund, you can also claim advocate fees, compensation for
+    mental agony and inconvenience, and interest on the amount withheld.
+    Consumer courts regularly award ₹2,000 to ₹25,000 in compensation for
+    clear deficiency of service in addition to the principal refund.
+
+[Frequently Asked Questions]
+
+  ▸ What is Urban Company's registered address for a legal notice?
+    Send your notice to Urban Company (India) Private Limited at: Floor 7, Tower A, Spaze I-Tech Park, Sector-49, Sohna Road, Gurugram, Haryana – 122018.
+    Grievance email: support@urbancompany.com.
+
+  ▸ How long does Urban Company have to respond to a legal notice?
+    15 to 30 days as specified in the notice. After that you can file a
+    consumer complaint in the District Consumer Disputes Redressal Commission
+    in your city.
+
+  ▸ Can I file in my city even if Urban Company is registered elsewhere?
+    Yes. Under the Consumer Protection Act 2019, you can file where you
+    reside or where the transaction took place.
+
+  ▸ How much does it cost to send a legal notice to Urban Company?
+    VakilTech charges ₹1,499 all-inclusive — consultation with a licensed
+    advocate, custom drafting, unlimited revisions, and Speed Post dispatch
+    with Acknowledgment Due.
+
+── STATS / SOCIAL PROOF ─────────────────────────────────────────────
+  • 15,000+ legal notices sent across India
+  • 4.8/5 customer rating
+  • 65% of disputes settle after legal notice — without going to court
+  • Drafted by licensed advocates in 24 hours
+
+── RELATED SERVICES ─────────────────────────────────────────────────
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+  • Consumer Complaint Legal Notice
+    Link: /send-legal-notice/consumer-complaint-legal-notice
+  • Consumer Complaint Legal Notice
+    Link: /send-legal-notice/consumer-complaint-legal-notice
+  • Legal Consultation — ₹299
+    Link: /legal-consultation
+
+── SCHEMA / STRUCTURED DATA (JSON-LD) ───────────────────────────────
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Urban Company's registered address for a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send your notice to Urban Company (India) Private Limited at Floor 7, Tower A, Spaze I-Tech Park, Sector-49, Sohna Road, Gurugram, Haryana – 122018. Grievance email: support@urbancompany.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does Urban Company have to respond to a legal notice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "15 to 30 days as specified in the notice. After that you can file in the District Consumer Disputes Redressal Commission in your city."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I file a consumer complaint in my city even if Urban Company is registered elsewhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Under the Consumer Protection Act 2019, you can file where you reside or where the transaction took place."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to send a legal notice to Urban Company?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "VakilTech charges ₹1,499 all-inclusive — consultation, custom drafting, unlimited revisions, and Speed Post dispatch with Acknowledgment Due."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "VakilTech — Send Legal Notice to Urban Company",
+  "description": "Send a lawyer-drafted legal notice to Urban Company (India) Private Limited for consumer disputes. ₹1,499.",
+  "url": "https://vakiltech.in/send-legal-notice/urban-company",
+  "priceRange": "₹1,499",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "provider": { "@type": "Organization", "name": "VakilTech", "url": "https://vakiltech.in" },
+  "offers": { "@type": "Offer", "price": "1499", "priceCurrency": "INR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vakiltech.in" },
+    { "@type": "ListItem", "position": 2, "name": "Send Legal Notice", "item": "https://vakiltech.in/send-legal-notice" },
+    { "@type": "ListItem", "position": 3, "name": "Send Legal Notice to Urban Company", "item": "https://vakiltech.in/send-legal-notice/urban-company" }
+  ]
+}
+</script>
+======================================================================
