@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCRM } from '@/contexts/CRMContext';
 import { Card } from '@/components/ui/card';
@@ -15,22 +15,32 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const { leads, tickets, allDueFollowUps, activityLogs, users, isLoadingLeads, isLoadingTickets } = useCRM();
 
+  const [timeFilter, setTimeFilter] = useState<'7' | '14' | '30' | 'all'>('all');
+
   const stats = useMemo(() => {
-    const totalLeads = leads.length;
-    const newLeads = leads.filter(l => l.status === 'NEW_LEAD').length;
-    const converted = leads.filter(l => ['ADVANCE_PAID', 'COMPLETED'].includes(l.status)).length;
+    const cutoffDate = new Date();
+    if (timeFilter !== 'all') {
+      cutoffDate.setDate(cutoffDate.getDate() - parseInt(timeFilter));
+    }
+
+    const filteredLeads = timeFilter === 'all' ? leads : leads.filter(l => new Date(l.created_at) >= cutoffDate);
+    const filteredTickets = timeFilter === 'all' ? tickets : tickets.filter(t => new Date(t.created_at) >= cutoffDate);
+
+    const totalLeads = filteredLeads.length;
+    const newLeads = filteredLeads.filter(l => l.status === 'NEW_LEAD').length;
+    const converted = filteredLeads.filter(l => ['ADVANCE_PAID', 'COMPLETED'].includes(l.status)).length;
     const conversionRate = totalLeads > 0 ? Math.round((converted / totalLeads) * 100) : 0;
-    const revenue = tickets.reduce((sum, t) => sum + (Number(t.advance_paid) || 0), 0);
-    const totalBilled = tickets.reduce((sum, t) => sum + (Number(t.amount) || 0), 0);
+    const revenue = filteredTickets.reduce((sum, t) => sum + (Number(t.advance_paid) || 0), 0);
+    const totalBilled = filteredTickets.reduce((sum, t) => sum + (Number(t.amount) || 0), 0);
     const pendingPayments = totalBilled - revenue;
-    const activeTickets = tickets.filter(t => !['ARCHIVED', 'WORK_COMPLETED'].includes(t.status)).length;
-    const pendingApproval = tickets.filter(t => t.status === 'PENDING_APPROVAL').length;
-    const archivedTickets = tickets.filter(t => t.status === 'ARCHIVED').length;
+    const activeTickets = filteredTickets.filter(t => !['ARCHIVED', 'WORK_COMPLETED'].includes(t.status)).length;
+    const pendingApproval = filteredTickets.filter(t => t.status === 'PENDING_APPROVAL').length;
+    const archivedTickets = filteredTickets.filter(t => t.status === 'ARCHIVED').length;
     const overdueFollowUps = allDueFollowUps.filter(f => !f.completed && new Date(f.scheduled_at) < new Date()).length;
     const dueToday = allDueFollowUps.filter(f => !f.completed && new Date(f.scheduled_at) <= new Date(Date.now() + 3600000)).length;
 
     // Conversion source breakdown
-    const convertedLeads = leads.filter(l => ['ADVANCE_PAID', 'COMPLETED'].includes(l.status));
+    const convertedLeads = filteredLeads.filter(l => ['ADVANCE_PAID', 'COMPLETED'].includes(l.status));
     const manualConversions = convertedLeads.filter(l => l.conversion_source === 'manual');
     const websiteConversions = convertedLeads.filter(l => l.conversion_source === 'website');
     const unknownConversions = convertedLeads.filter(l => !l.conversion_source);
@@ -52,7 +62,7 @@ const AdminDashboard = () => {
     // Lawyer performance
     const lawyers = users.filter(u => u.role === 'lawyer');
     const lawyerStats = lawyers.map(l => {
-      const cases = tickets.filter(t => t.lawyer_id === l.id);
+      const cases = filteredTickets.filter(t => t.lawyer_id === l.id);
       const active = cases.filter(t => !['ARCHIVED', 'WORK_COMPLETED'].includes(t.status)).length;
       const completed = cases.filter(t => ['ARCHIVED', 'WORK_COMPLETED'].includes(t.status)).length;
       const pending = cases.filter(t => t.status === 'PENDING_APPROVAL').length;
@@ -67,14 +77,21 @@ const AdminDashboard = () => {
       websiteConversions: websiteConversions.length,
       unknownConversions: unknownConversions.length,
       followUpStageBreakdown,
+      filteredTickets,
     };
-  }, [leads, tickets, allDueFollowUps, users]);
+  }, [leads, tickets, allDueFollowUps, users, timeFilter]);
 
   const recentActivity = useMemo(() => {
-    return [...activityLogs]
+    let filteredLogs = activityLogs;
+    if (timeFilter !== 'all') {
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - parseInt(timeFilter));
+      filteredLogs = activityLogs.filter(a => new Date(a.created_at) >= cutoffDate);
+    }
+    return [...filteredLogs]
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
       .slice(0, 8);
-  }, [activityLogs]);
+  }, [activityLogs, timeFilter]);
 
   const kpiCards = [
     { label: 'Total Leads', value: stats.totalLeads, icon: Users, color: 'text-primary', bg: 'bg-primary/10' },
@@ -105,7 +122,17 @@ const AdminDashboard = () => {
       <div className="sticky top-0 z-40 bg-card/95 backdrop-blur-lg border-b px-5 py-3">
         <div className="flex items-center justify-between">
           <img src={vakiltechLogo} alt="Vakiltech" className="h-10 w-auto" loading="eager" />
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
+            <select
+              value={timeFilter}
+              onChange={(e) => setTimeFilter(e.target.value as any)}
+              className="text-xs bg-muted border-none rounded-md px-2 py-1 outline-none text-muted-foreground font-medium"
+            >
+              <option value="7">Last 7 days</option>
+              <option value="14">Last 14 days</option>
+              <option value="30">Last 30 days</option>
+              <option value="all">All time</option>
+            </select>
             <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold flex items-center gap-1">
               <Shield className="w-3 h-3" /> Admin
             </span>
@@ -343,7 +370,7 @@ const AdminDashboard = () => {
           </h3>
           <div className="space-y-2">
             {Object.entries(TICKET_STATUS_LABELS).map(([status, label]) => {
-              const count = tickets.filter(t => t.status === status).length;
+              const count = stats.filteredTickets.filter(t => t.status === status).length;
               if (count === 0) return null;
               return (
                 <div key={status} className="flex items-center justify-between py-1.5">

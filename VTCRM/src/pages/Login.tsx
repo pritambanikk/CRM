@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCRM } from '@/contexts/CRMContext';
-import { AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
-import userPool from '@/lib/cognito';
+import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -17,60 +16,68 @@ const Login = () => {
   const { handleLoginSuccess } = useCRM();
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const authDetails = new AuthenticationDetails({
-      Username: email,
-      Password: password,
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    const cognitoUser = new CognitoUser({
-      Username: email,
-      Pool: userPool,
-    });
-
-    cognitoUser.authenticateUser(authDetails, {
-      onSuccess: (result) => {
-        setIsLoading(false);
-        // The token contains information about the user
-        const idTokenPayload = result.getIdToken().decodePayload();
-        const accessTokenPayload = result.getAccessToken().decodePayload();
-
-        console.log("ID Token Payload:", idTokenPayload);
-        console.log("Access Token Payload:", accessTokenPayload);
-
-        // Pass the merged payload into Context so the app knows who logged in (cognito:groups might be in either)
-        const mergedPayload = { ...idTokenPayload, ...accessTokenPayload };
-        handleLoginSuccess(mergedPayload);
-        toast.success('Login Successful');
-        navigate('/');
-      },
-      onFailure: (err) => {
-        setIsLoading(false);
-        console.error('Login Error:', err);
-        toast.error(err.message || 'Login failed. Please check your credentials.');
-      },
-      newPasswordRequired: (userAttributes, requiredAttributes) => {
-        // Handle forced password reset on first login if necessary
-        setIsLoading(false);
-        toast.info('New Password Required (Contact Admin)');
-        // Advanced: implement setting a new password here if they were created by admin
+      if (error) {
+        toast.error(error.message || 'Login failed. Please check your credentials.');
+        return;
       }
-    });
+
+      if (!data.user) {
+        toast.error('Login failed. No user returned.');
+        return;
+      }
+
+      // Fetch the user's role from crm_users table
+      const { data: crmUser, error: roleError } = await supabase
+        .from('crm_users')
+        .select('role, name')
+        .eq('id', data.user.id)
+        .single();
+
+      if (roleError || !crmUser) {
+        // Default to front_desk if no role record found
+        handleLoginSuccess({
+          id: data.user.id,
+          email: data.user.email || '',
+          name: data.user.user_metadata?.name || data.user.email || 'User',
+          role: 'front_desk',
+        });
+      } else {
+        handleLoginSuccess({
+          id: data.user.id,
+          email: data.user.email || '',
+          name: crmUser.name || data.user.email || 'User',
+          role: crmUser.role,
+        });
+      }
+
+      toast.success('Login Successful');
+      navigate('/');
+    } catch (err: any) {
+      console.error('Login Error:', err);
+      toast.error(err?.message || 'An unexpected error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen w-full flex lg:grid lg:grid-cols-2 bg-muted/30 lg:bg-background">
       {/* Left side - Aesthetic Graphic & Quote (Hidden on Mobile) */}
       <div className="hidden lg:flex flex-col justify-between bg-primary p-12 text-primary-foreground relative overflow-hidden">
-        {/* Subtle background glow/gradient */}
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 to-transparent opacity-50 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-2/3 h-2/3 bg-gradient-to-tl from-black/20 to-transparent opacity-40 blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex items-center gap-2">
-          {/* A white/inverted logo for the dark theme, using text as fallback if the image is dark */}
           <div className="bg-white p-2 rounded-xl shadow-sm">
             <img src={vakiltechLogo} alt="Vakiltech" className="h-8 w-auto" />
           </div>
@@ -96,10 +103,8 @@ const Login = () => {
 
       {/* Right side - Login Form */}
       <div className="flex-1 flex items-center justify-center p-4 lg:p-12 relative w-full">
-        {/* Mobile floating card wrapper */}
         <div className="w-full max-w-[400px] bg-card lg:bg-transparent p-8 lg:p-0 rounded-3xl lg:rounded-none shadow-xl lg:shadow-none border lg:border-none relative z-10 overflow-hidden">
 
-          {/* Subtle mobile-only top gradient for aesthetic pop */}
           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-primary/10 to-transparent lg:hidden pointer-events-none" />
 
           <div className="relative z-10 space-y-6">
@@ -108,7 +113,6 @@ const Login = () => {
                 <img src={vakiltechLogo} alt="Vakiltech" className="h-10 w-auto" />
               </div>
 
-              {/* Mobile-only quote */}
               <div className="lg:hidden mb-8 relative">
                 <div className="absolute inset-0 bg-primary/5 rounded-2xl transform -rotate-1"></div>
                 <div className="relative bg-background p-4 rounded-2xl border shadow-sm flex flex-col items-center text-center">
@@ -129,10 +133,10 @@ const Login = () => {
             <form onSubmit={handleLogin} className="space-y-4 pt-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  Email / Username
+                  Email
                 </label>
                 <Input
-                  type="text"
+                  type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@vakiltech.com"
@@ -169,11 +173,7 @@ const Login = () => {
                     className="absolute right-1 top-1 h-10 w-10 rounded-lg hover:bg-muted/80 flex items-center justify-center text-muted-foreground transition-colors"
                     tabIndex={-1}
                   >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
               </div>

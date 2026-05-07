@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPaymentLink } from '@/lib/cashfree';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCRM } from '@/contexts/CRMContext';
 import { QuickActions } from '@/components/QuickActions';
@@ -12,6 +13,7 @@ import { ArrowLeft, IndianRupee, FileText, Clock, Scale, Upload, Phone, MessageC
 import { TICKET_STATUS_LABELS, TicketStatus } from '@/types/crm';
 import { formatDistanceToNow, format } from 'date-fns';
 import { toast } from 'sonner';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 type NoteType = 'note' | 'call_log' | 'meeting';
 
@@ -531,6 +533,62 @@ const TicketDetail = () => {
                         <a href={doc.link} target="_blank" rel="noopener noreferrer" className="text-[11px] text-primary hover:underline truncate block">{doc.link}</a>
                         <p className="text-[10px] text-muted-foreground">{doc.uploaded_by} • {format(new Date(doc.uploaded_at), 'dd MMM yyyy, hh:mm a')}</p>
                       </div>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button size="sm" variant="outline" className="h-7 text-[10px] gap-1 px-2 shrink-0 border-success/30 text-success hover:bg-success/10 hover:text-success">
+                            <IndianRupee className="w-3 h-3" /> Req. Balance
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-72 p-3" align="end">
+                          <p className="text-xs font-semibold mb-2">Request Balance Payment</p>
+                          <p className="text-[10px] text-muted-foreground mb-3">
+                            Enter the balance amount to automatically generate a Cashfree payment link and send it.
+                          </p>
+                          <div className="space-y-2">
+                            <Input
+                              type="number"
+                              placeholder="Enter amount (₹)"
+                              id={`payamount-${doc.id}`}
+                              className="h-9 text-xs"
+                              min="1"
+                            />
+                            <Button
+                              className="w-full h-9 text-xs bg-success hover:bg-success/90"
+                              onClick={async (e) => {
+                                const btn = e.currentTarget;
+                                const originalText = btn.innerHTML;
+                                const amountStr = (document.getElementById(`payamount-${doc.id}`) as HTMLInputElement)?.value;
+                                const amount = parseFloat(amountStr);
+                                if (!amount || amount <= 0) {
+                                  toast.error('Please enter a valid amount');
+                                  return;
+                                }
+                                
+                                try {
+                                  btn.innerHTML = '<span class="animate-pulse">Generating...</span>';
+                                  btn.disabled = true;
+                                  
+                                  const phone = leads.find(l => l.id === ticket.client_id)?.whatsapp_number || '9999999999';
+                                  const payLink = await createPaymentLink(amount, ticket.client_name, phone, `Balance payment for ${doc.name}`);
+                                  
+                                  const msg = `The Assigned lawyer ${ticket.lawyer_name} has drafted the notice ${doc.link} and will now be sent by post. You're requested to complete the balance payment using this link ${payLink}`;
+                                  navigator.clipboard?.writeText(msg).catch(() => {});
+                                  navigate(`/inbox?search=${phone}`);
+                                  toast.success('Message copied! Paste it in the Inbox chat.');
+                                  addActivityLog(id!, 'WhatsApp Initiated', `Requested ₹${amount} balance payment for ${doc.name}`);
+                                } catch (err: any) {
+                                  toast.error(err.message || 'Failed to generate link');
+                                } finally {
+                                  btn.innerHTML = originalText;
+                                  btn.disabled = false;
+                                }
+                              }}
+                            >
+                              <MessageCircle className="w-3.5 h-3.5 mr-1" /> Generate & Send WhatsApp
+                            </Button>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                       <Button size="sm" variant="ghost" className="h-6 w-6 p-0 rounded-md shrink-0" onClick={() => { setEditingDocId(doc.id); setEditingDocLink(doc.link); }}>
                         <Pencil className="w-3 h-3 text-muted-foreground" />
                       </Button>
