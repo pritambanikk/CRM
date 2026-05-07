@@ -1,0 +1,8 @@
+definition: definition.json
+name: VakilTech Legal Notice Assistant
+slug: untitled-workflow
+status: draft
+triggers:
+  - active: false
+    phoneNumberId: "1112155208644941"
+    triggerType: inbound_message

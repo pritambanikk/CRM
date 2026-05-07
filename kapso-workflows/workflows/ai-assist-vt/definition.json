@@ -1,0 +1,82 @@
+{
+  "edges": [
+    {
+      "label": "next",
+      "source": "start",
+      "target": "call_gemini"
+    },
+    {
+      "label": "next",
+      "source": "call_gemini",
+      "target": "send_reply"
+    },
+    {
+      "label": "next",
+      "source": "send_reply",
+      "target": "wait_for_user"
+    },
+    {
+      "label": "next",
+      "source": "wait_for_user",
+      "target": "call_gemini"
+    }
+  ],
+  "nodes": [
+    {
+      "data": {
+        "config": {},
+        "node_type": "start"
+      },
+      "id": "start",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "type": "flow-node"
+    },
+    {
+      "data": {
+        "config": {
+          "function_slug": "gemini-legal-assistant"
+        },
+        "node_type": "function"
+      },
+      "id": "call_gemini",
+      "position": {
+        "x": 240,
+        "y": 0
+      },
+      "type": "flow-node"
+    },
+    {
+      "data": {
+        "config": {
+          "message": "{{ assistant_reply }}"
+        },
+        "node_type": "send_text"
+      },
+      "id": "send_reply",
+      "position": {
+        "x": 480,
+        "y": 0
+      },
+      "type": "flow-node"
+    },
+    {
+      "data": {
+        "config": {
+          "has_timeout": true,
+          "save_response_to": "last_user_input",
+          "timeout_seconds": 86400
+        },
+        "node_type": "wait_for_response"
+      },
+      "id": "wait_for_user",
+      "position": {
+        "x": 720,
+        "y": 0
+      },
+      "type": "flow-node"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "functions": {
+    "gemini-legal-assistant": {
+      "files": {
+        "functions/gemini-legal-assistant/function.yaml": "b27712953b7c313b457f8025c52dade77f4ca941a758d4ea3a6ee0d7f882d442",
+        "functions/gemini-legal-assistant/index.js": "87a953f908e3d6b98af93ea9c029676900853990e4cefa80f0a54e0f2d4d2119"
+      },
+      "id": "062be96f-3c0c-45f8-932d-f569d598b3a1",
+      "lastDeployedAt": "2026-04-29T13:45:45-04:00",
+      "lockVersion": 3,
+      "slug": "gemini-legal-assistant",
+      "status": "deployed",
+      "updatedAt": "2026-04-29T13:45:45-04:00"
+    }
+  },
+  "version": 1,
+  "workflows": {
+    "ai-assist-vt": {
+      "files": {
+        "workflows/ai-assist-vt/definition.json": "76d212788e842fa43417d3694d3c69fc276870268376e081482672bf9078ddc4",
+        "workflows/ai-assist-vt/workflow.yaml": "186d1278bc1659e6736eea807d0581606593b7a6e89e15ddd3614ae987350e82"
+      },
+      "generatedSource": {
+        "hash": "3e69198e91030651c5381cea3438ad2b36ae723e5e8340440e21c1b21a266dcb",
+        "path": "workflows/ai-assist-vt/workflow.js"
+      },
+      "id": "ee944061-0e2c-47ad-8813-04e72deb6a7c",
+      "lockVersion": 14,
+      "slug": "ai-assist-vt",
+      "sourceFile": {
+        "hash": "424f7d70625cf696fc5137ca66f0ec1c440580899b4b6edf23b8a78f3c259594",
+        "path": "workflows/ai-assist-vt/workflow.js"
+      },
+      "status": "active",
+      "updatedAt": "2026-04-29T13:54:28-04:00"
+    },
+    "untitled-workflow": {
+      "files": {
+        "workflows/untitled-workflow/definition.json": "220b285ebf75951c3b6fefb9b58d034d707916ede112a94b8b6f5916f4b18269",
+        "workflows/untitled-workflow/workflow.yaml": "e3980d3343b1592e17b8fd8fa92f8c0ad10dab7cfed4eaa8ef99d162915c1e5b"
+      },
+      "generatedSource": {
+        "hash": "eb3fe8d45e87fa5d62ce17b1baab9b3d11390b0bddf1fb28235f42a04f756a34",
+        "path": "workflows/untitled-workflow/workflow.js"
+      },
+      "id": "02f74f85-c326-4a59-94c1-2af1e3594c1c",
+      "lockVersion": 22,
+      "slug": "untitled-workflow",
+      "sourceFile": {
+        "hash": "eb3fe8d45e87fa5d62ce17b1baab9b3d11390b0bddf1fb28235f42a04f756a34",
+        "path": "workflows/untitled-workflow/workflow.js"
+      },
+      "status": "draft",
+      "updatedAt": "2026-04-29T13:21:45-04:00"
+    }
+  }
+}

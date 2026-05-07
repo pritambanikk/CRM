@@ -1,0 +1,282 @@
+import { useState } from 'react';
+import { Phone, MessageCircle, Link2, Calendar as CalendarIcon, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import { ServiceType, SERVICE_LABELS } from '@/types/crm';
+import { useCRM } from '@/contexts/CRMContext';
+
+interface WhatsAppTemplate {
+  id: string;
+  label: string;
+  stage: string;
+  getMessage: (name: string, service?: string) => string;
+}
+
+const whatsappTemplates: WhatsAppTemplate[] = [
+  {
+    id: 'intro',
+    label: 'Introduction',
+    stage: 'New Lead',
+    getMessage: (name, service) =>
+      `Hi ${name}, this is Vakiltech. Thank you for reaching out to us regarding ${service || 'your legal query'}. We'd love to help you. Could you share some more details so we can assist you better?`,
+  },
+  {
+    id: 'followup_1',
+    label: 'First Follow-up',
+    stage: 'Follow-up',
+    getMessage: (name, service) =>
+      `Hi ${name}, just following up on your enquiry about ${service || 'legal services'} with Vakiltech. We have expert lawyers ready to assist you. Would you like to schedule a quick call to discuss?`,
+  },
+  {
+    id: 'followup_2',
+    label: 'Gentle Reminder',
+    stage: 'Follow-up',
+    getMessage: (name) =>
+      `Hi ${name}, hope you're doing well! We noticed you were interested in our legal services. Our team is available to help whenever you're ready. Just reply to this message and we'll get back to you right away.`,
+  },
+  {
+    id: 'payment_reminder',
+    label: 'Payment Reminder',
+    stage: 'Payment',
+    getMessage: (name, service) =>
+      `Hi ${name}, thank you for choosing Vakiltech for your ${service || 'legal matter'}. To proceed with your case, kindly complete the advance payment using the link shared earlier. If you have any questions, feel free to ask!`,
+  },
+  {
+    id: 'payment_received',
+    label: 'Payment Confirmation',
+    stage: 'Payment',
+    getMessage: (name, service) =>
+      `Hi ${name}, we've received your advance payment for ${service || 'your case'}. Our lawyer will be assigned shortly and will reach out to you. Thank you for trusting Vakiltech!`,
+  },
+  {
+    id: 'final_reminder',
+    label: 'Final Reminder',
+    stage: 'Last Attempt',
+    getMessage: (name) =>
+      `Hi ${name}, this is a final follow-up from Vakiltech regarding your legal query. We'd hate to see you miss out on expert legal help. If you're still interested, please reply and we'll prioritize your case. Otherwise, feel free to reach out anytime in the future!`,
+  },
+];
+
+interface QuickActionsProps {
+  whatsapp_number: string;
+  name: string;
+  service?: ServiceType;
+  leadId?: string;
+  onPaymentLink?: () => void;
+  onFollowup?: (date: Date, note?: string) => void;
+  compact?: boolean;
+}
+
+export const QuickActions = ({ whatsapp_number, name, service, leadId, onPaymentLink, onFollowup, compact }: QuickActionsProps) => {
+  const navigate = useNavigate();
+  const { addActivityLog } = useCRM();
+  const [followupDate, setFollowupDate] = useState<Date>();
+  const [followupTime, setFollowupTime] = useState('09:00');
+  const [followupNote, setFollowupNote] = useState('');
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const [waPopoverOpen, setWaPopoverOpen] = useState(false);
+
+  const serviceLabel = service ? SERVICE_LABELS[service] : undefined;
+
+  const handleCall = () => {
+    if (leadId) addActivityLog(leadId, 'Call Initiated', `Initiated call to +${whatsapp_number}`);
+    window.open(`tel:+${whatsapp_number}`, '_self');
+  };
+
+  const openWhatsApp = (message: string, isTemplate: boolean = false, templateLabel?: string) => {
+    if (leadId) {
+      addActivityLog(leadId, 'WhatsApp Initiated', isTemplate ? `Sent template "${templateLabel}" to +${whatsapp_number}` : `Initiated direct WhatsApp chat with +${whatsapp_number}`);
+    }
+    // Copy message to clipboard so user can paste it in the inbox
+    navigator.clipboard?.writeText(message).catch(() => {});
+    
+    // Navigate to local Inbox with phone number
+    navigate(`/inbox?search=${whatsapp_number}`);
+    
+    toast.info('Message copied! Paste it in the Inbox chat.', {
+      description: `Opening chat for +${whatsapp_number}`,
+    });
+  };
+
+  const handleWhatsAppDirect = () => {
+    openWhatsApp(`Hi ${name}, this is Vakiltech. `);
+  };
+
+  const handleWhatsAppTemplate = (template: WhatsAppTemplate) => {
+    openWhatsApp(template.getMessage(name, serviceLabel), true, template.label);
+    setWaPopoverOpen(false);
+    toast.success(`"${template.label}" template opened in WhatsApp`);
+  };
+
+  const handlePaymentLink = () => {
+    toast.success('Payment link copied to clipboard!', { description: `vakil.tech/pay/${name.toLowerCase().split(' ')[0]}` });
+    onPaymentLink?.();
+  };
+
+  const handleScheduleFollowup = () => {
+    if (!followupDate) {
+      toast.error('Please select a date');
+      return;
+    }
+    const finalDate = new Date(followupDate);
+    if (followupTime) {
+      const [hours, minutes] = followupTime.split(':').map(Number);
+      finalDate.setHours(hours, minutes, 0, 0);
+    }
+    console.log('QuickActions: Invoking onFollowup prop with:', { finalDate, followupNote });
+    onFollowup?.(finalDate, followupNote || undefined);
+    toast.success('Follow-up scheduled!', {
+      description: format(followupDate, 'PPP') + (followupNote ? ` — ${followupNote}` : ''),
+    });
+    setFollowupDate(undefined);
+    setFollowupNote('');
+    setPopoverOpen(false);
+  };
+
+  const whatsappButton = (
+    <Popover open={waPopoverOpen} onOpenChange={setWaPopoverOpen}>
+      <PopoverTrigger asChild>
+        {compact ? (
+          <Button size="icon" variant="ghost" className="h-9 w-9 rounded-xl bg-success/10 text-success hover:bg-success/20">
+            <MessageCircle className="w-4 h-4" />
+          </Button>
+        ) : (
+          <Button className="h-11 rounded-xl bg-success text-success-foreground hover:bg-success/90 flex flex-col gap-0 px-1">
+            <MessageCircle className="w-4 h-4" />
+            <span className="text-[10px]">WhatsApp</span>
+          </Button>
+        )}
+      </PopoverTrigger>
+      <PopoverContent className="w-72 p-0" align="start" side="top">
+        <div className="p-3 pb-2">
+          <p className="text-xs font-semibold mb-0.5">Send WhatsApp Message</p>
+          <p className="text-[10px] text-muted-foreground">Choose a template or send custom</p>
+        </div>
+        <div className="px-2 pb-2">
+          <button
+            onClick={() => { handleWhatsAppDirect(); setWaPopoverOpen(false); }}
+            className="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-muted/60 transition-colors text-left"
+          >
+            <div className="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+              <MessageCircle className="w-4 h-4 text-success" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-medium">Custom Message</p>
+              <p className="text-[10px] text-muted-foreground">Write your own message</p>
+            </div>
+            <ChevronRight className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+          </button>
+        </div>
+        <div className="border-t px-2 py-2 space-y-0.5 max-h-64 overflow-y-auto">
+          {whatsappTemplates.map(template => (
+            <button
+              key={template.id}
+              onClick={() => handleWhatsAppTemplate(template)}
+              className="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-muted/60 transition-colors text-left"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <p className="text-xs font-medium">{template.label}</p>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground font-medium">{template.stage}</span>
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-0.5 line-clamp-2">
+                  {template.getMessage(name, serviceLabel)}
+                </p>
+              </div>
+              <ChevronRight className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+            </button>
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+
+  const followupButton = (
+    <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+      <PopoverTrigger asChild>
+        {compact ? (
+          <Button size="icon" variant="ghost" className="h-9 w-9 rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/80">
+            <CalendarIcon className="w-4 h-4" />
+          </Button>
+        ) : (
+          <Button className="h-11 rounded-xl bg-secondary text-secondary-foreground hover:bg-secondary/80 flex flex-col gap-0 px-1">
+            <CalendarIcon className="w-4 h-4" />
+            <span className="text-[10px]">Follow-up</span>
+          </Button>
+        )}
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="center" side="top">
+        <div className="p-3 space-y-3">
+          <Calendar
+            mode="single"
+            selected={followupDate}
+            onSelect={setFollowupDate}
+            disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+            initialFocus
+            className={cn("p-0 pointer-events-auto")}
+          />
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-muted-foreground w-12">Time</span>
+            <Input
+              type="time"
+              value={followupTime}
+              onChange={(e) => setFollowupTime(e.target.value)}
+              className="h-9 rounded-lg text-sm flex-1"
+            />
+          </div>
+          <Textarea
+            placeholder="Add a note (optional)"
+            value={followupNote}
+            onChange={(e) => setFollowupNote(e.target.value)}
+            className="min-h-[44px] text-sm rounded-xl resize-none"
+            rows={2}
+          />
+          <Button
+            className="w-full h-10 rounded-xl"
+            onClick={handleScheduleFollowup}
+            disabled={!followupDate}
+          >
+            Schedule {followupDate ? format(followupDate, 'MMM d') : 'Follow-up'}
+          </Button>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+
+  if (compact) {
+    return (
+      <div className="flex items-center gap-1.5">
+        <Button size="icon" variant="ghost" className="h-9 w-9 rounded-xl bg-success/10 text-success hover:bg-success/20" onClick={handleCall}>
+          <Phone className="w-4 h-4" />
+        </Button>
+        {whatsappButton}
+        <Button size="icon" variant="ghost" className="h-9 w-9 rounded-xl bg-primary/10 text-primary hover:bg-primary/20" onClick={handlePaymentLink}>
+          <Link2 className="w-4 h-4" />
+        </Button>
+        {followupButton}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-4 gap-2">
+      <Button className="h-11 rounded-xl bg-success text-success-foreground hover:bg-success/90 flex flex-col gap-0 px-1" onClick={handleCall}>
+        <Phone className="w-4 h-4" />
+        <span className="text-[10px]">Call</span>
+      </Button>
+      {whatsappButton}
+      <Button className="h-11 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 flex flex-col gap-0 px-1" onClick={handlePaymentLink}>
+        <Link2 className="w-4 h-4" />
+        <span className="text-[10px]">Pay Link</span>
+      </Button>
+      {followupButton}
+    </div>
+  );
+};
