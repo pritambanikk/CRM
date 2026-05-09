@@ -63,10 +63,8 @@ export default function HomeClient() {
     const timeout = setTimeout(() => {
       clearInterval(interval);
       // If we still have no conversation after waiting, surface it to the UI.
-      setPhoneNotFound(prev => {
-        // Only flip if we still haven't resolved a conversation.
-        return true;
-      });
+      // Only flip if we still haven't resolved a conversation.
+      setPhoneNotFound(true);
     }, maxWait);
     return () => { clearInterval(interval); clearTimeout(timeout); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

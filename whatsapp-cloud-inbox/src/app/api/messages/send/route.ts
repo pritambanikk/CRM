@@ -71,9 +71,10 @@ export async function POST(request: Request) {
 
     // Persist sender attribution if provided
     if (sentBy) {
+      const res = result as { id?: string; messages?: { id: string }[] } | undefined;
       const messageId =
-        (result as any)?.messages?.[0]?.id ??
-        (result as any)?.id ??
+        res?.messages?.[0]?.id ??
+        res?.id ??
         null;
       if (messageId) {
         // Fire-and-forget — don't block the response on this
