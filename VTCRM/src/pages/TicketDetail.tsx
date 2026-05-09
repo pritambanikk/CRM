@@ -3,13 +3,14 @@ import { createPaymentLink } from '@/lib/cashfree';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCRM } from '@/contexts/CRMContext';
 import { QuickActions } from '@/components/QuickActions';
+import { WhatsAppChatPanel } from '@/components/WhatsAppChatPanel';
 import { TicketStatusBadge, ServiceBadge, PriorityBadge } from '@/components/StatusBadges';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, IndianRupee, FileText, Clock, Scale, Upload, Phone, MessageCircle, Pencil, Check, X, SendHorizonal, ShieldCheck, ShieldX } from 'lucide-react';
+import { ArrowLeft, IndianRupee, FileText, Clock, Scale, Upload, Phone, MessageCircle, Pencil, Check, X, SendHorizonal, ShieldCheck, ShieldX, Lock } from 'lucide-react';
 import { TICKET_STATUS_LABELS, TicketStatus } from '@/types/crm';
 import { formatDistanceToNow, format } from 'date-fns';
 import { toast } from 'sonner';
@@ -45,6 +46,10 @@ const TicketDetail = () => {
   const [rejectionNote, setRejectionNote] = useState('');
   const [showRejectForm, setShowRejectForm] = useState(false);
 
+  // ── WhatsApp chat panel state ──────────────────────────────────────────────
+  const [chatPanelOpen, setChatPanelOpen] = useState(false);
+  const [chatPreloadMessage, setChatPreloadMessage] = useState<string | undefined>();
+
   if (isLoadingTickets) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -56,8 +61,8 @@ const TicketDetail = () => {
   const ticket = tickets.find(t => t.ticket_id === id);
   if (!ticket) return <div className="p-4 text-center">Ticket not found</div>;
 
-  const parsedNotes = typeof ticket.communication_notes === 'string' 
-    ? JSON.parse(ticket.communication_notes) 
+  const parsedNotes = typeof ticket.communication_notes === 'string'
+    ? JSON.parse(ticket.communication_notes)
     : (ticket.communication_notes || { notes: [], call_logs: [], meetings: [] });
 
   const unifiedNotes = [
@@ -69,28 +74,93 @@ const TicketDetail = () => {
   const ticketLogs = activityLogs.filter(a => a.entity_id === id).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
   // Parse documents from ticket JSON (persisted in DB)
-  const ticketDocs: { id: string, name: string, link: string, uploaded_by: string, uploaded_at: string }[] = 
+  const ticketDocs: { id: string, name: string, link: string, uploaded_by: string, uploaded_at: string }[] =
     typeof ticket.documents === 'string'
       ? JSON.parse(ticket.documents)
       : (ticket.documents || []);
   const canManagePayments = currentRole !== 'lawyer';
 
+  // ── Chat custody logic ────────────────────────────────────────────────────
+  const chatPhone = leads.find(l => l.id === ticket.client_id)?.whatsapp_number || '';
+  const custody = (ticket.chat_custody || 'lawyer_only') as 'open' | 'lawyer_only' | 'pending_approval' | 'archived';
+
+  /**
+   * Can the current user send messages in this ticket's WhatsApp chat?
+   *
+   *   lawyer_only      → super_admin + assigned lawyer only
+   *   pending_approval → everyone (lawyer submitted for review; front_desk restored)
+   *   archived         → super_admin + front_desk only (lawyer is view-only)
+   */
+  const canSendInChat = (() => {
+    if (currentRole === 'super_admin') return true;
+    if (custody === 'lawyer_only') {
+      return currentRole === 'lawyer' && currentUser.id === ticket.lawyer_id;
+    }
+    if (custody === 'pending_approval') {
+      return true; // front_desk + lawyer + admin all can respond
+    }
+    if (custody === 'archived') {
+      return currentRole === 'front_desk'; // lawyer is view-only after archiving
+    }
+    return true;
+  })();
+
   const handleStatusChange = async (status: string) => {
     const oldStatus = ticket.status;
     const finalStatus = (status === 'WORK_COMPLETED' && currentRole !== 'lawyer') ? 'ARCHIVED' : status;
+
+    // ── Chat custody transitions ───────────────────────────────────────────
+    let newCustody: 'lawyer_only' | 'pending_approval' | undefined;
+    if (finalStatus === 'PENDING_APPROVAL') {
+      // Lawyer sends work for review → front-desk chat window restores
+      newCustody = 'pending_approval';
+    } else if (
+      oldStatus === 'PENDING_APPROVAL' &&
+      finalStatus !== 'PENDING_APPROVAL' &&
+      finalStatus !== 'ARCHIVED' &&
+      finalStatus !== 'WORK_COMPLETED'
+    ) {
+      // Front-desk rejects / sends back → lawyer regains exclusive custody
+      newCustody = 'lawyer_only';
+    }
+
     try {
-      await updateTicketInServer(id!, { status: finalStatus as TicketStatus, updated_at: new Date().toISOString() });
+      await updateTicketInServer(id!, {
+        status: finalStatus as TicketStatus,
+        updated_at: new Date().toISOString(),
+        ...(newCustody && { chat_custody: newCustody }),
+      });
     } catch (e) {
       toast.error('Failed to update status');
       return;
     }
+
     const action = finalStatus === 'ARCHIVED' && status === 'WORK_COMPLETED'
       ? 'Ticket Completed & Archived'
       : 'Status Changed';
     const details = `${TICKET_STATUS_LABELS[oldStatus]} → ${TICKET_STATUS_LABELS[finalStatus as TicketStatus]}`;
-    
+
     addActivityLog(id!, action, details);
     toast.success(finalStatus === 'ARCHIVED' ? 'Ticket completed and archived!' : `Status updated to ${TICKET_STATUS_LABELS[finalStatus as TicketStatus]}`);
+
+    // Notify front-desk that chat is restored when sent for approval
+    if (newCustody === 'pending_approval' && chatPhone) {
+      try {
+        const inboxBase = import.meta.env.VITE_INBOX_URL?.replace(/\/$/, '');
+        if (inboxBase) {
+          await fetch(`${inboxBase}/api/notify`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              phone: chatPhone,
+              message: `Hi ${ticket.client_name}, your work has been reviewed by ${ticket.lawyer_name} and is pending your approval. Our team will be in touch with you shortly.`,
+            }),
+          });
+        }
+      } catch (notifyErr) {
+        console.warn('[handleStatusChange] Notify API failed (non-critical):', notifyErr);
+      }
+    }
   };
 
   const handleAddNote = async () => {
@@ -204,11 +274,39 @@ const TicketDetail = () => {
 
       <div className="px-5 py-4 space-y-4 max-w-lg mx-auto">
         {/* Quick Actions */}
-        <QuickActions 
-          whatsapp_number={leads.find(l => l.id === ticket.client_id)?.whatsapp_number || ''} 
-          name={ticket.client_name} 
+        {/* Show custody badge when front-desk is locked out */}
+        {/* front_desk: locked while lawyer has custody */}
+        {currentRole === 'front_desk' && custody === 'lawyer_only' && (
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-destructive/8 border border-destructive/20 text-xs text-destructive font-medium">
+            <Lock className="w-3.5 h-3.5" />
+            Chat assigned to lawyer — you can view messages but cannot respond until the ticket is sent for approval.
+          </div>
+        )}
+        {/* everyone: ticket is awaiting review */}
+        {custody === 'pending_approval' && (
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-700 font-medium">
+            Ticket sent for approval — everyone can now respond.
+          </div>
+        )}
+        {/* lawyer: locked after archiving */}
+        {currentRole === 'lawyer' && custody === 'archived' && (
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-destructive/8 border border-destructive/20 text-xs text-destructive font-medium">
+            <Lock className="w-3.5 h-3.5" />
+            Ticket archived — you can view the chat but front desk now handles client communication.
+          </div>
+        )}
+
+        <QuickActions
+          whatsapp_number={chatPhone}
+          name={ticket.client_name}
           service={ticket.service_type}
           leadId={ticket.client_id}
+          onOpenWhatsApp={(preloadMsg) => {
+            // Always open the panel — readonly prop handles the lock.
+            // Never fall back to /inbox which bypasses custody.
+            setChatPreloadMessage(canSendInChat ? preloadMsg : undefined);
+            setChatPanelOpen(true);
+          }}
           onFollowup={async (date, note) => {
             console.log('TicketDetail: onFollowup triggered by QuickActions', { date, note });
             const history = ticket.followup_history ? (typeof ticket.followup_history === 'string' ? JSON.parse(ticket.followup_history) : ticket.followup_history) : [];
@@ -321,7 +419,11 @@ const TicketDetail = () => {
               className="w-full h-11 rounded-xl gap-2"
               onClick={async () => {
                 try {
-                  await updateTicketInServer(id!, { status: 'PENDING_APPROVAL', updated_at: new Date().toISOString() });
+                  await updateTicketInServer(id!, {
+                    status: 'PENDING_APPROVAL',
+                    chat_custody: 'pending_approval',
+                    updated_at: new Date().toISOString(),
+                  });
                   addActivityLog(id!, 'Sent for Approval', 'Ticket sent to front desk for approval');
                   toast.success('Ticket sent for approval');
                 } catch (e) {
@@ -377,7 +479,11 @@ const TicketDetail = () => {
                   className="flex-1 h-10 rounded-xl gap-2 bg-success hover:bg-success/90 text-success-foreground"
                   onClick={async () => {
                     try {
-                      await updateTicketInServer(id!, { status: 'ARCHIVED', updated_at: new Date().toISOString() });
+                      await updateTicketInServer(id!, {
+                        status: 'ARCHIVED',
+                        chat_custody: 'archived',
+                        updated_at: new Date().toISOString(),
+                      });
                       addActivityLog(id!, 'Ticket Approved & Archived', `Approved by ${currentUser.name}`);
                       toast.success('Ticket approved and archived');
                     } catch (e) {
@@ -554,6 +660,8 @@ const TicketDetail = () => {
                             />
                             <Button
                               className="w-full h-9 text-xs bg-success hover:bg-success/90"
+                              disabled={!canSendInChat}
+                              title={!canSendInChat ? 'Chat is locked — lawyer has custody' : undefined}
                               onClick={async (e) => {
                                 const btn = e.currentTarget;
                                 const originalText = btn.innerHTML;
@@ -570,12 +678,12 @@ const TicketDetail = () => {
                                   
                                   const phone = leads.find(l => l.id === ticket.client_id)?.whatsapp_number || '9999999999';
                                   const payLink = await createPaymentLink(amount, ticket.client_name, phone, `Balance payment for ${doc.name}`);
-                                  
+
                                   const msg = `The Assigned lawyer ${ticket.lawyer_name} has drafted the notice ${doc.link} and will now be sent by post. You're requested to complete the balance payment using this link ${payLink}`;
-                                  navigator.clipboard?.writeText(msg).catch(() => {});
-                                  navigate(`/inbox?search=${phone}`);
-                                  toast.success('Message copied! Paste it in the Inbox chat.');
                                   addActivityLog(id!, 'WhatsApp Initiated', `Requested ₹${amount} balance payment for ${doc.name}`);
+                                  // Open inline chat panel with pre-loaded message
+                                  setChatPreloadMessage(msg);
+                                  setChatPanelOpen(true);
                                 } catch (err: any) {
                                   toast.error(err.message || 'Failed to generate link');
                                 } finally {
@@ -718,6 +826,18 @@ const TicketDetail = () => {
           )}
         </Card>
       </div>
+
+      {/* ── Inline WhatsApp chat panel ───────────────────────────────────── */}
+      <WhatsAppChatPanel
+        open={chatPanelOpen}
+        onClose={() => { setChatPanelOpen(false); setChatPreloadMessage(undefined); }}
+        phone={chatPhone}
+        name={ticket.client_name}
+        readonly={!canSendInChat}
+        custody={custody}
+        preloadMessage={chatPreloadMessage}
+        sender={`${currentUser.name} · ${currentRole === 'super_admin' ? 'Super Admin' : currentRole === 'front_desk' ? 'Front Desk' : 'Lawyer'}`}
+      />
     </div>
   );
 };

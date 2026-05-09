@@ -2,7 +2,7 @@
 
 import { useEffect, useState, forwardRef, useImperativeHandle, useCallback } from 'react';
 import { format, isValid, isToday, isYesterday } from 'date-fns';
-import { RefreshCw, Search } from 'lucide-react';
+import { RefreshCw, Search, Pencil, Check, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAutoPolling } from '@/hooks/use-auto-polling';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,8 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+
+const SENDER_KEY = 'inbox_sender_identity';
 
 type Conversation = {
   id: string;
@@ -61,6 +63,8 @@ type Props = {
   onSelectConversation: (conversation: Conversation) => void;
   selectedConversationId?: string;
   isHidden?: boolean;
+  /** Called whenever the user saves a new "Sending as" identity (standalone mode only) */
+  onSenderChange?: (sender: string) => void;
 };
 
 export type ConversationListRef = {
@@ -69,20 +73,28 @@ export type ConversationListRef = {
 };
 
 export const ConversationList = forwardRef<ConversationListRef, Props>(
-  ({ onSelectConversation, selectedConversationId, isHidden = false }, ref) => {
+  ({ onSelectConversation, selectedConversationId, isHidden = false, onSenderChange }, ref) => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  
+
+  // ── Sender identity (standalone inbox only) ──────────────────────────────
+  const [senderIdentity, setSenderIdentity] = useState('');
+  const [isEditingSender, setIsEditingSender] = useState(false);
+  const [draftSender, setDraftSender] = useState('');
+  const [isPanelMode, setIsPanelMode] = useState(false);
+
   // ACL: Role-based access control via URL params from parent CRM
   const [aclMode, setAclMode] = useState<'all' | 'restricted'>('all');
   const [allowedPhoneNumbers, setAllowedPhoneNumbers] = useState<string[]>([]);
 
-  // Read ACL from URL query parameters (set by the CRM iframe src)
+  // Read ACL + panel mode from URL query parameters (set by the CRM iframe src)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const acl = params.get('acl');
+    const panelMode = params.get('mode') === 'panel';
+    setIsPanelMode(panelMode);
 
     if (acl === 'restricted') {
       setAclMode('restricted');
@@ -94,7 +106,14 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
       // Default to 'all' (standalone access or explicit acl=all)
       setAclMode('all');
     }
-  }, []);
+
+    // Load persisted sender identity for standalone mode
+    if (!panelMode) {
+      const saved = localStorage.getItem(SENDER_KEY) ?? '';
+      setSenderIdentity(saved);
+      if (saved) onSenderChange?.(saved);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchConversations = useCallback(async () => {
     try {
@@ -118,6 +137,23 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
     fetchConversations();
   };
 
+  const handleSenderSave = () => {
+    const trimmed = draftSender.trim();
+    setSenderIdentity(trimmed);
+    localStorage.setItem(SENDER_KEY, trimmed);
+    onSenderChange?.(trimmed);
+    setIsEditingSender(false);
+  };
+
+  const handleSenderEdit = () => {
+    setDraftSender(senderIdentity);
+    setIsEditingSender(true);
+  };
+
+  const handleSenderCancel = () => {
+    setIsEditingSender(false);
+  };
+
   // Auto-polling for conversations (every 10 seconds)
   const { isPolling } = useAutoPolling({
     interval: 10000,
@@ -125,8 +161,15 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
     onPoll: fetchConversations
   });
 
+  // Strip leading '+' and whitespace so comparisons work regardless of how
+  // the number is stored in the CRM vs. what the WhatsApp API returns.
+  const normalizePhone = (p: string) => p.replace(/^\+/, '').trim();
+
   const selectByPhoneNumber = (phoneNumber: string) => {
-    const conversation = conversations.find(conv => conv.phoneNumber === phoneNumber);
+    const normalised = normalizePhone(phoneNumber);
+    const conversation = conversations.find(
+      conv => normalizePhone(conv.phoneNumber) === normalised
+    );
     if (conversation) {
       onSelectConversation(conversation);
       return true;
@@ -150,9 +193,11 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
   const filteredConversations = conversations.filter((conv) => {
     // ACL filter: if restricted, only show allowed phone numbers
     if (aclMode === 'restricted') {
-      const isAllowed = allowedPhoneNumbers.some(num => 
-        conv.phoneNumber.includes(num) || num.includes(conv.phoneNumber)
-      );
+      const convNorm = normalizePhone(conv.phoneNumber);
+      const isAllowed = allowedPhoneNumbers.some(num => {
+        const numNorm = normalizePhone(num);
+        return convNorm.includes(numNorm) || numNorm.includes(convNorm);
+      });
       if (!isAllowed) return false;
     }
 
@@ -227,6 +272,56 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
             className="pl-9 bg-white border-[#d1d7db] focus-visible:ring-[#00a884] rounded-lg"
           />
         </div>
+
+        {/* ── Sender identity (standalone mode only) ──────────────────── */}
+        {!isPanelMode && (
+          <div className="mt-2">
+            {isEditingSender ? (
+              <div className="flex items-center gap-1">
+                <Input
+                  autoFocus
+                  value={draftSender}
+                  onChange={(e) => setDraftSender(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSenderSave();
+                    if (e.key === 'Escape') handleSenderCancel();
+                  }}
+                  placeholder="Name · Role (e.g. Pritam · Front Desk)"
+                  className="h-7 text-xs bg-white border-[#d1d7db] focus-visible:ring-[#00a884] rounded"
+                />
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="h-7 w-7 flex-shrink-0 text-[#00a884] hover:bg-[#d1d7db]/30"
+                  onClick={handleSenderSave}
+                >
+                  <Check className="h-3.5 w-3.5" />
+                </Button>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="h-7 w-7 flex-shrink-0 text-[#667781] hover:bg-[#d1d7db]/30"
+                  onClick={handleSenderCancel}
+                >
+                  <X className="h-3.5 w-3.5" />
+                </Button>
+              </div>
+            ) : (
+              <button
+                onClick={handleSenderEdit}
+                className="flex items-center gap-1.5 text-xs text-[#667781] hover:text-[#111b21] transition-colors w-full text-left group"
+              >
+                <Pencil className="h-3 w-3 flex-shrink-0 opacity-60 group-hover:opacity-100" />
+                <span className="truncate">
+                  {senderIdentity
+                    ? <><span className="text-[#667781]">Sending as:</span> <span className="font-medium text-[#111b21]">{senderIdentity}</span></>
+                    : <span className="italic opacity-75">Set your name for message tracking</span>
+                  }
+                </span>
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       <ScrollArea className="flex-1 h-0 overflow-hidden">

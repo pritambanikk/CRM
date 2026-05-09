@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { format, isValid, isToday, isYesterday, differenceInHours } from 'date-fns';
-import { RefreshCw, Paperclip, Send, X, AlertCircle, MessageSquare, XCircle, ListTree, ArrowLeft } from 'lucide-react';
+import { RefreshCw, Paperclip, Send, X, AlertCircle, MessageSquare, XCircle, ListTree, ArrowLeft, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MediaMessage } from '@/components/media-message';
 import { TemplateSelectorDialog } from '@/components/template-selector-dialog';
@@ -23,6 +23,7 @@ type Message = {
   status?: string;
   phoneNumber: string;
   hasMedia: boolean;
+  sentBy?: string | null;
   mediaData?: {
     url: string;
     contentType?: string;
@@ -119,9 +120,37 @@ type Props = {
   onTemplateSent?: (phoneNumber: string) => Promise<void>;
   onBack?: () => void;
   isVisible?: boolean;
+  /** When true, the message input is hidden and a lock banner is shown */
+  readonly?: boolean;
+  /** Human-readable reason shown in the lock banner (e.g. "lawyer_only") */
+  custodyLabel?: string;
+  /** Pre-fill the message input with this text */
+  preloadMessage?: string;
+  /**
+   * The phone number we were asked to open (from URL params).
+   * Used when no existing conversation is found so we can still send a template.
+   */
+  targetPhone?: string;
+  /**
+   * True when the conversation-list poll timed out without finding the number.
+   * Switches the loading spinner to a "no prior chat — send a template" screen.
+   */
+  phoneNotFound?: boolean;
+  /**
+   * "Name · Role" of the CRM user viewing this panel.
+   * Stored against every outbound message for internal attribution — never sent to the customer.
+   */
+  sender?: string;
 };
 
-export function MessageView({ conversationId, phoneNumber, contactName, onTemplateSent, onBack, isVisible = false }: Props) {
+const CUSTODY_MESSAGES: Record<string, string> = {
+  lawyer_only: 'This chat is handled by the assigned lawyer. You can view messages but cannot respond until the ticket is sent for approval.',
+  pending_approval: 'Ticket sent for approval — you can now respond.',
+  archived: 'Ticket archived — front desk now handles client communication. You can view the chat but cannot send messages.',
+  open: 'Chat is open.',
+};
+
+export function MessageView({ conversationId, phoneNumber, contactName, onTemplateSent, onBack, isVisible = false, readonly = false, custodyLabel, preloadMessage, sender, targetPhone, phoneNotFound = false }: Props) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -220,6 +249,13 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
     }
   }, []);
 
+  // Pre-fill message input from URL param (panel mode)
+  useEffect(() => {
+    if (preloadMessage && !readonly) {
+      setMessageInput(preloadMessage);
+    }
+  }, [preloadMessage, readonly]);
+
   const handleRefresh = () => {
     setRefreshing(true);
     fetchMessages();
@@ -273,6 +309,9 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
       if (selectedFile) {
         formData.append('file', selectedFile);
       }
+      if (sender) {
+        formData.append('sent_by', sender);
+      }
 
       await fetch('/api/messages/send', {
         method: 'POST',
@@ -299,12 +338,73 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
   };
 
   if (!conversationId) {
+    // ── Case 1: Normal mode — no conversation selected yet ──────────────────
+    if (!isVisible) {
+      return (
+        <div className="flex-1 hidden md:flex items-center justify-center bg-[#efeae2]">
+          <p className="text-muted-foreground">Select a conversation to view messages</p>
+        </div>
+      );
+    }
+
+    // ── Case 2: Panel mode, poll timed out — no prior conversation exists ────
+    // WhatsApp Business API rule: you can only initiate with an approved template.
+    // Show a clear explanation and a direct "Send template" button.
+    if (phoneNotFound) {
+      const displayPhone = targetPhone ? `+${targetPhone}` : 'this number';
+      return (
+        <div className="flex-1 flex flex-col bg-[#efeae2]">
+          {/* Minimal header so the panel doesn't look broken */}
+          <div className="p-3 border-b border-[#d1d7db] bg-[#f0f2f5]">
+            <h2 className="text-base font-medium text-[#111b21] truncate">
+              {contactName || displayPhone}
+            </h2>
+            {contactName && <p className="text-xs text-[#667781]">{displayPhone}</p>}
+          </div>
+
+          <div className="flex-1 flex items-center justify-center p-6">
+            <div className="max-w-xs text-center space-y-4">
+              <div className="w-14 h-14 rounded-full bg-[#f0f2f5] flex items-center justify-center mx-auto">
+                <MessageSquare className="h-7 w-7 text-[#667781]" />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-[#111b21] mb-1">No conversation yet</p>
+                <p className="text-xs text-[#667781] leading-relaxed">
+                  {displayPhone} hasn&apos;t messaged your account.{' '}
+                  <strong>WhatsApp only allows outbound messages via approved templates</strong>{' '}
+                  until the customer replies.
+                </p>
+              </div>
+              <Button
+                onClick={() => setShowTemplateDialog(true)}
+                className="bg-[#00a884] hover:bg-[#008f6f] w-full"
+                size="sm"
+              >
+                <MessageSquare className="h-4 w-4 mr-2" />
+                Send template to {displayPhone}
+              </Button>
+            </div>
+          </div>
+
+          <TemplateSelectorDialog
+            open={showTemplateDialog}
+            onOpenChange={setShowTemplateDialog}
+            phoneNumber={targetPhone || ''}
+            onTemplateSent={async () => {
+              if (targetPhone && onTemplateSent) await onTemplateSent(targetPhone);
+            }}
+          />
+        </div>
+      );
+    }
+
+    // ── Case 3: Panel mode, still looking up the conversation ───────────────
     return (
-      <div className={cn(
-        "flex-1 flex items-center justify-center bg-muted/50",
-        !isVisible && "hidden md:flex"
-      )}>
-        <p className="text-muted-foreground">Select a conversation to view messages</p>
+      <div className="flex-1 flex items-center justify-center bg-[#efeae2]">
+        <div className="flex flex-col items-center gap-3 text-[#667781]">
+          <div className="w-8 h-8 border-[3px] border-[#00a884] border-t-transparent rounded-full animate-spin" />
+          <p className="text-sm">Opening chat…</p>
+        </div>
       </div>
     );
   }
@@ -485,6 +585,9 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
                       </p>
                     )}
 
+                    {message.direction === 'outbound' && message.sentBy && (
+                      <p className="text-[10px] text-[#667781] italic mb-0.5">{message.sentBy}</p>
+                    )}
                     <div className="flex items-center gap-1.5 mt-1">
                       <span className="text-[11px] text-[#667781]">
                         {formatMessageTime(message.createdAt)}
@@ -535,7 +638,24 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
       </ScrollArea>
 
       <div className="border-t border-[#d1d7db] bg-[#f0f2f5] safe-area-bottom">
-        {canSendRegularMessage ? (
+        {readonly ? (
+          // ── Custody lock banner ────────────────────────────────────────────
+          <div className="p-3 max-w-[900px] mx-auto w-full">
+            <div className="bg-[#fff0f0] border border-[#ffb3b3] rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <Lock className="h-5 w-5 text-[#c0392b] flex-shrink-0 mt-0.5" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-[#111b21] mb-0.5">Chat locked</p>
+                  <p className="text-xs text-[#667781]">
+                    {custodyLabel
+                      ? (CUSTODY_MESSAGES[custodyLabel] ?? 'You do not have permission to send messages in this chat.')
+                      : 'You do not have permission to send messages in this chat.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : canSendRegularMessage ? (
           <>
             {selectedFile && (
               <div className="p-3 border-b border-[#d1d7db] bg-white">

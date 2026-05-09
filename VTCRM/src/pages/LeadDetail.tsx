@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCRM } from '@/contexts/CRMContext';
 import { QuickActions } from '@/components/QuickActions';
+import { WhatsAppChatPanel } from '@/components/WhatsAppChatPanel';
 import { LeadStatusBadge, ServiceBadge, LeadScoreIndicator } from '@/components/StatusBadges';
 import { ActivityTimeline } from '@/components/ActivityTimeline';
 import { Card } from '@/components/ui/card';
@@ -19,8 +20,8 @@ const LeadDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { 
-    leads, setLeads, tickets, addTicketToServer, followUps, setFollowUps, 
-    currentUser, users, isLoadingLeads, updateLeadInServer, 
+    leads, setLeads, tickets, addTicketToServer, followUps, setFollowUps,
+    currentUser, currentRole, users, isLoadingLeads, updateLeadInServer,
     addFollowUpToServer, addActivityLog, activityLogs
   } = useCRM();
   const [newNote, setNewNote] = useState('');
@@ -31,6 +32,10 @@ const LeadDetail = () => {
   const [selectedLawyerId, setSelectedLawyerId] = useState<string>('');
   const [followUpNoteId, setFollowUpNoteId] = useState<number | null>(null);
   const [followUpNoteText, setFollowUpNoteText] = useState('');
+
+  // ── WhatsApp chat panel state ──────────────────────────────────────────────
+  const [chatPanelOpen, setChatPanelOpen] = useState(false);
+  const [chatPreloadMessage, setChatPreloadMessage] = useState<string | undefined>();
 
 
 
@@ -144,12 +149,13 @@ const LeadDetail = () => {
         priority: 'medium' as const,
         amount: servicePrice,
         advance_paid: amount,
+        chat_custody: 'lawyer_only' as const,
         communication_notes: lead.communication_notes,
         followup_history: lead.followup_history,
       };
-      
+
       console.log('[handleConfirmPayment] Ticket payload:', JSON.stringify(ticketPayload));
-      
+
       await addTicketToServer(ticketPayload);
 
       console.log('[handleConfirmPayment] addTicketToServer SUCCESS');
@@ -157,6 +163,22 @@ const LeadDetail = () => {
       toast.success(`Ticket created with ₹${amount.toLocaleString('en-IN')} advance`, {
         description: `Assigned to ${lawyer.name}`,
       });
+
+      // ── Auto-send WhatsApp assignment notification ─────────────────────────
+      const assignmentMessage = `Hi ${lead.name}, your case has been received and assigned to our lawyer ${lawyer.name}. They will review your details and get in touch with you shortly. For any urgent queries, please reply to this message.`;
+      try {
+        const inboxBase = import.meta.env.VITE_INBOX_URL?.replace(/\/$/, '');
+        if (inboxBase && lead.whatsapp_number) {
+          await fetch(`${inboxBase}/api/notify`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone: lead.whatsapp_number, message: assignmentMessage }),
+          });
+          addActivityLog(id!, 'WhatsApp Sent', `Assignment notification sent to +${lead.whatsapp_number}`);
+        }
+      } catch (notifyErr) {
+        console.warn('[handleConfirmPayment] Notify API failed (non-critical):', notifyErr);
+      }
 
       navigate(`/tickets`);
     } catch (e: any) {
@@ -216,17 +238,21 @@ const LeadDetail = () => {
 
       <div className="px-5 py-4 space-y-4 max-w-lg mx-auto">
         {/* Quick Actions */}
-        <QuickActions 
-          whatsapp_number={lead.whatsapp_number} 
-          name={lead.name} 
+        <QuickActions
+          whatsapp_number={lead.whatsapp_number}
+          name={lead.name}
           service={lead.service}
           leadId={id}
+          onOpenWhatsApp={(preloadMsg) => {
+            setChatPreloadMessage(preloadMsg);
+            setChatPanelOpen(true);
+          }}
           onFollowup={async (date, note) => {
             console.log('LeadDetail: onFollowup triggered by QuickActions', { date, note });
             const history = lead.followup_history ? (typeof lead.followup_history === 'string' ? JSON.parse(lead.followup_history) : lead.followup_history) : [];
             const record = {
               attempt: history.length + 1,
-              type: 'call', 
+              type: 'call',
               scheduled_at: date.toISOString(),
               completed: false,
               note: note
@@ -252,7 +278,7 @@ const LeadDetail = () => {
                 <MapPin className="w-4 h-4 shrink-0" /><span>{lead.location}</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
-                <Phone className="w-4 h-4 shrink-0" /><span>+{lead.whatsapp_number}</span>
+                <Phone className="w-4 h-4 shrink-0" /><span>+{lead.whatsapp_number.replace(/^\+/, '')}</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <User className="w-4 h-4 shrink-0" /><span>Follow-ups: {(() => {
@@ -548,6 +574,18 @@ const LeadDetail = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* ── Inline WhatsApp chat panel ───────────────────────────────────── */}
+      <WhatsAppChatPanel
+        open={chatPanelOpen}
+        onClose={() => { setChatPanelOpen(false); setChatPreloadMessage(undefined); }}
+        phone={lead.whatsapp_number}
+        name={lead.name}
+        readonly={false}
+        custody="open"
+        preloadMessage={chatPreloadMessage}
+        sender={`${currentUser.name} · ${currentRole === 'super_admin' ? 'Super Admin' : currentRole === 'front_desk' ? 'Front Desk' : 'Lawyer'}`}
+      />
     </div>
   );
 };

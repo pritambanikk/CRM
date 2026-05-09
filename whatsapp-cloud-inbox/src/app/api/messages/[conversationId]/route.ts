@@ -6,6 +6,7 @@ import {
   type MetaMessage
 } from '@kapso/whatsapp-cloud-api';
 import { whatsappClient, PHONE_NUMBER_ID } from '@/lib/whatsapp-client';
+import { supabase } from '@/lib/supabase';
 
 type MessageTypeData = {
   filename?: string;
@@ -180,8 +181,31 @@ export async function GET(
       };
     });
 
+    // ── Enrich outbound messages with internal sender attribution ──────────
+    const outboundIds = transformedData
+      .filter(m => m.direction === 'outbound')
+      .map(m => m.id);
+
+    let senderMap: Record<string, string> = {};
+    if (outboundIds.length > 0) {
+      const { data: senderRows } = await supabase
+        .from('message_senders')
+        .select('whatsapp_message_id, sent_by')
+        .in('whatsapp_message_id', outboundIds);
+      if (senderRows) {
+        senderMap = Object.fromEntries(
+          senderRows.map(r => [r.whatsapp_message_id, r.sent_by])
+        );
+      }
+    }
+
+    const enrichedData = transformedData.map(m => ({
+      ...m,
+      sentBy: senderMap[m.id] ?? null,
+    }));
+
     return NextResponse.json({
-      data: transformedData,
+      data: enrichedData,
       paging: response.paging
     });
   } catch (error) {

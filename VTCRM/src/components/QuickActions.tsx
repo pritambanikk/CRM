@@ -72,9 +72,15 @@ interface QuickActionsProps {
   onPaymentLink?: () => void;
   onFollowup?: (date: Date, note?: string) => void;
   compact?: boolean;
+  /**
+   * If provided, clicking WhatsApp opens the inline chat panel via this callback
+   * instead of navigating to the global /inbox page.
+   * Receives the optional pre-populated message text.
+   */
+  onOpenWhatsApp?: (preloadMessage?: string) => void;
 }
 
-export const QuickActions = ({ whatsapp_number, name, service, leadId, onPaymentLink, onFollowup, compact }: QuickActionsProps) => {
+export const QuickActions = ({ whatsapp_number, name, service, leadId, onPaymentLink, onFollowup, compact, onOpenWhatsApp }: QuickActionsProps) => {
   const navigate = useNavigate();
   const { addActivityLog } = useCRM();
   const [followupDate, setFollowupDate] = useState<Date>();
@@ -85,23 +91,31 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
 
   const serviceLabel = service ? SERVICE_LABELS[service] : undefined;
 
+  // Always work with a clean number for links and logs
+  const cleanNumber = whatsapp_number.replace(/^\+/, '').trim();
+
   const handleCall = () => {
-    if (leadId) addActivityLog(leadId, 'Call Initiated', `Initiated call to +${whatsapp_number}`);
-    window.open(`tel:+${whatsapp_number}`, '_self');
+    if (leadId) addActivityLog(leadId, 'Call Initiated', `Initiated call to +${cleanNumber}`);
+    window.open(`tel:+${cleanNumber}`, '_self');
   };
 
   const openWhatsApp = (message: string, isTemplate: boolean = false, templateLabel?: string) => {
     if (leadId) {
-      addActivityLog(leadId, 'WhatsApp Initiated', isTemplate ? `Sent template "${templateLabel}" to +${whatsapp_number}` : `Initiated direct WhatsApp chat with +${whatsapp_number}`);
+      addActivityLog(leadId, 'WhatsApp Initiated', isTemplate ? `Sent template "${templateLabel}" to +${cleanNumber}` : `Initiated direct WhatsApp chat with +${cleanNumber}`);
     }
-    // Copy message to clipboard so user can paste it in the inbox
+
+    if (onOpenWhatsApp) {
+      // Inline panel mode: open panel with the message pre-loaded
+      onOpenWhatsApp(message);
+      if (isTemplate) toast.success(`"${templateLabel}" template loaded in chat.`);
+      return;
+    }
+
+    // Fallback: copy to clipboard and navigate to the global inbox
     navigator.clipboard?.writeText(message).catch(() => {});
-    
-    // Navigate to local Inbox with phone number
-    navigate(`/inbox?search=${whatsapp_number}`);
-    
+    navigate(`/inbox?search=${cleanNumber}`);
     toast.info('Message copied! Paste it in the Inbox chat.', {
-      description: `Opening chat for +${whatsapp_number}`,
+      description: `Opening chat for +${cleanNumber}`,
     });
   };
 
@@ -112,7 +126,6 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
   const handleWhatsAppTemplate = (template: WhatsAppTemplate) => {
     openWhatsApp(template.getMessage(name, serviceLabel), true, template.label);
     setWaPopoverOpen(false);
-    toast.success(`"${template.label}" template opened in WhatsApp`);
   };
 
   const handlePaymentLink = () => {

@@ -64,6 +64,13 @@ export interface Ticket {
   priority: 'low' | 'medium' | 'high' | 'urgent';
   amount: number;
   advance_paid: number;
+  /**
+   * Controls who can send WhatsApp messages for this ticket:
+   *   'lawyer_only'      – only super_admin + assigned lawyer can respond
+   *   'pending_approval' – everyone can respond (lawyer submitted for review)
+   *   'archived'         – only super_admin + front_desk can respond; lawyer is view-only
+   */
+  chat_custody?: 'open' | 'lawyer_only' | 'pending_approval' | 'archived';
   followup_history?: string | any[];
   communication_notes?: string | {
     notes: { id: string, text: string, created_by: string, created_at: string }[];
