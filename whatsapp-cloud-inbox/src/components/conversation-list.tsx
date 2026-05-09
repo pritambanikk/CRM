@@ -78,6 +78,7 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [readTimestamps, setReadTimestamps] = useState<Record<string, string>>({});
 
   // ── Sender identity (standalone inbox only) ──────────────────────────────
   const [senderIdentity, setSenderIdentity] = useState('');
@@ -107,6 +108,14 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
       setAclMode('all');
     }
 
+    // Load read timestamps
+    try {
+      const savedTimestamps = localStorage.getItem('inbox_read_timestamps');
+      if (savedTimestamps) {
+        setReadTimestamps(JSON.parse(savedTimestamps));
+      }
+    } catch (e) {}
+
     // Load persisted sender identity for standalone mode
     if (!panelMode) {
       const saved = localStorage.getItem(SENDER_KEY) ?? '';
@@ -131,6 +140,28 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
   useEffect(() => {
     fetchConversations();
   }, [fetchConversations]);
+
+  const markAsRead = useCallback((convId: string, timestamp: string) => {
+    setReadTimestamps((prev) => {
+      // Only update if it's actually newer (or doesn't exist)
+      if (!prev[convId] || new Date(timestamp) > new Date(prev[convId])) {
+        const next = { ...prev, [convId]: timestamp };
+        localStorage.setItem('inbox_read_timestamps', JSON.stringify(next));
+        return next;
+      }
+      return prev;
+    });
+  }, []);
+
+  // Auto-mark as read if a new message arrives in the currently active conversation
+  useEffect(() => {
+    if (selectedConversationId) {
+      const activeConv = conversations.find(c => c.id === selectedConversationId);
+      if (activeConv && activeConv.lastActiveAt) {
+        markAsRead(activeConv.id, activeConv.lastActiveAt);
+      }
+    }
+  }, [conversations, selectedConversationId, markAsRead]);
 
   const handleRefresh = () => {
     setRefreshing(true);
@@ -171,6 +202,7 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
       conv => normalizePhone(conv.phoneNumber) === normalised
     );
     if (conversation) {
+      markAsRead(conversation.id, conversation.lastActiveAt);
       onSelectConversation(conversation);
       return true;
     }
@@ -331,10 +363,19 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
           </div>
         ) : (
           <div className="w-full overflow-hidden">
-          {filteredConversations.map((conversation) => (
+          {filteredConversations.map((conversation) => {
+            const isUnread =
+              conversation.lastMessage?.direction === 'inbound' &&
+              (!readTimestamps[conversation.id] ||
+                new Date(conversation.lastActiveAt) > new Date(readTimestamps[conversation.id]));
+
+            return (
             <button
               key={conversation.id}
-              onClick={() => onSelectConversation(conversation)}
+              onClick={() => {
+                markAsRead(conversation.id, conversation.lastActiveAt);
+                onSelectConversation(conversation);
+              }}
               className={cn(
                 'w-full p-3 pr-4 border-b border-[#e9edef] hover:bg-[#f0f2f5] text-left transition-colors relative overflow-hidden',
                 selectedConversationId === conversation.id && 'bg-[#f0f2f5]'
@@ -348,11 +389,16 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
                 </Avatar>
                 <div className="flex-1 min-w-0 flex justify-between items-start gap-4 overflow-hidden">
                   <div className="flex-1 min-w-0 overflow-hidden">
-                    <p className="font-medium text-[#111b21] truncate">
-                      {conversation.contactName || conversation.phoneNumber}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className={cn("truncate", isUnread ? "font-bold text-[#111b21]" : "font-medium text-[#111b21]")}>
+                        {conversation.contactName || conversation.phoneNumber}
+                      </p>
+                      {isUnread && (
+                        <div className="w-2 h-2 rounded-full bg-[#00a884] flex-shrink-0" />
+                      )}
+                    </div>
                     {conversation.lastMessage && (
-                      <p className="text-sm text-[#667781] truncate mt-0.5">
+                      <p className={cn("text-sm truncate mt-0.5", isUnread ? "font-medium text-[#111b21]" : "text-[#667781]")}>
                         {conversation.lastMessage.direction === 'outbound' && (
                           <span className="text-[#53bdeb]">✓ </span>
                         )}
@@ -366,7 +412,8 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
                 </div>
               </div>
             </button>
-          ))
+            );
+          })
           }
           </div>
         )}
