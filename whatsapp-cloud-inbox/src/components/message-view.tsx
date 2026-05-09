@@ -228,26 +228,7 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
     setCanSendRegularMessage(isWithin24HourWindow(messages));
   }, [messages]);
 
-  // Track if user is near bottom of scroll
-  useEffect(() => {
-    const container = messagesContainerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const viewport = container.querySelector('[data-radix-scroll-area-viewport]');
-      if (!viewport) return;
-
-      const { scrollTop, scrollHeight, clientHeight } = viewport;
-      const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
-      setIsNearBottom(distanceFromBottom < 100);
-    };
-
-    const viewport = container.querySelector('[data-radix-scroll-area-viewport]');
-    if (viewport) {
-      viewport.addEventListener('scroll', handleScroll);
-      return () => viewport.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
+  // Track if user is near bottom of scroll using onScrollCapture on the ScrollArea
 
   // Pre-fill message input from URL param (panel mode)
   useEffect(() => {
@@ -492,7 +473,18 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
         </div>
       </div>
 
-      <ScrollArea ref={messagesContainerRef} className="flex-1 h-0 p-4">
+      <ScrollArea 
+        ref={messagesContainerRef} 
+        className="flex-1 h-0 p-4"
+        onScrollCapture={(e) => {
+          const target = e.target as HTMLElement;
+          if (target.hasAttribute('data-radix-scroll-area-viewport')) {
+            const { scrollTop, scrollHeight, clientHeight } = target;
+            const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+            setIsNearBottom(distanceFromBottom < 150);
+          }
+        }}
+      >
         <div className="max-w-[900px] mx-auto">
         {messages.length === 0 ? (
           <p className="text-center text-muted-foreground">No messages yet</p>
