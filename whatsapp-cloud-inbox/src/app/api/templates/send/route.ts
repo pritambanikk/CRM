@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { buildTemplateSendPayload } from '@kapso/whatsapp-cloud-api';
 import { whatsappClient, PHONE_NUMBER_ID } from '@/lib/whatsapp-client';
+import { supabase } from '@/lib/supabase';
 import type { TemplateParameterInfo } from '@/types/whatsapp';
 
 type TemplateSendInput = Parameters<typeof buildTemplateSendPayload>[0];
@@ -114,6 +115,61 @@ export async function POST(request: Request) {
       to,
       template: templatePayload
     });
+
+    // ── Persist to Supabase (fire-and-forget) ─────────────────────────────
+    const res = result as { id?: string; messages?: { id: string }[] } | undefined;
+    const messageId = res?.messages?.[0]?.id ?? res?.id ?? null;
+
+    if (messageId) {
+      (async () => {
+        // Upsert conversation
+        const { data: conv, error: convError } = await supabase
+          .from('wa_conversations')
+          .upsert(
+            {
+              phone_number: to,
+              phone_number_id: PHONE_NUMBER_ID,
+              last_active_at: new Date().toISOString(),
+              last_message_content: `[Template: ${templateName}]`,
+              last_message_direction: 'outbound',
+              last_message_type: 'template',
+              status: 'active',
+              updated_at: new Date().toISOString(),
+            },
+            { onConflict: 'phone_number', ignoreDuplicates: false }
+          )
+          .select('id')
+          .single();
+
+        if (convError || !conv?.id) {
+          console.error('[template/send] wa_conversations upsert error:', JSON.stringify(convError));
+          return;
+        }
+
+        // Insert outbound template message
+        const { error: msgError } = await supabase
+          .from('wa_messages')
+          .upsert(
+            {
+              id: messageId,
+              conversation_id: conv.id,
+              direction: 'outbound',
+              content: `[Template: ${templateName}]`,
+              message_type: 'template',
+              has_media: false,
+              phone_number: to,
+              status: 'sent',
+              created_at: new Date().toISOString(),
+              received_at: new Date().toISOString(),
+            },
+            { onConflict: 'id', ignoreDuplicates: true }
+          );
+
+        if (msgError) {
+          console.error('[template/send] wa_messages upsert error:', JSON.stringify(msgError));
+        }
+      })().catch(err => console.warn('[template/send] Supabase save error:', err));
+    }
 
     return NextResponse.json(result);
   } catch (error) {
