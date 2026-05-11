@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabase';
  * Remove or restrict this endpoint once the issue is diagnosed.
  */
 export async function GET() {
-  const results: Record<string, any> = {
+  const results: Record<string, unknown> = {
     env: {
       SUPABASE_URL: process.env.SUPABASE_URL ? '✓ set' : '✗ MISSING',
       SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY ? '✓ set' : '✗ MISSING',
