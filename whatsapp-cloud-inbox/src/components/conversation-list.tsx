@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState, forwardRef, useImperativeHandle, useCallback } from 'react';
+import { useEffect, useState, forwardRef, useImperativeHandle, useCallback, useRef } from 'react';
 import { format, isValid, isToday, isYesterday } from 'date-fns';
 import { RefreshCw, Search, Pencil, Check, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useAutoPolling } from '@/hooks/use-auto-polling';
+import { supabaseBrowser } from '@/lib/supabase-browser';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -78,6 +78,8 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLive, setIsLive] = useState(false);
+  const realtimeChannelRef = useRef<ReturnType<typeof supabaseBrowser.channel> | null>(null);
   const [readTimestamps, setReadTimestamps] = useState<Record<string, string>>({});
 
   // ── Sender identity (standalone inbox only) ──────────────────────────────
@@ -185,12 +187,30 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
     setIsEditingSender(false);
   };
 
-  // Auto-polling for conversations (every 10 seconds)
-  const { isPolling } = useAutoPolling({
-    interval: 10000,
-    enabled: true,
-    onPoll: fetchConversations
-  });
+  // ── Supabase Realtime: re-fetch when wa_conversations changes ───────────
+  useEffect(() => {
+    const channel = supabaseBrowser
+      .channel('wa_conversations_changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'wa_conversations' },
+        () => {
+          // A new message/conversation arrived — refresh the list
+          fetchConversations();
+        }
+      )
+      .subscribe((status) => {
+        setIsLive(status === 'SUBSCRIBED');
+      });
+
+    realtimeChannelRef.current = channel;
+
+    return () => {
+      supabaseBrowser.removeChannel(channel);
+      realtimeChannelRef.current = null;
+      setIsLive(false);
+    };
+  }, [fetchConversations]);
 
   // Strip leading '+' and whitespace so comparisons work regardless of how
   // the number is stored in the CRM vs. what the WhatsApp API returns.
@@ -277,10 +297,10 @@ export const ConversationList = forwardRef<ConversationListRef, Props>(
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-semibold text-[#111b21]">Chats</h1>
-            {isPolling && (
+            {isLive && (
               <div
                 className="h-2 w-2 rounded-full bg-green-500 animate-pulse"
-                title="Auto-updating"
+                title="Live — updates instantly"
               />
             )}
           </div>

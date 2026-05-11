@@ -8,73 +8,152 @@ import {
 import { whatsappClient, PHONE_NUMBER_ID } from '@/lib/whatsapp-client';
 import { supabase } from '@/lib/supabase';
 
-type MessageTypeData = {
-  filename?: string;
-  mimeType?: string;
-  messageId?: string;
-};
+// ── Helpers (kept for Kapso seed path) ──────────────────────────────────────
 
-type WithOptionalTimestamp = {
-  lastMessageTimestamp?: unknown;
-};
+type MessageTypeData = { filename?: string; mimeType?: string; messageId?: string };
+type WithOptionalTimestamp = { lastMessageTimestamp?: unknown };
 
 function toIsoString(timestamp: unknown, fallback?: unknown): string {
-  const coerceToNumber = (value: unknown): number | null => {
-    if (typeof value === 'number' && Number.isFinite(value)) {
-      return value;
-    }
-    if (typeof value === 'string' && value.trim() !== '') {
-      const num = Number(value);
-      if (Number.isFinite(num)) {
-        return num;
-      }
-    }
+  const n = (v: unknown): number | null => {
+    if (typeof v === 'number' && Number.isFinite(v)) return v;
+    if (typeof v === 'string' && v.trim()) { const n2 = Number(v); if (Number.isFinite(n2)) return n2; }
     return null;
   };
-
-  const epochSeconds = coerceToNumber(timestamp);
-  if (epochSeconds !== null) {
-    return new Date(epochSeconds * 1000).toISOString();
-  }
-
-  if (typeof fallback === 'string' && !Number.isNaN(Date.parse(fallback))) {
-    return new Date(fallback).toISOString();
-  }
-
+  const s = n(timestamp);
+  if (s !== null) return new Date(s * 1000).toISOString();
+  if (typeof fallback === 'string' && !isNaN(Date.parse(fallback))) return new Date(fallback).toISOString();
   return new Date().toISOString();
 }
 
-function normaliseKapsoContent(content: KapsoMessageExtensions['content']): string | undefined {
+function normaliseContent(content: KapsoMessageExtensions['content']): string | undefined {
   if (!content) return undefined;
   if (typeof content === 'string') return content;
   if (typeof content === 'object' && 'text' in content) {
-    const maybeText = (content as { text?: unknown }).text;
-    if (typeof maybeText === 'string') return maybeText;
+    const t = (content as { text?: unknown }).text;
+    if (typeof t === 'string') return t;
   }
   return undefined;
 }
 
-function extractMessageTypeData(value: KapsoMessageExtensions['messageTypeData']): MessageTypeData | undefined {
-  if (!value || typeof value !== 'object') {
-    return undefined;
-  }
-
-  const { filename, mimeType, messageId } = value as MessageTypeData;
+function extractTypeData(v: KapsoMessageExtensions['messageTypeData']): MessageTypeData | undefined {
+  if (!v || typeof v !== 'object') return undefined;
+  const { filename, mimeType, messageId } = v as MessageTypeData;
   return {
     filename: typeof filename === 'string' ? filename : undefined,
     mimeType: typeof mimeType === 'string' ? mimeType : undefined,
-    messageId: typeof messageId === 'string' ? messageId : undefined
+    messageId: typeof messageId === 'string' ? messageId : undefined,
   };
 }
 
-function extractMediaData(mediaData: MediaData | undefined): Pick<MediaData, 'filename' | 'contentType' | 'byteSize'> {
+function extractMedia(m: MediaData | undefined) {
   return {
-    filename: typeof mediaData?.filename === 'string' ? mediaData.filename : undefined,
-    contentType: typeof mediaData?.contentType === 'string' ? mediaData.contentType : undefined,
-    byteSize: typeof mediaData?.byteSize === 'number' ? mediaData.byteSize : undefined
+    filename: typeof m?.filename === 'string' ? m.filename : undefined,
+    contentType: typeof m?.contentType === 'string' ? m.contentType : undefined,
+    byteSize: typeof m?.byteSize === 'number' ? m.byteSize : undefined,
   };
 }
 
+// ── Map a Supabase wa_messages row → frontend message shape ─────────────────
+function supabaseRowToMessage(row: any, sentByMap: Record<string, string> = {}) {
+  return {
+    id: row.id,
+    direction: row.direction,
+    content: row.content ?? '',
+    createdAt: row.created_at,
+    status: row.status ?? undefined,
+    phoneNumber: row.phone_number ?? '',
+    hasMedia: row.has_media ?? false,
+    mediaData: row.media_url
+      ? { url: row.media_url, contentType: row.media_mime_type, filename: row.media_filename }
+      : undefined,
+    reactionEmoji: row.reaction_emoji ?? null,
+    reactedToMessageId: row.reacted_to_message_id ?? null,
+    filename: row.media_filename ?? null,
+    mimeType: row.media_mime_type ?? null,
+    messageType: row.message_type ?? 'text',
+    caption: row.caption ?? null,
+    sentBy: sentByMap[row.id] ?? row.sent_by ?? null,
+    metadata: row.media_id ? { mediaId: row.media_id } : {},
+  };
+}
+
+// ── Seed Supabase from Kapso for a conversation (first-open) ─────────────────
+async function seedFromKapso(
+  conversationId: string,
+  kapsoId: string,
+  limit: number,
+  after?: string
+): Promise<{ messages: any[]; paging: any }> {
+  const response = await whatsappClient.messages.listByConversation({
+    phoneNumberId: PHONE_NUMBER_ID,
+    conversationId: kapsoId,
+    limit,
+    after,
+    fields: buildKapsoFields([
+      'direction', 'status', 'processing_status', 'phone_number', 'has_media',
+      'media_data', 'media_url', 'whatsapp_conversation_id', 'contact_name',
+      'message_type_data', 'content', 'flow_response', 'flow_token', 'flow_name', 'order_text'
+    ])
+  });
+
+  const rows = response.data.map((msg: MetaMessage) => {
+    const { image, video, audio, document, sticker, text, reaction, kapso } = msg;
+    const kx = kapso as KapsoMessageExtensions | undefined;
+    const typeData = extractTypeData(kx?.messageTypeData);
+    const kapsoMedia = extractMedia(kx?.mediaData);
+    const mediaId = image?.id ?? video?.id ?? audio?.id ?? document?.id ?? sticker?.id
+      ?? (typeof kx?.mediaData?.id === 'string' ? kx.mediaData.id : undefined);
+    const mediaUrl = image?.link ?? video?.link ?? audio?.link ?? document?.link ?? sticker?.link
+      ?? (typeof kx?.mediaUrl === 'string' ? kx.mediaUrl : undefined)
+      ?? (typeof kx?.mediaData?.url === 'string' ? kx.mediaData.url : undefined);
+    const hasMedia = Boolean(kx?.hasMedia) || Boolean(mediaId)
+      || ['image', 'video', 'audio', 'document', 'sticker'].includes(msg.type);
+    const kapsoContent = normaliseContent(kx?.content);
+    const textBody = typeof text?.body === 'string' ? text.body : undefined;
+    const reactionEmoji = typeof reaction?.emoji === 'string' ? reaction.emoji : undefined;
+    const fallbackCaption = (typeof image?.caption === 'string' && image.caption)
+      || (typeof video?.caption === 'string' && video.caption)
+      || (typeof document?.caption === 'string' && document.caption) || undefined;
+    const lmt = (kx as WithOptionalTimestamp | undefined)?.lastMessageTimestamp;
+    const createdAt = toIsoString(msg.timestamp, lmt);
+    const direction = typeof kx?.direction === 'string' ? kx.direction : 'inbound';
+    const content = kapsoContent ?? textBody ?? reactionEmoji ?? fallbackCaption ?? '';
+
+    return {
+      id: msg.id,
+      conversation_id: conversationId,
+      direction,
+      content,
+      message_type: msg.type,
+      has_media: hasMedia,
+      media_id: mediaId ?? null,
+      media_url: mediaUrl ?? null,
+      media_filename: document?.filename ?? typeData?.filename ?? kapsoMedia.filename ?? null,
+      media_mime_type: typeData?.mimeType ?? kapsoMedia.contentType ?? null,
+      media_size: kapsoMedia.byteSize ?? null,
+      phone_number: typeof kx?.phoneNumber === 'string' ? kx.phoneNumber : (msg as any).from ?? null,
+      status: typeof kx?.status === 'string' ? kx.status : null,
+      reaction_emoji: reactionEmoji ?? null,
+      reacted_to_message_id: typeof reaction?.messageId === 'string' ? reaction.messageId
+        : typeData?.messageId ?? null,
+      caption: fallbackCaption ?? null,
+      raw: msg,
+      created_at: createdAt,
+      received_at: new Date().toISOString(),
+    };
+  });
+
+  // Batch upsert into Supabase (ignore duplicates)
+  if (rows.length > 0) {
+    await supabase
+      .from('wa_messages')
+      .upsert(rows, { onConflict: 'id', ignoreDuplicates: true });
+  }
+
+  return { messages: rows, paging: response.paging };
+}
+
+// ── GET /api/messages/[conversationId] ───────────────────────────────────────
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ conversationId: string }> }
@@ -83,109 +162,89 @@ export async function GET(
   try {
     const { searchParams } = new URL(request.url);
     const parsedLimit = Number.parseInt(searchParams.get('limit') ?? '', 10);
-    const limit = Number.isFinite(parsedLimit) && parsedLimit > 0 ? Math.min(parsedLimit, 100) : 50;
+    const limit = Number.isFinite(parsedLimit) && parsedLimit > 0 ? Math.min(parsedLimit, 100) : 25;
+    const after = searchParams.get('after') || undefined; // cursor for older messages
 
-    const response = await whatsappClient.messages.listByConversation({
-      phoneNumberId: PHONE_NUMBER_ID,
-      conversationId,
-      limit,
-      fields: buildKapsoFields([
-        'direction',
-        'status',
-        'processing_status',
-        'phone_number',
-        'has_media',
-        'media_data',
-        'media_url',
-        'whatsapp_conversation_id',
-        'contact_name',
-        'message_type_data',
-        'content',
-        'flow_response',
-        'flow_token',
-        'flow_name',
-        'order_text'
-      ])
-    });
+    // ── 1. Try reading from Supabase ─────────────────────────────────────
+    let query = supabase
+      .from('wa_messages')
+      .select('*')
+      .eq('conversation_id', conversationId)
+      .order('created_at', { ascending: false })
+      .limit(limit);
 
-    // Transform messages to match frontend expectations
-    const transformedData = response.data.map((msg: MetaMessage) => {
-      const { image, video, audio, document, sticker, text, reaction, kapso } = msg;
-      const kapsoExtensions = kapso as KapsoMessageExtensions | undefined;
-      const messageTypeData = extractMessageTypeData(kapsoExtensions?.messageTypeData);
-      const kapsoMediaData = extractMediaData(kapsoExtensions?.mediaData);
+    // "after" is used for pagination — in Supabase we use created_at as cursor
+    if (after) {
+      // after is a base64-encoded ISO timestamp from previous page
+      try {
+        const afterTs = Buffer.from(after, 'base64').toString('utf8');
+        query = query.lt('created_at', afterTs);
+      } catch {
+        // ignore bad cursor
+      }
+    }
 
-      const mediaId =
-        image?.id ??
-        video?.id ??
-        audio?.id ??
-        document?.id ??
-        sticker?.id ??
-        (typeof kapsoExtensions?.mediaData?.id === 'string' ? kapsoExtensions.mediaData.id : undefined);
+    const { data: rows, error } = await query;
 
-      const mediaUrl =
-        image?.link ??
-        video?.link ??
-        audio?.link ??
-        document?.link ??
-        sticker?.link ??
-        (typeof kapsoExtensions?.mediaUrl === 'string' ? kapsoExtensions.mediaUrl : undefined) ??
-        (typeof kapsoExtensions?.mediaData?.url === 'string' ? kapsoExtensions.mediaData.url : undefined);
-
-      const hasMedia =
-        Boolean(kapsoExtensions?.hasMedia) ||
-        Boolean(mediaId) ||
-        ['image', 'video', 'audio', 'document', 'sticker'].includes(msg.type);
-
-      const resolvedMediaData = mediaUrl
-        ? {
-            url: mediaUrl,
-            filename: document?.filename ?? messageTypeData?.filename ?? kapsoMediaData.filename,
-            contentType: messageTypeData?.mimeType ?? kapsoMediaData.contentType,
-            byteSize: kapsoMediaData.byteSize
-          }
-        : undefined;
-
-      const kapsoContent = normaliseKapsoContent(kapsoExtensions?.content);
-      const textBody = typeof text?.body === 'string' ? text.body : undefined;
-      const reactionEmoji = typeof reaction?.emoji === 'string' ? reaction.emoji : undefined;
-
-      const fallbackCaption =
-        (typeof image?.caption === 'string' && image.caption) ||
-        (typeof video?.caption === 'string' && video.caption) ||
-        (typeof document?.caption === 'string' && document.caption) ||
-        undefined;
-
-      const lastMessageTimestamp = (kapsoExtensions as WithOptionalTimestamp | undefined)?.lastMessageTimestamp;
-
-      return {
-        id: msg.id,
-        direction: typeof kapsoExtensions?.direction === 'string' ? kapsoExtensions.direction : 'inbound',
-        content: kapsoContent ?? textBody ?? reactionEmoji ?? fallbackCaption ?? '',
-        createdAt: toIsoString(msg.timestamp, lastMessageTimestamp),
-        status: typeof kapsoExtensions?.status === 'string' ? kapsoExtensions.status : undefined,
-        phoneNumber: typeof kapsoExtensions?.phoneNumber === 'string' ? kapsoExtensions.phoneNumber : msg.from,
-        hasMedia,
-        mediaData: resolvedMediaData,
-        reactionEmoji,
-        reactedToMessageId: typeof reaction?.messageId === 'string'
-          ? reaction.messageId
-          : messageTypeData?.messageId,
-        filename: document?.filename ?? messageTypeData?.filename ?? kapsoMediaData.filename,
-        mimeType: messageTypeData?.mimeType ?? kapsoMediaData.contentType,
-        messageType: msg.type,
-        caption: fallbackCaption,
-        metadata: {
-          mediaId
+    // ── 2. If Supabase has data, serve it ─────────────────────────────────
+    if (!error && rows && rows.length > 0) {
+      // Fetch sender attribution for outbound messages
+      const outboundIds = rows.filter(r => r.direction === 'outbound').map(r => r.id);
+      let senderMap: Record<string, string> = {};
+      if (outboundIds.length > 0) {
+        const { data: senderRows } = await supabase
+          .from('message_senders')
+          .select('whatsapp_message_id, sent_by')
+          .in('whatsapp_message_id', outboundIds);
+        if (senderRows) {
+          senderMap = Object.fromEntries(senderRows.map(r => [r.whatsapp_message_id, r.sent_by]));
         }
-      };
-    });
+      }
 
-    // ── Enrich outbound messages with internal sender attribution ──────────
-    const outboundIds = transformedData
-      .filter(m => m.direction === 'outbound')
-      .map(m => m.id);
+      const messages = rows.map(r => supabaseRowToMessage(r, senderMap));
 
+      // Build next cursor (oldest timestamp in this page)
+      const oldest = rows[rows.length - 1];
+      const nextCursor = oldest
+        ? Buffer.from(oldest.created_at).toString('base64')
+        : null;
+
+      // Check if there are older messages
+      const { count } = await supabase
+        .from('wa_messages')
+        .select('*', { count: 'exact', head: true })
+        .eq('conversation_id', conversationId)
+        .lt('created_at', oldest?.created_at ?? new Date().toISOString());
+
+      const hasMore = (count ?? 0) > 0;
+
+      return NextResponse.json({
+        data: messages,
+        paging: hasMore && nextCursor
+          ? { cursors: { after: nextCursor } }
+          : { cursors: {} }
+      });
+    }
+
+    // ── 3. Supabase is empty — seed from Kapso (first-open for this chat) ──
+    const { data: convRow } = await supabase
+      .from('wa_conversations')
+      .select('kapso_id')
+      .eq('id', conversationId)
+      .single();
+
+    const kapsoId = convRow?.kapso_id;
+    if (!kapsoId) {
+      // Conversation not yet in Supabase at all — return empty
+      return NextResponse.json({ data: [], paging: { cursors: {} } });
+    }
+
+    const { messages: seededRows, paging } = await seedFromKapso(
+      conversationId, kapsoId, limit, after
+    );
+
+    // Fetch sender attribution for outbound messages from the seed
+    const outboundIds = seededRows.filter(r => r.direction === 'outbound').map(r => r.id);
     let senderMap: Record<string, string> = {};
     if (outboundIds.length > 0) {
       const { data: senderRows } = await supabase
@@ -193,21 +252,13 @@ export async function GET(
         .select('whatsapp_message_id, sent_by')
         .in('whatsapp_message_id', outboundIds);
       if (senderRows) {
-        senderMap = Object.fromEntries(
-          senderRows.map(r => [r.whatsapp_message_id, r.sent_by])
-        );
+        senderMap = Object.fromEntries(senderRows.map(r => [r.whatsapp_message_id, r.sent_by]));
       }
     }
 
-    const enrichedData = transformedData.map(m => ({
-      ...m,
-      sentBy: senderMap[m.id] ?? null,
-    }));
+    const messages = seededRows.map(r => supabaseRowToMessage(r, senderMap));
 
-    return NextResponse.json({
-      data: enrichedData,
-      paging: response.paging
-    });
+    return NextResponse.json({ data: messages, paging });
   } catch (error) {
     console.error('Error fetching messages:', error);
     return NextResponse.json(

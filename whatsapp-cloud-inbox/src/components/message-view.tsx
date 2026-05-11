@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { format, isValid, isToday, isYesterday, differenceInHours } from 'date-fns';
 import { RefreshCw, Paperclip, Send, X, AlertCircle, MessageSquare, XCircle, ListTree, ArrowLeft, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MediaMessage } from '@/components/media-message';
 import { TemplateSelectorDialog } from '@/components/template-selector-dialog';
 import { InteractiveMessageDialog } from '@/components/interactive-message-dialog';
-import { useAutoPolling } from '@/hooks/use-auto-polling';
+import { supabaseBrowser } from '@/lib/supabase-browser';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -150,6 +150,24 @@ const CUSTODY_MESSAGES: Record<string, string> = {
   open: 'Chat is open.',
 };
 
+function cleanMediaContent(content: string | undefined): string {
+  if (!content) return '';
+  if (content === '[Image attached]' || content === '[Document attached]' || content === '[Video attached]') return '';
+  
+  // Remove the long generated URL format but keep anything else (like "Transcript: ...")
+  let cleaned = content.replace(/^(Document|Image|Video|Audio) attached \([^\)]+\) \[Size: [^\]]+\] URL: https?:\/\/[^\s]+/i, '');
+
+  return cleaned.trim();
+}
+
+// Global cache to enable instant UI switching between conversations
+type CacheEntry = {
+  messages: Message[];
+  nextCursor: string | null;
+  hasMore: boolean;
+};
+const messageCache: Record<string, CacheEntry> = {};
+
 export function MessageView({ conversationId, phoneNumber, contactName, onTemplateSent, onBack, isVisible = false, readonly = false, custodyLabel, preloadMessage, sender, targetPhone, phoneNotFound = false }: Props) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
@@ -162,6 +180,10 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
   const [showTemplateDialog, setShowTemplateDialog] = useState(false);
   const [showInteractiveDialog, setShowInteractiveDialog] = useState(false);
   const [isNearBottom, setIsNearBottom] = useState(true);
+  const [loadingOlder, setLoadingOlder] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const nextCursorRef = useRef<string | null>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -171,12 +193,36 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const fetchMessages = useCallback(async () => {
+  const handleLoadOlder = async () => {
+    if (!hasMore || loadingOlder) return;
+    
+    const viewport = messagesContainerRef.current?.querySelector('[data-radix-scroll-area-viewport]');
+    const prevScrollHeight = viewport?.scrollHeight || 0;
+
+    setLoadingOlder(true);
+    await fetchMessages(true);
+
+    setTimeout(() => {
+      if (viewport) {
+        viewport.scrollTop = viewport.scrollHeight - prevScrollHeight;
+      }
+    }, 0);
+  };
+
+  const fetchMessages = useCallback(async (loadOlder = false) => {
     if (!conversationId) return;
 
     try {
-      const response = await fetch(`/api/messages/${conversationId}`);
+      const url = new URL(`/api/messages/${conversationId}`, window.location.origin);
+      url.searchParams.set('limit', '25');
+      if (loadOlder && nextCursorRef.current) {
+        url.searchParams.set('after', nextCursorRef.current);
+      }
+
+      const response = await fetch(url.toString());
       const data = await response.json();
+      
+      const returnedCount = data.data?.length || 0;
 
       // Separate reactions from regular messages
       const reactions = (data.data || []).filter((msg: Message) => msg.messageType === 'reaction');
@@ -200,20 +246,61 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
         return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
       });
 
-      setMessages(sortedMessages);
-      previousMessageCountRef.current = sortedMessages.length;
+      const newNextCursor = data.paging?.cursors?.after || null;
+      // If we got fewer than the requested limit, we've reached the very beginning of the chat
+      const newHasMore = !!newNextCursor && returnedCount === 25;
+      
+      let mergedMessages = sortedMessages;
+
+      setMessages((prev) => {
+        const newMap = new Map(prev.map((m: Message) => [m.id, m]));
+        sortedMessages.forEach((m: Message) => newMap.set(m.id, m));
+        mergedMessages = Array.from(newMap.values()).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+        
+        previousMessageCountRef.current = mergedMessages.length;
+        return mergedMessages;
+      });
+      
+      if (loadOlder) {
+        nextCursorRef.current = newNextCursor;
+        setHasMore(newHasMore);
+      } else if (!nextCursorRef.current && newNextCursor) {
+        nextCursorRef.current = newNextCursor;
+        setHasMore(true);
+      }
+
+      // Update cache
+      messageCache[conversationId] = {
+        messages: mergedMessages,
+        nextCursor: nextCursorRef.current,
+        hasMore: loadOlder ? newHasMore : !!nextCursorRef.current
+      };
+
     } catch (error) {
       console.error('Error fetching messages:', error);
     } finally {
       setLoading(false);
       setRefreshing(false);
+      setLoadingOlder(false);
     }
   }, [conversationId]);
 
   useEffect(() => {
     if (conversationId) {
-      setLoading(true);
-      fetchMessages();
+      const cache = messageCache[conversationId];
+      if (cache) {
+        setMessages(cache.messages);
+        nextCursorRef.current = cache.nextCursor;
+        setHasMore(cache.hasMore);
+        setLoading(false);
+      } else {
+        setMessages([]);
+        nextCursorRef.current = null;
+        setHasMore(true);
+        setLoading(true);
+      }
+      // Always fetch fresh data in background
+      fetchMessages(false);
     }
   }, [conversationId, fetchMessages]);
 
@@ -230,6 +317,27 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
 
   // Track if user is near bottom of scroll using onScrollCapture on the ScrollArea
 
+  // Find the latest inbound message ID to send read receipts
+  const lastInboundMessageId = useMemo(() => {
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i].direction === 'inbound') {
+        return messages[i].id;
+      }
+    }
+    return null;
+  }, [messages]);
+
+  // Send read receipt when a new inbound message is viewed
+  useEffect(() => {
+    if (lastInboundMessageId) {
+      fetch('/api/messages/read', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messageId: lastInboundMessageId })
+      }).catch(console.error);
+    }
+  }, [lastInboundMessageId]);
+
   // Pre-fill message input from URL param (panel mode)
   useEffect(() => {
     if (preloadMessage && !readonly) {
@@ -239,15 +347,88 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
 
   const handleRefresh = () => {
     setRefreshing(true);
-    fetchMessages();
+    fetchMessages(false);
   };
 
-  // Auto-polling for messages (every 5 seconds)
-  useAutoPolling({
-    interval: 5000,
-    enabled: !!conversationId,
-    onPoll: fetchMessages
-  });
+  // ── Supabase Realtime: push new messages without polling ────────────────
+  useEffect(() => {
+    if (!conversationId) return;
+
+    const channel = supabaseBrowser
+      .channel(`wa_messages:${conversationId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'wa_messages',
+          filter: `conversation_id=eq.${conversationId}`,
+        },
+        (payload) => {
+          const row = payload.new as any;
+          if (!row?.id) return;
+
+          // Merge new message into state without a full re-fetch
+          setMessages((prev) => {
+            if (prev.some((m) => m.id === row.id)) return prev;
+            const newMsg: Message = {
+              id: row.id,
+              direction: row.direction,
+              content: row.content ?? '',
+              createdAt: row.created_at,
+              status: row.status ?? undefined,
+              phoneNumber: row.phone_number ?? '',
+              hasMedia: row.has_media ?? false,
+              mediaData: row.media_url
+                ? { url: row.media_url, contentType: row.media_mime_type, filename: row.media_filename }
+                : undefined,
+              reactionEmoji: row.reaction_emoji ?? null,
+              reactedToMessageId: row.reacted_to_message_id ?? null,
+              filename: row.media_filename ?? null,
+              mimeType: row.media_mime_type ?? null,
+              messageType: row.message_type ?? 'text',
+              caption: row.caption ?? null,
+              sentBy: row.sent_by ?? null,
+              metadata: row.media_id ? { mediaId: row.media_id } : {},
+            };
+            const updated = [...prev, newMsg].sort(
+              (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+            // Update cache
+            if (messageCache[conversationId]) {
+              messageCache[conversationId].messages = updated;
+            }
+            return updated;
+          });
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'wa_messages',
+          filter: `conversation_id=eq.${conversationId}`,
+        },
+        (payload) => {
+          const row = payload.new as any;
+          if (!row?.id) return;
+          // Update status (e.g. sent → delivered → read)
+          setMessages((prev) =>
+            prev.map((m: Message) =>
+              m.id === row.id
+                ? { ...m, status: row.status ?? m.status }
+                : m
+            )
+          );
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabaseBrowser.removeChannel(channel);
+    };
+  }, [conversationId]);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -482,10 +663,33 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
             const { scrollTop, scrollHeight, clientHeight } = target;
             const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
             setIsNearBottom(distanceFromBottom < 150);
+            
+            // Auto-load older messages when user scrolls near the top
+            if (scrollTop < 100 && hasMore && !loadingOlder) {
+              handleLoadOlder();
+            }
           }
         }}
       >
         <div className="max-w-[900px] mx-auto">
+        
+        {hasMore && !loading && messages.length > 0 && (
+          <div className="py-2 flex justify-center">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => handleLoadOlder()}
+              disabled={loadingOlder}
+              className="bg-white/80 text-xs shadow-sm hover:bg-white rounded-full h-8 px-4"
+            >
+              {loadingOlder ? (
+                <RefreshCw className="h-3 w-3 animate-spin mr-2" />
+              ) : null}
+              {loadingOlder ? 'Loading older messages...' : 'Load older messages'}
+            </Button>
+          </div>
+        )}
+
         {messages.length === 0 ? (
           <p className="text-center text-muted-foreground">No messages yet</p>
         ) : (
@@ -571,9 +775,9 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
                       </p>
                     )}
 
-                    {message.content && message.content !== '[Image attached]' && (
+                    {cleanMediaContent(message.content) && (
                       <p className="text-sm break-all whitespace-pre-wrap">
-                        {message.content}
+                        {cleanMediaContent(message.content)}
                       </p>
                     )}
 
