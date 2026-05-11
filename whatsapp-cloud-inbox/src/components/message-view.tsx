@@ -394,7 +394,7 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
               id: row.id,
               direction: row.direction as 'inbound' | 'outbound',
               content: row.content ?? '',
-              createdAt: row.created_at,
+              createdAt: row.created_at ?? '',
               status: row.status ?? undefined,
               phoneNumber: row.phone_number ?? '',
               hasMedia: row.has_media ?? false,
