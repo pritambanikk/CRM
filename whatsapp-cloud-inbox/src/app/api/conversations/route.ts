@@ -64,7 +64,9 @@ export async function GET(request: Request) {
 
     // ── Sync to Supabase (upsert by phone_number) and collect UUIDs ───────
     const upsertPayloads = transformed.map(c => ({
-      kapso_id: c._kapsoId,
+      // Only include kapso_id when Kapso returns a real value — don't overwrite
+      // an existing kapso_id with null if Kapso returns an empty id.
+      ...(c._kapsoId ? { kapso_id: c._kapsoId } : {}),
       phone_number: c._phoneNumber,
       phone_number_id: c.phoneNumberId,
       contact_name: c.contactName ?? null,

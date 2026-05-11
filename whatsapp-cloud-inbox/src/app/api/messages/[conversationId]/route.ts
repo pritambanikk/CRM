@@ -3,7 +3,8 @@ import {
   buildKapsoFields,
   type KapsoMessageExtensions,
   type MediaData,
-  type MetaMessage
+  type MetaMessage,
+  type ConversationRecord
 } from '@kapso/whatsapp-cloud-api';
 import { whatsappClient, PHONE_NUMBER_ID } from '@/lib/whatsapp-client';
 import { supabase } from '@/lib/supabase';
@@ -250,13 +251,39 @@ export async function GET(
     // ── 3. Supabase is empty — seed from Kapso (first-open for this chat) ──
     const { data: convRow } = await supabase
       .from('wa_conversations')
-      .select('kapso_id')
+      .select('kapso_id, phone_number')
       .eq('id', conversationId)
       .single();
 
-    const kapsoId = convRow?.kapso_id;
+    let kapsoId: string | null = convRow?.kapso_id ?? null;
+
+    // kapso_id may be null if the conversation was created by the webhook
+    // (which doesn't know the Kapso conversation ID). Try to find it from
+    // the Kapso conversations list using the stored phone number.
+    if (!kapsoId && convRow?.phone_number) {
+      try {
+        const convList = await whatsappClient.conversations.list({
+          phoneNumberId: PHONE_NUMBER_ID,
+          limit: 100,
+        });
+        const phone = convRow.phone_number;
+        const match = (convList.data as ConversationRecord[]).find(
+          (c) => c.phoneNumber === phone || c.phoneNumber === `+${phone}` || `+${c.phoneNumber}` === phone
+        );
+        if (match?.id) {
+          kapsoId = match.id;
+          // Persist so future loads skip this lookup
+          await supabase
+            .from('wa_conversations')
+            .update({ kapso_id: kapsoId })
+            .eq('id', conversationId);
+        }
+      } catch {
+        // Kapso lookup failed — will return empty below
+      }
+    }
+
     if (!kapsoId) {
-      // Conversation not yet in Supabase at all — return empty
       return NextResponse.json({ data: [], paging: { cursors: {} } });
     }
 
