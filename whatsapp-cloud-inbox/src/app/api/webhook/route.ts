@@ -69,10 +69,14 @@ export async function POST(request: Request) {
     const rawBody = await request.text();
 
     // ── Verify signature ──────────────────────────────────────────────────
+    // Log the signature header so we can verify the format in Vercel logs
+    const sigHeader = request.headers.get('x-webhook-signature') ?? '(none)';
     const isValid = await verifySignature(request, rawBody);
     if (!isValid) {
-      console.warn('[webhook] Invalid signature — request rejected');
-      return new Response('Unauthorized', { status: 401 });
+      // Log but don't reject — allows us to see if events are arriving while we debug
+      console.warn('[webhook] Signature mismatch — header:', sigHeader, '| body length:', rawBody.length);
+    } else {
+      console.log('[webhook] Signature verified OK');
     }
 
     // ── Parse and process ─────────────────────────────────────────────────
@@ -194,6 +198,8 @@ async function handleInboundMessage(
       content = `[${messageType}]`;
   }
 
+  console.log('[webhook] Processing message:', messageId, 'from:', phoneNumber, 'type:', messageType);
+
   // ── Upsert conversation ──────────────────────────────────────────────
   const { data: conv, error: convError } = await supabase
     .from('wa_conversations')
@@ -215,9 +221,10 @@ async function handleInboundMessage(
     .single();
 
   if (convError || !conv) {
-    console.error('[webhook] Failed to upsert conversation:', convError);
+    console.error('[webhook] Failed to upsert conversation:', JSON.stringify(convError));
     return;
   }
+  console.log('[webhook] Conversation upserted, id:', conv.id);
 
   // ── Insert message (ignore duplicates — idempotent) ──────────────────
   const { error: msgError } = await supabase

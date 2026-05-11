@@ -77,10 +77,17 @@ export async function GET(request: Request) {
       updated_at: new Date().toISOString(),
     }));
 
-    const { data: supabaseRows } = await supabase
+    // Filter out any conversations with empty phone numbers before upserting
+    const validPayloads = upsertPayloads.filter(p => p.phone_number && p.phone_number.trim() !== '');
+
+    const { data: supabaseRows, error: upsertError } = await supabase
       .from('wa_conversations')
-      .upsert(upsertPayloads, { onConflict: 'phone_number', ignoreDuplicates: false })
+      .upsert(validPayloads, { onConflict: 'phone_number', ignoreDuplicates: false })
       .select('id, phone_number');
+
+    if (upsertError) {
+      console.error('[conversations] Supabase upsert error:', JSON.stringify(upsertError));
+    }
 
     // Build phone → UUID map
     const phoneToUUID: Record<string, string> = {};

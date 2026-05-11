@@ -70,7 +70,7 @@ export async function POST(request: Request) {
       // Find or create the conversation row in Supabase by phone number
       const saveToSupabase = async () => {
         // Upsert conversation
-        const { data: conv } = await supabase
+        const { data: conv, error: convError } = await supabase
           .from('wa_conversations')
           .upsert(
             {
@@ -88,10 +88,17 @@ export async function POST(request: Request) {
           .select('id')
           .single();
 
-        if (!conv?.id) return;
+        if (convError) {
+          console.error('[send] wa_conversations upsert error:', JSON.stringify(convError));
+          return;
+        }
+        if (!conv?.id) {
+          console.error('[send] wa_conversations upsert returned no id for phone:', to);
+          return;
+        }
 
         // Insert outbound message
-        await supabase.from('wa_messages').upsert(
+        const { error: msgError } = await supabase.from('wa_messages').upsert(
           {
             id: messageId,
             conversation_id: conv.id,
@@ -109,6 +116,9 @@ export async function POST(request: Request) {
           },
           { onConflict: 'id', ignoreDuplicates: true }
         );
+        if (msgError) {
+          console.error('[send] wa_messages upsert error:', JSON.stringify(msgError));
+        }
 
         // Also write to legacy message_senders table for backward compat
         if (sentBy) {
