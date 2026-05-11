@@ -399,7 +399,7 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
               phoneNumber: row.phone_number ?? '',
               hasMedia: row.has_media ?? false,
               mediaData: row.media_url
-                ? { url: row.media_url, contentType: row.media_mime_type, filename: row.media_filename }
+                ? { url: row.media_url, contentType: row.media_mime_type ?? undefined, filename: row.media_filename ?? undefined }
                 : undefined,
               reactionEmoji: row.reaction_emoji ?? null,
               reactedToMessageId: row.reacted_to_message_id ?? null,
