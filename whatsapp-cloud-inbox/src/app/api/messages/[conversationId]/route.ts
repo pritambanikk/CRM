@@ -53,8 +53,29 @@ function extractMedia(m: MediaData | undefined) {
   };
 }
 
+// ── Supabase row type (matches wa_messages schema) ──────────────────────────
+type WaMessageRow = {
+  id: string;
+  conversation_id?: string;
+  direction?: string;
+  content?: string | null;
+  created_at?: string;
+  status?: string | null;
+  phone_number?: string | null;
+  has_media?: boolean;
+  media_url?: string | null;
+  media_mime_type?: string | null;
+  media_filename?: string | null;
+  media_id?: string | null;
+  reaction_emoji?: string | null;
+  reacted_to_message_id?: string | null;
+  message_type?: string | null;
+  caption?: string | null;
+  sent_by?: string | null;
+};
+
 // ── Map a Supabase wa_messages row → frontend message shape ─────────────────
-function supabaseRowToMessage(row: any, sentByMap: Record<string, string> = {}) {
+function supabaseRowToMessage(row: WaMessageRow, sentByMap: Record<string, string> = {}) {
   return {
     id: row.id,
     direction: row.direction,
@@ -83,7 +104,7 @@ async function seedFromKapso(
   kapsoId: string,
   limit: number,
   after?: string
-): Promise<{ messages: any[]; paging: any }> {
+): Promise<{ messages: WaMessageRow[]; paging: unknown }> {
   const response = await whatsappClient.messages.listByConversation({
     phoneNumberId: PHONE_NUMBER_ID,
     conversationId: kapsoId,
@@ -131,7 +152,7 @@ async function seedFromKapso(
       media_filename: document?.filename ?? typeData?.filename ?? kapsoMedia.filename ?? null,
       media_mime_type: typeData?.mimeType ?? kapsoMedia.contentType ?? null,
       media_size: kapsoMedia.byteSize ?? null,
-      phone_number: typeof kx?.phoneNumber === 'string' ? kx.phoneNumber : (msg as any).from ?? null,
+      phone_number: typeof kx?.phoneNumber === 'string' ? kx.phoneNumber : (msg as Record<string, unknown>).from as string | null ?? null,
       status: typeof kx?.status === 'string' ? kx.status : null,
       reaction_emoji: reactionEmoji ?? null,
       reacted_to_message_id: typeof reaction?.messageId === 'string' ? reaction.messageId

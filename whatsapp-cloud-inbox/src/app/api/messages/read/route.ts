@@ -15,10 +15,11 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true, result });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error marking message as read:', error);
+    const message = error instanceof Error ? error.message : 'Failed to mark message as read';
     return NextResponse.json(
-      { error: error.message || 'Failed to mark message as read' },
+      { error: message },
       { status: 500 }
     );
   }

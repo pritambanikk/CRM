@@ -110,10 +110,11 @@ export async function GET(request: Request) {
     }));
 
     return NextResponse.json({ data: finalData, paging: response.paging });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error fetching conversations:', error);
+    const e = error instanceof Error ? error : new Error(String(error));
     return NextResponse.json(
-      { error: 'Failed to fetch conversations', details: error.message, stack: error.stack },
+      { error: 'Failed to fetch conversations', details: e.message, stack: e.stack },
       { status: 500 }
     );
   }

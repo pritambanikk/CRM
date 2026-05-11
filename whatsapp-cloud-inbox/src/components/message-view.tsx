@@ -15,6 +15,25 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import type { MediaData } from '@kapso/whatsapp-cloud-api';
 
+type WaMessageRow = {
+  id: string;
+  direction?: string;
+  content?: string | null;
+  created_at?: string;
+  status?: string | null;
+  phone_number?: string | null;
+  has_media?: boolean;
+  media_url?: string | null;
+  media_mime_type?: string | null;
+  media_filename?: string | null;
+  media_id?: string | null;
+  reaction_emoji?: string | null;
+  reacted_to_message_id?: string | null;
+  message_type?: string | null;
+  caption?: string | null;
+  sent_by?: string | null;
+};
+
 type Message = {
   id: string;
   direction: 'inbound' | 'outbound';
@@ -155,7 +174,7 @@ function cleanMediaContent(content: string | undefined): string {
   if (content === '[Image attached]' || content === '[Document attached]' || content === '[Video attached]') return '';
   
   // Remove the long generated URL format but keep anything else (like "Transcript: ...")
-  let cleaned = content.replace(/^(Document|Image|Video|Audio) attached \([^\)]+\) \[Size: [^\]]+\] URL: https?:\/\/[^\s]+/i, '');
+  const cleaned = content.replace(/^(Document|Image|Video|Audio) attached \([^\)]+\) \[Size: [^\]]+\] URL: https?:\/\/[^\s]+/i, '');
 
   return cleaned.trim();
 }
@@ -365,7 +384,7 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
           filter: `conversation_id=eq.${conversationId}`,
         },
         (payload) => {
-          const row = payload.new as any;
+          const row = payload.new as WaMessageRow;
           if (!row?.id) return;
 
           // Merge new message into state without a full re-fetch
@@ -373,7 +392,7 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
             if (prev.some((m) => m.id === row.id)) return prev;
             const newMsg: Message = {
               id: row.id,
-              direction: row.direction,
+              direction: row.direction as 'inbound' | 'outbound',
               content: row.content ?? '',
               createdAt: row.created_at,
               status: row.status ?? undefined,
@@ -411,7 +430,7 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
           filter: `conversation_id=eq.${conversationId}`,
         },
         (payload) => {
-          const row = payload.new as any;
+          const row = payload.new as WaMessageRow;
           if (!row?.id) return;
           // Update status (e.g. sent → delivered → read)
           setMessages((prev) =>

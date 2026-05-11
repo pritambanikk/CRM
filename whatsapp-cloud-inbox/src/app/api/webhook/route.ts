@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     }
 
     // ── Parse and process ─────────────────────────────────────────────────
-    const body = JSON.parse(rawBody);
+    const body = JSON.parse(rawBody) as WebhookPayload;
 
     // Acknowledge immediately — Meta requires a 200 within 5s
     await processWebhookPayload(body);
@@ -93,8 +93,32 @@ export async function POST(request: Request) {
   }
 }
 
+// ── Webhook payload types ────────────────────────────────────────────────────
+type WebhookContact = { wa_id?: string; profile?: { name?: string } };
+type WebhookMessage = {
+  from?: string; id?: string; timestamp?: string; type?: string;
+  text?: { body?: string };
+  image?: { id?: string; mime_type?: string; caption?: string };
+  video?: { id?: string; mime_type?: string; caption?: string };
+  audio?: { id?: string; mime_type?: string };
+  document?: { id?: string; mime_type?: string; filename?: string; caption?: string };
+  sticker?: { id?: string; mime_type?: string };
+  reaction?: { emoji?: string; message_id?: string };
+  location?: { name?: string; latitude?: number; longitude?: number };
+};
+type WebhookStatus = { id?: string; status?: string };
+type WebhookValue = {
+  metadata?: { phone_number_id?: string };
+  contacts?: WebhookContact[];
+  messages?: WebhookMessage[];
+  statuses?: WebhookStatus[];
+};
+type WebhookChange = { field?: string; value?: WebhookValue };
+type WebhookEntry = { changes?: WebhookChange[] };
+type WebhookPayload = { object?: string; entry?: WebhookEntry[] };
+
 // ── Core processor ───────────────────────────────────────────────────────────
-async function processWebhookPayload(payload: any) {
+async function processWebhookPayload(payload: WebhookPayload) {
   if (payload.object !== 'whatsapp_business_account') return;
 
   for (const entry of payload.entry ?? []) {
@@ -127,7 +151,7 @@ async function processWebhookPayload(payload: any) {
 
 // ── Inbound message handler ──────────────────────────────────────────────────
 async function handleInboundMessage(
-  msg: any,
+  msg: WebhookMessage,
   phoneNumberId: string,
   contactMap: Record<string, string>
 ) {
@@ -264,7 +288,7 @@ async function handleInboundMessage(
 }
 
 // ── Status update handler ────────────────────────────────────────────────────
-async function handleStatusUpdate(status: any) {
+async function handleStatusUpdate(status: WebhookStatus) {
   const messageId: string = status.id ?? '';
   const newStatus: string = status.status ?? '';
 
