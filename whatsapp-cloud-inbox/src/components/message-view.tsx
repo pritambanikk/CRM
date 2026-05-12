@@ -202,6 +202,9 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const nextCursorRef = useRef<string | null>(null);
+  // Track the currently-active conversation ID so stale in-flight fetches
+  // from a previous conversation don't land on the wrong chat.
+  const activeConversationIdRef = useRef<string | undefined>(conversationId);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -230,6 +233,10 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
 
   const fetchMessages = useCallback(async (loadOlder = false) => {
     if (!conversationId) return;
+    // Capture the conversation this fetch is for.  If the user switches away
+    // before the response arrives we'll bail out and discard the stale data.
+    const fetchedForId = conversationId;
+    let stale = false;
 
     try {
       const url = new URL(`/api/messages/${conversationId}`, window.location.origin);
@@ -240,6 +247,10 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
 
       const response = await fetch(url.toString());
       const data = await response.json();
+
+      // Stale-fetch guard: if the user has already switched to a different
+      // conversation, throw away this result rather than corrupting state.
+      if (activeConversationIdRef.current !== fetchedForId) { stale = true; return; }
       
       const returnedCount = data.data?.length || 0;
 
@@ -298,14 +309,29 @@ export function MessageView({ conversationId, phoneNumber, contactName, onTempla
     } catch (error) {
       console.error('Error fetching messages:', error);
     } finally {
-      setLoading(false);
-      setRefreshing(false);
-      setLoadingOlder(false);
+      // Only touch loading state if this fetch is still for the active conversation.
+      if (!stale) {
+        setLoading(false);
+        setRefreshing(false);
+        setLoadingOlder(false);
+      }
     }
   }, [conversationId]);
 
   useEffect(() => {
+    // Keep the ref in sync so the stale-fetch guard in fetchMessages works.
+    activeConversationIdRef.current = conversationId;
+
     if (conversationId) {
+      // Reset per-conversation UI state so conversation A's draft / file
+      // attachment / send-button state never bleeds into conversation B.
+      setMessageInput('');
+      setSelectedFile(null);
+      setFilePreview(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      setCanSendRegularMessage(true);
+      setIsNearBottom(true);
+
       const cache = messageCache[conversationId];
       if (cache) {
         setMessages(cache.messages);
