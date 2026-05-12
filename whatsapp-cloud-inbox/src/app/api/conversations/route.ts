@@ -91,11 +91,31 @@ export async function GET(request: Request) {
       console.error('[conversations] Supabase upsert error:', JSON.stringify(upsertError));
     }
 
-    // Build phone → UUID map
+    // Build phone → UUID map from upsert results
     const phoneToUUID: Record<string, string> = {};
     for (const row of supabaseRows ?? []) {
-      phoneToUUID[row.phone_number] = row.id;
+      if (row.phone_number && row.id) phoneToUUID[row.phone_number] = row.id;
     }
+
+    // ── Fallback: for any conversation the upsert didn't return a UUID for,
+    // query Supabase directly by phone number. This handles edge cases where
+    // the upsert result is missing rows (e.g. RLS quirks, race conditions).
+    const missingPhones = transformed
+      .map(c => c._phoneNumber)
+      .filter(p => p && !phoneToUUID[p]);
+
+    if (missingPhones.length > 0) {
+      const { data: fallbackRows } = await supabase
+        .from('wa_conversations')
+        .select('id, phone_number')
+        .in('phone_number', missingPhones);
+      for (const row of fallbackRows ?? []) {
+        if (row.phone_number && row.id) phoneToUUID[row.phone_number] = row.id;
+      }
+    }
+
+    // Log so Vercel function logs show us exactly what IDs are resolved
+    console.log('[conversations] phoneToUUID:', JSON.stringify(phoneToUUID));
 
     // ── Return with Supabase UUID as the conversation `id` ────────────────
     const finalData = transformed.map(c => ({

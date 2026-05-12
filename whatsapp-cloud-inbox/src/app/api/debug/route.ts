@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { whatsappClient, PHONE_NUMBER_ID } from '@/lib/whatsapp-client';
 
 /**
  * GET /api/debug
- * Tests Supabase connectivity and write access from the running Vercel environment.
- * Remove or restrict this endpoint once the issue is diagnosed.
+ * Full pipeline diagnostic — shows exactly what each layer returns.
  */
 export async function GET() {
   const results: Record<string, unknown> = {
@@ -17,57 +17,85 @@ export async function GET() {
     }
   };
 
-  // Test 1: SELECT from wa_conversations
-  const { data: selectData, error: selectError } = await supabase
+  // ── 1. What's in wa_conversations? ───────────────────────────────────────
+  const { data: convRows, error: convErr } = await supabase
     .from('wa_conversations')
-    .select('id')
-    .limit(1);
-  results.select_wa_conversations = selectError
-    ? { error: selectError.message, code: selectError.code }
-    : { ok: true, rows: selectData?.length ?? 0 };
+    .select('id, kapso_id, phone_number, last_message_content, last_message_direction')
+    .order('created_at', { ascending: false })
+    .limit(10);
+  results.wa_conversations = convErr
+    ? { error: convErr.message }
+    : { count: convRows?.length ?? 0, rows: convRows };
 
-  // Test 2: INSERT into wa_conversations
-  const testPhone = `debug_${Date.now()}`;
-  const { data: insertData, error: insertError } = await supabase
-    .from('wa_conversations')
-    .insert({ phone_number: testPhone, status: 'active' })
-    .select('id')
-    .single();
-  results.insert_wa_conversations = insertError
-    ? { error: insertError.message, code: insertError.code, hint: insertError.hint }
-    : { ok: true, id: insertData?.id };
+  // ── 2. What's in wa_messages? ────────────────────────────────────────────
+  const { data: msgRows, error: msgErr } = await supabase
+    .from('wa_messages')
+    .select('id, conversation_id, direction, content, message_type, created_at')
+    .order('created_at', { ascending: false })
+    .limit(10);
+  results.wa_messages = msgErr
+    ? { error: msgErr.message }
+    : { count: msgRows?.length ?? 0, rows: msgRows };
 
-  // Test 3: UPSERT into wa_conversations (the actual path used by conversations API)
-  const { data: upsertData, error: upsertError } = await supabase
-    .from('wa_conversations')
-    .upsert(
-      { phone_number: testPhone, contact_name: 'debug_upsert', status: 'active', updated_at: new Date().toISOString() },
-      { onConflict: 'phone_number', ignoreDuplicates: false }
-    )
-    .select('id, phone_number');
-  results.upsert_wa_conversations = upsertError
-    ? { error: upsertError.message, code: upsertError.code, hint: upsertError.hint }
-    : { ok: true, rows: upsertData?.length };
+  // ── 3. What does Kapso conversations list return? ────────────────────────
+  try {
+    const kapsoResp = await whatsappClient.conversations.list({
+      phoneNumberId: PHONE_NUMBER_ID,
+      limit: 10,
+    });
+    results.kapso_conversations = {
+      count: kapsoResp.data?.length ?? 0,
+      conversations: (kapsoResp.data ?? []).map((c: Record<string, unknown>) => ({
+        id: c.id,
+        phoneNumber: c.phoneNumber,
+        status: c.status,
+      })),
+    };
+  } catch (e) {
+    results.kapso_conversations = { error: String(e) };
+  }
 
-  // Test 4: INSERT into wa_messages (requires a valid conversation_id)
-  if (insertData?.id) {
-    const { error: msgError } = await supabase
-      .from('wa_messages')
-      .insert({
-        id: `debug_msg_${Date.now()}`,
-        conversation_id: insertData.id,
-        direction: 'inbound',
-        content: 'debug test',
-        message_type: 'text',
-        has_media: false,
-        created_at: new Date().toISOString(),
-      });
-    results.insert_wa_messages = msgError
-      ? { error: msgError.message, code: msgError.code, hint: msgError.hint }
-      : { ok: true };
+  // ── 4. Upsert simulation — does phone_number → UUID lookup work? ─────────
+  try {
+    const kapsoResp2 = await whatsappClient.conversations.list({
+      phoneNumberId: PHONE_NUMBER_ID,
+      limit: 10,
+    });
+    const phones = (kapsoResp2.data ?? [])
+      .map((c: Record<string, unknown>) => c.phoneNumber as string)
+      .filter(Boolean);
 
-    // Cleanup
-    await supabase.from('wa_conversations').delete().eq('phone_number', testPhone);
+    const { data: upsertCheck, error: upsertCheckErr } = await supabase
+      .from('wa_conversations')
+      .select('id, phone_number')
+      .in('phone_number', phones);
+
+    results.phone_to_uuid_lookup = upsertCheckErr
+      ? { error: upsertCheckErr.message }
+      : {
+          phones_from_kapso: phones,
+          matched_in_supabase: upsertCheck?.map(r => ({
+            phone: r.phone_number, uuid: r.id,
+          })),
+        };
+  } catch (e) {
+    results.phone_to_uuid_lookup = { error: String(e) };
+  }
+
+  // ── 5. Messages fetch for each known conversation ────────────────────────
+  const convIds = (convRows ?? []).map((r: { id: string }) => r.id);
+  if (convIds.length > 0) {
+    const checks: Record<string, unknown> = {};
+    for (const cid of convIds.slice(0, 3)) {
+      const { data, error } = await supabase
+        .from('wa_messages')
+        .select('id, direction, content, created_at')
+        .eq('conversation_id', cid)
+        .order('created_at', { ascending: false })
+        .limit(5);
+      checks[cid] = error ? { error: error.message } : { count: data?.length ?? 0, messages: data };
+    }
+    results.messages_per_conversation = checks;
   }
 
   return NextResponse.json(results, { status: 200 });
