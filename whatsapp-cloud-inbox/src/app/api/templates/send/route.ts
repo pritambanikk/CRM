@@ -182,10 +182,13 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(result, { headers: CORS_HEADERS });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error sending template:', error);
     return NextResponse.json(
-      { error: 'Failed to send template message' },
+      { 
+        error: 'Failed to send template message',
+        details: error?.response?.data || error?.message || String(error)
+      },
       { status: 500, headers: CORS_HEADERS }
     );
   }

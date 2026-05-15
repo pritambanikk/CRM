@@ -175,7 +175,7 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
         body: JSON.stringify({
           to: '91' + cleanNumber.replace(/^91/, ''), // Ensure exactly one 91 prefix
           templateName: selectedTemplate.templateName,
-          languageCode: 'en', // default language
+          languageCode: 'en_US', // default language
           parameters: vars,
           parameterInfo: {
             parameters: vars.map((_, i) => ({
@@ -187,7 +187,16 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send template. Meta API might have rejected it.');
+        let errMessage = 'Failed to send template. Meta API might have rejected it.';
+        try {
+          const errData = await response.json();
+          if (errData?.details) {
+            errMessage = typeof errData.details === 'object' ? JSON.stringify(errData.details) : errData.details;
+          } else if (errData?.error) {
+            errMessage = typeof errData.error === 'object' ? JSON.stringify(errData.error) : errData.error;
+          }
+        } catch (_) {}
+        throw new Error(errMessage);
       }
 
       toast.success(`Template "${selectedTemplate.label}" sent successfully!`);
