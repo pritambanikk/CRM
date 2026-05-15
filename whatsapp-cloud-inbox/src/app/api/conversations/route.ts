@@ -117,21 +117,52 @@ export async function GET(request: Request) {
     // Log so Vercel function logs show us exactly what IDs are resolved
     console.log('[conversations] phoneToUUID:', JSON.stringify(phoneToUUID));
 
-    // ── Return with Supabase UUID as the conversation `id` ────────────────
-    const finalData = transformed.map(c => ({
-      id: phoneToUUID[c._phoneNumber] ?? c._kapsoId,
-      kapsoId: c._kapsoId,
-      phoneNumber: c.phoneNumber,
-      status: c.status,
-      lastActiveAt: c.lastActiveAt,
-      phoneNumberId: c.phoneNumberId,
-      metadata: c.metadata,
-      contactName: c.contactName,
-      messagesCount: c.messagesCount,
-      lastMessage: c.lastMessage,
+    // ── Return ALL latest conversations from Supabase ───────────────────
+    // This ensures we include conversations created locally (e.g. sent templates)
+    // that might not yet be indexed by Kapso's API.
+    const { data: allConversations, error: fetchError } = await supabase
+      .from('wa_conversations')
+      .select('*')
+      .order('last_active_at', { ascending: false })
+      .limit(limit);
+
+    if (fetchError || !allConversations) {
+      console.error('[conversations] Supabase fetch error:', fetchError);
+      
+      // Fallback to Kapso transformed if Supabase fails
+      const finalData = transformed.map(c => ({
+        id: phoneToUUID[c._phoneNumber] ?? c._kapsoId,
+        kapsoId: c._kapsoId,
+        phoneNumber: c.phoneNumber,
+        status: c.status,
+        lastActiveAt: c.lastActiveAt,
+        phoneNumberId: c.phoneNumberId,
+        metadata: c.metadata,
+        contactName: c.contactName,
+        messagesCount: c.messagesCount,
+        lastMessage: c.lastMessage,
+      }));
+      return NextResponse.json({ data: finalData, paging: response.paging });
+    }
+
+    const finalSupabaseData = allConversations.map(row => ({
+      id: row.id,
+      kapsoId: row.kapso_id,
+      phoneNumber: row.phone_number,
+      status: row.status,
+      lastActiveAt: row.last_active_at,
+      phoneNumberId: row.phone_number_id,
+      metadata: {},
+      contactName: row.contact_name,
+      messagesCount: row.messages_count,
+      lastMessage: row.last_message_content ? {
+        content: row.last_message_content,
+        direction: row.last_message_direction,
+        type: row.last_message_type
+      } : undefined,
     }));
 
-    return NextResponse.json({ data: finalData, paging: response.paging });
+    return NextResponse.json({ data: finalSupabaseData, paging: response.paging });
   } catch (error: unknown) {
     console.error('Error fetching conversations:', error);
     const e = error instanceof Error ? error : new Error(String(error));

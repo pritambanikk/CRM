@@ -1,9 +1,19 @@
 import { useState } from 'react';
-import { Phone, MessageCircle, Link2, Calendar as CalendarIcon, ChevronRight } from 'lucide-react';
+import { Phone, MessageCircle, Link2, Calendar as CalendarIcon, ChevronRight, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -16,6 +26,8 @@ interface WhatsAppTemplate {
   id: string;
   label: string;
   stage: string;
+  templateName: string;
+  getVariables: (name: string, service?: string) => string[];
   getMessage: (name: string, service?: string) => string;
 }
 
@@ -24,6 +36,8 @@ const whatsappTemplates: WhatsAppTemplate[] = [
     id: 'intro',
     label: 'Introduction',
     stage: 'New Lead',
+    templateName: 'introduction',
+    getVariables: (name, service) => [name, service || 'your legal query'],
     getMessage: (name, service) =>
       `Hi ${name}, this is Vakiltech. Thank you for reaching out to us regarding ${service || 'your legal query'}. We'd love to help you. Could you share some more details so we can assist you better?`,
   },
@@ -31,6 +45,8 @@ const whatsappTemplates: WhatsAppTemplate[] = [
     id: 'followup_1',
     label: 'First Follow-up',
     stage: 'Follow-up',
+    templateName: 'first_followup',
+    getVariables: (name, service) => [name, service || 'legal services'],
     getMessage: (name, service) =>
       `Hi ${name}, just following up on your enquiry about ${service || 'legal services'} with Vakiltech. We have expert lawyers ready to assist you. Would you like to schedule a quick call to discuss?`,
   },
@@ -38,6 +54,8 @@ const whatsappTemplates: WhatsAppTemplate[] = [
     id: 'followup_2',
     label: 'Gentle Reminder',
     stage: 'Follow-up',
+    templateName: 'gentle_reminder',
+    getVariables: (name) => [name],
     getMessage: (name) =>
       `Hi ${name}, hope you're doing well! We noticed you were interested in our legal services. Our team is available to help whenever you're ready. Just reply to this message and we'll get back to you right away.`,
   },
@@ -45,6 +63,8 @@ const whatsappTemplates: WhatsAppTemplate[] = [
     id: 'payment_reminder',
     label: 'Payment Reminder',
     stage: 'Payment',
+    templateName: 'payment_reminder',
+    getVariables: (name, service) => [name, service || 'legal matter'],
     getMessage: (name, service) =>
       `Hi ${name}, thank you for choosing Vakiltech for your ${service || 'legal matter'}. To proceed with your case, kindly complete the advance payment using the link shared earlier. If you have any questions, feel free to ask!`,
   },
@@ -52,6 +72,8 @@ const whatsappTemplates: WhatsAppTemplate[] = [
     id: 'payment_received',
     label: 'Payment Confirmation',
     stage: 'Payment',
+    templateName: 'payment_received',
+    getVariables: (name, service) => [name, service || 'your case'],
     getMessage: (name, service) =>
       `Hi ${name}, we've received your advance payment for ${service || 'your case'}. Our lawyer will be assigned shortly and will reach out to you. Thank you for trusting Vakiltech!`,
   },
@@ -59,6 +81,8 @@ const whatsappTemplates: WhatsAppTemplate[] = [
     id: 'final_reminder',
     label: 'Final Reminder',
     stage: 'Last Attempt',
+    templateName: 'final_reminder',
+    getVariables: (name) => [name],
     getMessage: (name) =>
       `Hi ${name}, this is a final follow-up from Vakiltech regarding your legal query. We'd hate to see you miss out on expert legal help. If you're still interested, please reply and we'll prioritize your case. Otherwise, feel free to reach out anytime in the future!`,
   },
@@ -88,6 +112,9 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
   const [followupNote, setFollowupNote] = useState('');
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [waPopoverOpen, setWaPopoverOpen] = useState(false);
+  const [templateConfirmOpen, setTemplateConfirmOpen] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<WhatsAppTemplate | null>(null);
+  const [isSendingTemplate, setIsSendingTemplate] = useState(false);
 
   const serviceLabel = service ? SERVICE_LABELS[service] : undefined;
 
@@ -123,9 +150,67 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
     openWhatsApp(`Hi ${name}, this is Vakiltech. `);
   };
 
-  const handleWhatsAppTemplate = (template: WhatsAppTemplate) => {
-    openWhatsApp(template.getMessage(name, serviceLabel), true, template.label);
+  const handleWhatsAppTemplateClick = (template: WhatsAppTemplate) => {
+    setSelectedTemplate(template);
     setWaPopoverOpen(false);
+    setTemplateConfirmOpen(true);
+  };
+
+  const confirmSendTemplate = async () => {
+    if (!selectedTemplate) return;
+    setIsSendingTemplate(true);
+    const vars = selectedTemplate.getVariables(name, serviceLabel);
+    
+    try {
+      const inboxUrl = import.meta.env.VITE_INBOX_URL?.replace(/\/$/, '');
+      if (!inboxUrl) {
+        throw new Error('VITE_INBOX_URL is not configured');
+      }
+
+      const response = await fetch(`${inboxUrl}/api/templates/send`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: '91' + cleanNumber.replace(/^91/, ''), // Ensure exactly one 91 prefix
+          templateName: selectedTemplate.templateName,
+          languageCode: 'en', // default language
+          parameters: vars,
+          parameterInfo: {
+            parameters: vars.map((_, i) => ({
+              name: String(i + 1),
+              component: 'BODY'
+            }))
+          }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send template. Meta API might have rejected it.');
+      }
+
+      toast.success(`Template "${selectedTemplate.label}" sent successfully!`);
+      
+      if (leadId) {
+        addActivityLog(leadId, 'WhatsApp Initiated', `Sent template "${selectedTemplate.label}" to +${cleanNumber}`);
+      }
+
+      // Open chat panel so they can see the sent template
+      if (onOpenWhatsApp) {
+        onOpenWhatsApp(undefined);
+      } else {
+        navigate(`/inbox?search=${cleanNumber}`);
+      }
+
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to send template.');
+      console.error(error);
+    } finally {
+      setIsSendingTemplate(false);
+      setTemplateConfirmOpen(false);
+      setSelectedTemplate(null);
+    }
   };
 
   const handlePaymentLink = () => {
@@ -191,7 +276,7 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
           {whatsappTemplates.map(template => (
             <button
               key={template.id}
-              onClick={() => handleWhatsAppTemplate(template)}
+              onClick={() => handleWhatsAppTemplateClick(template)}
               className="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-muted/60 transition-colors text-left"
             >
               <div className="flex-1 min-w-0">
@@ -263,6 +348,45 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
     </Popover>
   );
 
+  const templateConfirmDialog = (
+    <AlertDialog open={templateConfirmOpen} onOpenChange={setTemplateConfirmOpen}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Send {selectedTemplate?.label} Template?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This will immediately send the official Meta WhatsApp template directly to the client.
+            <br /><br />
+            <strong>Preview:</strong>
+            <br />
+            <span className="text-foreground block mt-2 p-3 bg-muted rounded-md text-sm whitespace-pre-wrap text-left">
+              {selectedTemplate?.getMessage(name, serviceLabel)}
+            </span>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel disabled={isSendingTemplate}>Cancel</AlertDialogCancel>
+          <AlertDialogAction 
+            onClick={(e) => {
+              e.preventDefault();
+              confirmSendTemplate();
+            }}
+            disabled={isSendingTemplate}
+            className="bg-[#00a884] hover:bg-[#008f6f] text-white"
+          >
+            {isSendingTemplate ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              'Send Template'
+            )}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+
   if (compact) {
     return (
       <div className="flex items-center gap-1.5">
@@ -274,6 +398,7 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
           <Link2 className="w-4 h-4" />
         </Button>
         {followupButton}
+        {templateConfirmDialog}
       </div>
     );
   }
@@ -290,6 +415,7 @@ export const QuickActions = ({ whatsapp_number, name, service, leadId, onPayment
         <span className="text-[10px]">Pay Link</span>
       </Button>
       {followupButton}
+      {templateConfirmDialog}
     </div>
   );
 };

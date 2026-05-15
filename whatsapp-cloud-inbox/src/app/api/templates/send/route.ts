@@ -12,6 +12,16 @@ type TemplateHeaderParameter = Extract<NonNullable<TemplateSendInput['header']>,
 type TemplateButtonParameter = Extract<NonNullable<TemplateSendInput['buttons']>[number], { subType: 'url' }>;
 type ButtonTextParameter = { type: 'text'; text: string; parameter_name?: string };
 
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -20,7 +30,7 @@ export async function POST(request: Request) {
     if (!to || !templateName || !languageCode) {
       return NextResponse.json(
         { error: 'Missing required fields: to, templateName, languageCode' },
-        { status: 400 }
+        { status: 400, headers: CORS_HEADERS }
       );
     }
 
@@ -171,12 +181,12 @@ export async function POST(request: Request) {
       })().catch(err => console.warn('[template/send] Supabase save error:', err));
     }
 
-    return NextResponse.json(result);
+    return NextResponse.json(result, { headers: CORS_HEADERS });
   } catch (error) {
     console.error('Error sending template:', error);
     return NextResponse.json(
       { error: 'Failed to send template message' },
-      { status: 500 }
+      { status: 500, headers: CORS_HEADERS }
     );
   }
 }
